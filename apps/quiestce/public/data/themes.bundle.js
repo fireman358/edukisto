@@ -4,7 +4,7 @@
  */
 window.QC_THEME_BUNDLE = {
   "version": 1,
-  "genereLe": "2026-11-07T20:17:55.754Z",
+  "genereLe": "2026-11-12T08:18:46.116Z",
   "themes": [
     {
       "id": "classique",
