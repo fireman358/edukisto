@@ -1,8 +1,8 @@
 /* Test smoke : parsing ICS + structures de données */
 const fs = require("fs");
 global.localStorage = { _s: {}, getItem(k) { return this._s[k] || null; }, setItem(k, v) { this._s[k] = v; } };
-eval(fs.readFileSync("donnees/donnees-initiales.js", "utf8") + "\n;global.FERIES_BE = FERIES_BE; global.VACANCES_SCOLAIRES_BE = VACANCES_SCOLAIRES_BE; global.PLATS_INITIAUX = PLATS_INITIAUX;");
-eval(fs.readFileSync("js/storage.js", "utf8") + "\n;global.donneesDefaut = donneesDefaut;");
+eval(fs.readFileSync("public/donnees/donnees-initiales.js", "utf8") + "\n;global.FERIES_BE = FERIES_BE; global.VACANCES_SCOLAIRES_BE = VACANCES_SCOLAIRES_BE; global.PLATS_INITIAUX = PLATS_INITIAUX;");
+eval(fs.readFileSync("public/js/storage.js", "utf8") + "\n;global.donneesDefaut = donneesDefaut;");
 
 const ics = "BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\nSUMMARY:Dentiste Lulu\r\nDTSTART;VALUE=DATE:20261105\r\nEND:VEVENT\r\nBEGIN:VEVENT\r\nSUMMARY:Réunion école\r\nDTSTART:20261112T100000Z\r\nEND:VEVENT\r\nEND:VCALENDAR";
 const lignes = ics.replace(/\r\n/g, "\n").split("\n");
