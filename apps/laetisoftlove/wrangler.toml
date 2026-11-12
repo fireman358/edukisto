@@ -1,0 +1,11 @@
+name = "laetisoftlove"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+
+[assets]
+directory = "."
+
+[[d1_databases]]
+binding = "DB"
+database_name = "laetisoftlove"
+database_id = "c66c9fed-66a8-41ca-a655-fe3c276e8fbb"

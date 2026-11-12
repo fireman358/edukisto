@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ta commande saucisson — Edukisto</title>
+<meta name="description" content="Commande de saucissons en ligne, par David (Edukisto).">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<style>
+  /* Charte Edukisto : anthracite #333333 · blanc · bleu #38bdf8 */
+  :root {
+    --bg: #333333; --surface: #3d3d3d; --text: #ffffff; --muted: #c9c9c9;
+    --accent: #38bdf8; --accent-soft: #7dd3fc; --ink: #0f1115;
+    --border: #4a4a4a; --radius: 8px;
+    --header-bg: rgba(16,16,16,.92); --footer-bg: #101010;
+    --ok: #4ade80; --danger: #f87171;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; min-height:100vh; }
+  .wrap { max-width:900px; margin:0 auto; padding:16px; }
+
+  header { position:sticky; top:0; background:var(--header-bg); backdrop-filter:blur(8px); z-index:100; border-bottom:1px solid var(--border); }
+  .nav { display:flex; align-items:center; justify-content:space-between; padding:.8rem 1.5rem; flex-wrap:wrap; gap:.5rem; }
+  .brand-wrap { display:flex; align-items:center; gap:.6rem; text-decoration:none; color:var(--text); font-weight:700; }
+  .brand-wrap img { width:28px; height:28px; }
+  .nav-links { display:flex; gap:1.2rem; align-items:center; }
+  .nav-links a { color:var(--muted); text-decoration:none; font-weight:500; font-size:.9rem; }
+  .nav-links a:hover { color:var(--accent); }
+  
+.hero {
+  background: linear-gradient(rgba(16,16,16,.55), rgba(16,16,16,.75)), url('img/hero.jpg') center 35% / cover no-repeat;
+  text-align:center; padding:3.2rem 1rem 2.2rem;
+  border-bottom:1px solid var(--border);
+}
+  .hero h1 { font-size:clamp(1.4rem, 3vw, 2rem); }
+  .hero h1 span { color:var(--accent); }
+  .hero p { color:var(--muted); font-size:.95rem; margin-top:.3rem; }
+  .tabs { display:flex; gap:8px; justify-content:center; margin-top:1rem; }
+  .tabs button { border:1px solid var(--border); background:var(--surface); color:var(--text); padding:8px 18px; border-radius:20px; cursor:pointer; font-size:.9rem; }
+  .tabs button.on { background:var(--accent); color:var(--ink); border-color:var(--accent); font-weight:600; }
+
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px; margin-top:16px; }
+  h2 { color:var(--accent-soft); font-size:1.1rem; margin-bottom:12px; }
+  label { display:block; font-size:.85rem; color:var(--muted); margin-bottom:4px; }
+  input[type=text], input[type=password], input[type=number], textarea {
+    width:100%; padding:10px; border:1px solid var(--border); border-radius:var(--radius); font-size:1rem; background:var(--bg); color:var(--text);
+  }
+  .row { display:flex; gap:12px; flex-wrap:wrap; }
+  .row > div { flex:1; min-width:140px; margin-bottom:12px; }
+  .flavors { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+  .flavor { border:1px solid var(--border); border-radius:var(--radius); padding:10px; display:flex; flex-direction:column; gap:8px; background:var(--bg); }
+  .flavor .name { font-weight:600; font-size:.95rem; }
+  .flavor .price { color:var(--accent); font-size:.8rem; font-weight:600; }
+  .flavor.off { opacity:.45; }
+  .stepper { display:flex; align-items:center; gap:8px; justify-content:space-between; }
+  .stepper button { width:34px; height:34px; border-radius:50%; border:none; background:var(--accent); color:var(--ink); font-size:1.2rem; font-weight:700; cursor:pointer; }
+  .stepper button:disabled { background:var(--border); color:var(--muted); cursor:default; }
+  .stepper .qty { min-width:24px; text-align:center; font-weight:700; font-size:1.1rem; }
+
+  .btn { display:inline-block; background:var(--accent); color:var(--ink); border:1px solid var(--accent); padding:12px 24px; border-radius:var(--radius); font-size:1rem; font-weight:600; cursor:pointer; margin-top:12px; text-decoration:none; transition:transform .15s ease; }
+  .btn:hover { transform:translateY(-2px); }
+  .btn.sec { background:var(--surface); color:var(--text); border:1px solid var(--border); }
+  .btn.small { padding:6px 12px; font-size:.8rem; margin:0; }
+  .btn.danger { background:var(--danger); border-color:var(--danger); color:var(--ink); }
+
+  .msg { margin-top:12px; padding:12px; border-radius:var(--radius); display:none; }
+  .msg.ok { background:rgba(74,222,128,.15); color:var(--ok); display:block; }
+  .msg.err { background:rgba(248,113,113,.15); color:var(--danger); display:block; }
+
+  table { width:100%; border-collapse:collapse; font-size:.9rem; }
+  th, td { padding:8px 6px; border-bottom:1px solid var(--border); text-align:left; }
+  th { color:var(--muted); font-weight:600; font-size:.75rem; text-transform:uppercase; }
+  .scroll { overflow-x:auto; }
+  .pill { display:inline-block; padding:2px 10px; border-radius:12px; font-size:.75rem; cursor:pointer; border:none; }
+  .pill.yes { background:rgba(74,222,128,.2); color:var(--ok); }
+  .pill.no { background:rgba(248,113,113,.2); color:var(--danger); }
+  .hidden { display:none; }
+  .total-line { font-size:1.2rem; font-weight:700; color:var(--accent); margin-top:12px; text-align:right; }
+  .admin-top { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:12px; }
+  .admin-top input { flex:1; min-width:180px; }
+  pre.copybox { background:var(--bg); border:1px solid var(--border); border-radius:var(--radius); padding:12px; white-space:pre-wrap; font-size:.85rem; margin-top:8px; }
+  .flavor-admin { display:flex; gap:8px; align-items:center; padding:8px 0; border-bottom:1px solid var(--border); flex-wrap:wrap; }
+  .flavor-admin .fname { flex:1; min-width:120px; font-weight:600; }
+  .flavor-admin input[type=number] { width:80px; padding:6px; border:1px solid var(--border); border-radius:6px; background:var(--bg); color:var(--text); }
+
+  /* Promo apps retirée : liens dans le header et le footer */
+
+  footer { background:var(--footer-bg); border-top:1px solid var(--border); text-align:center; padding:1.5rem 1rem; font-size:.8rem; color:var(--muted); }
+  footer a { color:var(--accent); text-decoration:none; font-weight:600; }
+  footer .foot-links { margin-bottom:.5rem; display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a class="brand-wrap" href="https://edukisto.win/" target="_blank" rel="noopener">
+      <img src="brand/edukisto-mark.svg" alt="Edukisto">
+      <span>Edukisto</span>
+    </a>
+    <div class="nav-links">
+      <a href="https://edukisto.win/services.html" target="_blank" rel="noopener">Services</a>
+      <a href="https://edukisto.win/construis.html" target="_blank" rel="noopener">Mes apps</a>
+    </div>
+  </nav>
+</header>
+
+<div class="hero">
+  <h1>🥖 Ta commande <span>saucisson</span></h1>
+  <p>Les saucissons sont à 3 €, fais ton choix et bon apéro !</p>
+  <div class="tabs">
+    <button id="tabOrder" class="on" onclick="showView('order')">Commander</button>
+    <button id="tabAdmin" onclick="showView('admin')">Admin</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ===== VUE CLIENT ===== -->
+  <div id="viewOrder">
+    <div class="card">
+      <h2>Qui es-tu ?</h2>
+      <div class="row">
+        <div><label for="lastName">Nom *</label><input type="text" id="lastName" placeholder="Ton nom"></div>
+        <div><label for="firstName">Prénom *</label><input type="text" id="firstName" placeholder="Ton prénom"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Choisis tes saucissons</h2>
+      <div class="flavors" id="flavorList"></div>
+    </div>
+    <div class="card">
+      <h2>Remarques</h2>
+      <textarea id="remarks" rows="2" placeholder="Allergies, précisions, quantités spéciales..."></textarea>
+      <div class="total-line" id="clientTotal">Total : 0,00 €</div>
+      <button class="btn" onclick="submitOrder()">Envoyer ma commande</button>
+      <div class="msg" id="orderMsg"></div>
+    </div>
+    <div class="card">
+      <h2>💳 Paiement</h2>
+      <p style="font-size:.95rem">Paiement par virement :</p>
+      <p style="font-size:1.1rem;font-weight:700;letter-spacing:.5px;margin:.5rem 0;user-select:all">BE29 3630 1539 6364</p>
+      <p style="font-size:.8rem;color:var(--muted)">Communication : 3 lettres de ton prénom + 3 lettres de ton nom + « saucissons » → <b id="commPreview">ex. davdem saucissons</b>. Merci !</p>
+    </div>
+  </div>
+
+  <!-- ===== VUE ADMIN ===== -->
+  <div id="viewAdmin" class="hidden">
+    <div class="card" id="loginCard">
+      <h2>Accès admin</h2>
+      <p style="font-size:.85rem;color:var(--muted);margin-bottom:10px">Entre le mot de passe admin pour gérer les commandes.</p>
+      <div class="admin-top">
+        <input type="password" id="adminToken" placeholder="Mot de passe admin">
+        <button class="btn small" onclick="adminLogin()">Se connecter</button>
+      </div>
+      <div class="msg" id="loginMsg"></div>
+    </div>
+
+    <div id="adminPanel" class="hidden">
+      <div class="card">
+        <div class="admin-top">
+          <button class="btn small" onclick="renderAdmin()">🔄 Rafraîchir</button>
+          <button class="btn small sec" onclick="exportCsv()">⬇ Export CSV</button>
+          <button class="btn small sec" onclick="adminLogout()">Déconnexion</button>
+          <button class="btn small danger" onclick="resetOrders()">🧹 Nouvelle campagne</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>📋 Commandes</h2>
+        <div class="scroll"><table id="ordersTable"></table></div>
+        <div class="total-line" id="adminTotal"></div>
+      </div>
+
+      <div class="card">
+        <h2>🚚 Récap fournisseur (par saveur)</h2>
+        <div class="scroll"><table id="summaryTable"></table></div>
+        <button class="btn small sec" onclick="copySupplier()">Copier la liste fournisseur</button>
+        <pre class="copybox hidden" id="supplierBox"></pre>
+      </div>
+
+      <div class="card">
+        <h2>🧀 Saveurs (stock &amp; prix)</h2>
+        <div id="flavorAdminList"></div>
+        <div class="admin-top" style="margin-top:12px">
+          <input type="text" id="newFlavorName" placeholder="Nouvelle saveur">
+          <input type="number" id="newFlavorPrice" value="3" step="0.5" min="0">
+          <button class="btn small" onclick="addFlavor()">Ajouter</button>
+        </div>
+        <div class="msg" id="flavorMsg"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== FIN PROMO RETIRÉE ===== -->
+
+<footer>
+  <div class="foot-links">
+    <a href="https://edukisto.win/" target="_blank" rel="noopener">Edukisto — dépannage &amp; cours d'informatique</a>
+    <a href="https://edukisto.win/construis.html" target="_blank" rel="noopener">Mes apps &amp; jeux</a>
+  </div>
+  <p>Commande de saucissons par David Demoulin · Arquennes, Belgique</p>
+</footer>
+
+<script>
+const API = '/api';
+const state = { flavors: [], qty: {}, orders: [], token: localStorage.getItem('sauc_token') || '' };
+
+const fmt = (e) => e.toFixed(2).replace('.', ',') + ' €';
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function updateCommPreview() {
+  const f = document.getElementById('firstName').value.trim();
+  const l = document.getElementById('lastName').value.trim();
+  if (!f && !l) { document.getElementById('commPreview').textContent = 'ex. davdem saucissons'; return; }
+  document.getElementById('commPreview').textContent = ((f.slice(0,3) + l.slice(0,3)).toLowerCase() || 'ex.') + ' saucissons';
+}
+document.getElementById('firstName').addEventListener('input', updateCommPreview);
+document.getElementById('lastName').addEventListener('input', updateCommPreview);
+
+function showView(v) {
+  document.getElementById('viewOrder').classList.toggle('hidden', v !== 'order');
+  document.getElementById('viewAdmin').classList.toggle('hidden', v !== 'admin');
+  document.getElementById('tabOrder').classList.toggle('on', v === 'order');
+  document.getElementById('tabAdmin').classList.toggle('on', v === 'admin');
+  if (v === 'order') loadFlavors();
+  if (v === 'admin') checkAdmin();
+}
+
+function msg(el, text, cls) {
+  const m = document.getElementById(el);
+  m.textContent = text;
+  m.className = 'msg ' + cls;
+}
+
+async function api(path, opts = {}) {
+  const headers = { 'Content-Type': 'application/json' };
+  if (state.token) headers['x-admin-token'] = state.token;
+  const r = await fetch(API + path, { ...opts, headers });
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(data.error || 'Erreur ' + r.status);
+  return data;
+}
+
+// ---------- CLIENT ----------
+async function loadFlavors() {
+  try {
+    state.flavors = await api('/flavors');
+    renderFlavors();
+  } catch (e) { msg('orderMsg', e.message, 'err'); }
+}
+
+function renderFlavors() {
+  const el = document.getElementById('flavorList');
+  el.innerHTML = state.flavors.map(f => `
+    <div class="flavor">
+      <div class="name">${esc(f.name)}</div>
+      <div class="price">${fmt(f.price)}</div>
+      <div class="stepper">
+        <button onclick="step(${f.id},-1)" ${!state.qty[f.id] ? 'disabled' : ''}>−</button>
+        <span class="qty">${state.qty[f.id] || 0}</span>
+        <button onclick="step(${f.id},1)">+</button>
+      </div>
+    </div>`).join('');
+  updateClientTotal();
+}
+
+function step(id, d) {
+  state.qty[id] = Math.max(0, Math.min(99, (state.qty[id] || 0) + d));
+  renderFlavors();
+}
+
+function updateClientTotal() {
+  const total = state.flavors.reduce((s, f) => s + (state.qty[f.id] || 0) * f.price, 0);
+  document.getElementById('clientTotal').textContent = 'Total : ' + fmt(total);
+}
+
+async function submitOrder() {
+  const last = document.getElementById('lastName').value.trim();
+  const first = document.getElementById('firstName').value.trim();
+  if (!last || !first) return msg('orderMsg', 'Nom et prénom obligatoires.', 'err');
+  const items = Object.entries(state.qty).filter(([, q]) => q > 0).map(([fid, q]) => ({ flavor_id: +fid, qty: q }));
+  if (!items.length) return msg('orderMsg', 'Choisis au moins un saucisson !', 'err');
+  try {
+    const res = await api('/orders', { method: 'POST', body: JSON.stringify({
+      last_name: last, first_name: first,
+      remarks: document.getElementById('remarks').value, items
+    })});
+    const comm = (first.slice(0,3) + last.slice(0,3)).toLowerCase() + ' saucissons';
+    msg('orderMsg', `✅ Commande envoyée ! Total : ${fmt(res.total)}. Merci ${first} ! Paiement par virement : BE29 3630 1539 6364 (communication : « ${comm} »).`, 'ok');
+    state.qty = {};
+    ['lastName','firstName','remarks'].forEach(i => document.getElementById(i).value = '');
+    renderFlavors();
+  } catch (e) { msg('orderMsg', e.message, 'err'); }
+}
+
+// ---------- ADMIN ----------
+async function adminLogin() {
+  state.token = document.getElementById('adminToken').value;
+  try {
+    await api('/orders');
+    localStorage.setItem('sauc_token', state.token);
+    checkAdmin();
+  } catch (e) {
+    state.token = '';
+    msg('loginMsg', 'Mot de passe incorrect.', 'err');
+  }
+}
+
+function adminLogout() {
+  state.token = '';
+  localStorage.removeItem('sauc_token');
+  checkAdmin();
+}
+
+async function checkAdmin() {
+  const ok = state.token && await api('/orders').then(() => true).catch(() => false);
+  document.getElementById('loginCard').classList.toggle('hidden', ok);
+  document.getElementById('adminPanel').classList.toggle('hidden', !ok);
+  if (ok) renderAdmin();
+}
+
+async function renderAdmin() {
+  try {
+    const [orders, flavors] = await Promise.all([
+      api('/orders'), api('/flavors')
+    ]);
+    state.orders = orders;
+    state.flavors = flavors;
+    renderOrders();
+    renderSummary();
+    renderFlavorAdmin();
+  } catch (e) { console.error(e); }
+}
+
+function renderOrders() {
+  const t = document.getElementById('ordersTable');
+  const rows = state.orders.map(o => `
+    <tr>
+      <td>${esc(o.last_name)} ${esc(o.first_name)}</td>
+      <td>${o.items.map(i => esc(i.name) + ' ×' + i.qty).join(', ') || '—'}</td>
+      <td><b>${fmt(o.total)}</b></td>
+      <td><button class="pill ${o.paid ? 'yes' : 'no'}" onclick="togglePaid(${o.id}, ${!o.paid})">${o.paid ? 'Payé' : 'Impayé'}</button></td>
+      <td>${esc(o.remarks) || '—'}</td>
+      <td>${o.created_at}</td>
+      <td><button class="btn small danger" onclick="deleteOrder(${o.id})">Suppr.</button></td>
+    </tr>`).join('');
+  t.innerHTML = `<tr><th>Personne</th><th>Détail</th><th>Total</th><th>Paiement</th><th>Remarques</th><th>Date</th><th></th></tr>` + (rows || '<tr><td colspan="7">Aucune commande pour l\'instant.</td></tr>');
+  const total = state.orders.reduce((s, o) => s + o.total, 0);
+  const unpaid = state.orders.filter(o => !o.paid).reduce((s, o) => s + o.total, 0);
+  document.getElementById('adminTotal').textContent =
+    `Total : ${fmt(total)} — Dont impayé : ${fmt(unpaid)} (${state.orders.filter(o => !o.paid).length})`;
+}
+
+function renderSummary() {
+  const totals = {};
+  for (const o of state.orders) for (const i of o.items) {
+    totals[i.name] = (totals[i.name] || 0) + i.qty;
+  }
+  const rows = Object.entries(totals).sort((a, b) => b[1] - a[1])
+    .map(([name, qty]) => `<tr><td>${esc(name)}</td><td><b>${qty}</b></td></tr>`).join('');
+  document.getElementById('summaryTable').innerHTML =
+    `<tr><th>Saveur</th><th>Quantité</th></tr>` + (rows || '<tr><td colspan="2">Aucune commande.</td></tr>');
+  state.supplierText = Object.entries(totals).sort((a, b) => b[1] - a[1])
+    .map(([name, qty]) => `${qty} × ${name}`).join('\n');
+}
+
+function copySupplier() {
+  const box = document.getElementById('supplierBox');
+  box.textContent = state.supplierText || 'Aucune commande.';
+  box.classList.remove('hidden');
+  navigator.clipboard?.writeText(state.supplierText || '');
+}
+
+function renderFlavorAdmin() {
+  const el = document.getElementById('flavorAdminList');
+  el.innerHTML = state.flavors.map(f => `
+    <div class="flavor-admin ${f.active ? '' : 'off'}">
+      <span class="fname">${esc(f.name)}</span>
+      <input type="number" value="${f.price}" step="0.5" min="0" onchange="updateFlavor(${f.id}, {price: this.value})">
+      <button class="btn small ${f.active ? 'sec' : ''}" onclick="updateFlavor(${f.id}, {active: ${!f.active}})">
+        ${f.active ? 'Masquer (rupture)' : 'Réafficher'}
+      </button>
+    </div>`).join('');
+}
+
+async function updateFlavor(id, patch) {
+  try { await api('/flavors/' + id, { method: 'POST', body: JSON.stringify(patch) }); renderAdmin(); }
+  catch (e) { msg('flavorMsg', e.message, 'err'); }
+}
+
+async function addFlavor() {
+  const name = document.getElementById('newFlavorName').value.trim();
+  const price = document.getElementById('newFlavorPrice').value;
+  if (!name) return msg('flavorMsg', 'Donne un nom à la saveur.', 'err');
+  try {
+    await api('/flavors', { method: 'POST', body: JSON.stringify({ name, price: +price }) });
+    document.getElementById('newFlavorName').value = '';
+    msg('flavorMsg', 'Saveur ajoutée !', 'ok');
+    renderAdmin();
+  } catch (e) { msg('flavorMsg', e.message, 'err'); }
+}
+
+async function togglePaid(id, paid) {
+  try { await api('/orders/' + id, { method: 'POST', body: JSON.stringify({ paid }) }); renderAdmin(); }
+  catch (e) { console.error(e); }
+}
+
+async function exportCsv() {
+  try {
+    const r = await fetch(API + '/export', { headers: { 'x-admin-token': state.token } });
+    if (!r.ok) throw new Error('Export refusé (' + r.status + ')');
+    const blob = await r.blob();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'commandes-saucissons.csv';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  } catch (e) { console.error(e); alert(e.message); }
+}
+
+async function resetOrders() {
+  if (!confirm("Vider toutes les commandes pour démarrer une nouvelle campagne ?\nPense d'abord à exporter le CSV (bouton ⬇ Export CSV) si tu veux garder l'historique. Les saveurs et prix restent intacts.")) return;
+  try {
+    await api('/orders', { method: 'POST', body: JSON.stringify({ action: 'reset' }) });
+    renderAdmin();
+  } catch (e) { console.error(e); }
+}
+
+async function deleteOrder(id) {
+  if (!confirm('Supprimer cette commande ?')) return;
+  try { await api('/orders/' + id, { method: 'POST', body: JSON.stringify({ action: 'delete' }) }); renderAdmin(); }
+  catch (e) { console.error(e); }
+}
+
+loadFlavors();
+</script>
+</body>
+</html>

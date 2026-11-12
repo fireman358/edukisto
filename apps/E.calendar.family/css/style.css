@@ -1,0 +1,570 @@
+/* ===== Edukisto Home — charte de marque edukisto =====
+   Fond anthracite #333333 · surface #3d3d3d · accent unique #38bdf8
+   Variante teal du logo #0e7490 · rayon 8px (kit de marque) ===== */
+:root {
+    --accent: #38bdf8;
+    --accent-2: #38bdf8;
+    --teal: #0e7490;
+    --teal-clair: #7dd3fc;
+    --fond: #333333;
+    --surface: #3d3d3d;
+    --bord: #4a4a4a;
+    --texte: #ffffff;
+    --muted: #a8b3bd;
+    --vert: #2ecc71;
+    --rouge: #ef5b7c;
+    --orange: #f59e0b;
+    --violet: #b085f5;
+    --bleu-clair: #38bdf8;
+    --cyan: #38bdf8;
+    --bleu-vac: #24445a;
+    --rouge-ferie: #4d2733;
+    --gris-we: #383838;
+    --radius: 8px;
+    /* alias historiques */
+    --bleu-fonce: #333333;
+    --bleu: #0e7490;
+    --blanc: #3d3d3d;
+}
+body.sombre {
+    --fond: #1f1f1f;
+    --surface: #2a2a2a;
+    --bord: #3a3a3a;
+    --bleu-vac: #1c3a4d;
+    --gris-we: #262626;
+}
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--fond);
+    color: var(--texte);
+}
+
+/* ===== En-tête ===== */
+.app-header {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    background: var(--fond); border-bottom: 1px solid var(--bord); color: #fff;
+    padding: 10px 18px; position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,.45);
+}
+.brand-logo svg { width: 34px; height: 34px; display: block; }
+.brand { font-size: 1.2em; font-weight: bold; }
+.brand em { color: var(--accent); font-style: normal; }
+.header-date { font-size: .85em; color: var(--muted); }
+.tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-right: auto; }
+.tab {
+    background: transparent; color: var(--muted); border: none; padding: 12px 16px;
+    font-size: 1em; cursor: pointer; border-radius: 8px; font-weight: 600;
+    min-height: 44px;
+}
+.tab.active { background: var(--teal); color: #fff; }
+.tab:hover { color: #fff; }
+
+/* ===== Vues / cartes ===== */
+.view { display: none; padding: 20px; max-width: 1400px; margin: 0 auto; }
+.view.active { display: block; }
+.card {
+    background: var(--surface); border: 1px solid var(--bord);
+    border-radius: var(--radius); padding: 16px; margin-bottom: 18px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.25);
+}
+h1 { color: #fff; font-size: 1.5em; margin: 0; }
+h2 { margin: 0 0 10px; color: #fff; font-size: 1.1em; }
+.hint { font-size: .82em; color: var(--muted); }
+.today-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
+
+/* ===== Boutons / inputs ===== */
+.btn {
+    background: var(--teal); color: #fff; border: none; padding: 12px 16px;
+    border-radius: var(--radius); cursor: pointer; font-weight: 600; font-size: .9em;
+    min-height: 44px; display: inline-flex; align-items: center; gap: 6px;
+}
+.btn:hover { filter: brightness(1.15); }
+.btn-primary { background: var(--accent); color: #0e2230; }
+.btn-orange { background: var(--orange); }
+.btn-danger { background: var(--rouge); }
+.btn-mini { padding: 6px 10px; font-size: .8em; min-height: 36px; }
+.input {
+    padding: 10px 12px; border-radius: var(--radius); border: 1px solid var(--bord);
+    font-size: .95em; background: var(--fond); color: var(--texte); min-width: 120px;
+}
+.panel-toolbar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+.panel-toolbar .input { flex: 1; }
+
+/* ===== Aujourd'hui ===== */
+.today-hero { background: linear-gradient(135deg, var(--fond), var(--teal)); border: 1px solid var(--bord); color: #fff; }
+.today-hero .hero-date { font-size: 1.9em; font-weight: bold; }
+.today-hero .hero-sous { opacity: .9; margin-top: 6px; font-size: 1.05em; line-height: 1.6; }
+.today-hero .badge {
+    display: inline-block; background: rgba(255,255,255,.2); border-radius: 14px;
+    padding: 4px 12px; margin: 4px 6px 0 0; font-size: .9em;
+}
+.today-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--bord); }
+.today-item:last-child { border-bottom: none; }
+.dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+hint a, a { color: var(--accent); }
+
+/* ===== Calendrier ===== */
+.cal-toolbar { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
+.cal-legend { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.cal-legend .leg { display: inline-flex; align-items: center; gap: 6px; font-size: .82em; color: var(--muted); }
+.cal-grille { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.cal-jour-tete { text-align: center; font-weight: bold; color: #fff; padding: 6px 0; }
+.cal-cell {
+    background: var(--surface); border: 1px solid var(--bord); border-radius: var(--radius);
+    min-height: 96px; padding: 6px; cursor: pointer; position: relative;
+    overflow: hidden; font-size: .82em;
+}
+.cal-cell.hors-mois { opacity: .35; }
+.cal-cell.weekend { background: var(--gris-we); }
+.cal-cell.ferie { background: var(--rouge-ferie); }
+.cal-cell.vacances { background: var(--bleu-vac); }
+.cal-cell.aujourdhui { border: 2px solid var(--rouge); }
+.cal-cell .num { font-weight: bold; }
+.cal-cell .ev { border-radius: 4px; padding: 2px 4px; margin-top: 3px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cal-cell .anniv { color: var(--rouge); font-weight: 600; }
+
+/* ===== Repas ===== */
+.repas-semaine { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.repas-jour { background: var(--surface); border: 1px solid var(--bord); border-radius: var(--radius); padding: 12px; min-height: 130px; cursor: pointer; }
+.repas-jour h3 { margin: 0 0 8px; font-size: 1em; color: var(--accent); }
+.repas-jour .repas-nom { font-size: .9em; color: var(--texte); }
+.repas-jour .repas-nom.selectable:hover { color: var(--orange); }
+.plats-liste { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px; }
+.plat-item { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid var(--bord); border-radius: 8px; font-size: .88em; }
+.plat-item .cat { font-size: .78em; padding: 2px 8px; border-radius: 10px; background: rgba(56,189,248,.15); color: var(--accent); white-space: nowrap; }
+
+/* ===== Tâches / objectifs ===== */
+.tache-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--bord); }
+.tache-item:last-child { border-bottom: none; }
+.tache-item input[type=checkbox] { width: 26px; height: 26px; accent-color: var(--vert); }
+.tache-item.done .tache-titre { text-decoration: line-through; opacity: .5; }
+.tache-titre { flex: 1; }
+.pts { background: var(--orange); color: #1f1f1f; border-radius: 12px; padding: 2px 10px; font-size: .8em; font-weight: bold; }
+.progress-bar { height: 14px; background: var(--bord); border-radius: 8px; overflow: hidden; margin: 8px 0; }
+.progress-bar > div { height: 100%; background: var(--vert); border-radius: 8px; transition: width .3s; }
+
+/* ===== Listes ===== */
+.listes-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+.liste-item { padding: 8px 0; border-bottom: 1px solid var(--bord); display: flex; gap: 10px; align-items: center; }
+.liste-item input[type=checkbox] { width: 22px; height: 22px; accent-color: var(--vert); }
+.liste-item.done span { text-decoration: line-through; opacity: .5; }
+
+/* ===== Photos ===== */
+.photos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.photos-grid img, .repas-jour img, .today-item img { width: 100%; border-radius: 8px; object-fit: cover; }
+.cadre-full { position: fixed; inset: 0; background: #000; z-index: 500; display: flex; align-items: center; justify-content: center; }
+.cadre-full img { max-width: 100vw; max-height: 100vh; object-fit: contain; }
+.hidden { display: none !important; }
+
+/* ===== Modale / toast ===== */
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 400; display: flex; align-items: center; justify-content: center; padding: 16px; }
+.modal-content { background: var(--surface); border: 1px solid var(--bord); border-radius: var(--radius); padding: 20px; max-width: 560px; width: 100%; max-height: 88vh; overflow: auto; }
+.modal-content h2 { margin-bottom: 14px; }
+.modal-content label { display: block; font-weight: 600; font-size: .85em; margin: 12px 0 4px; }
+.modal-content .input, .modal-content select, .modal-content textarea { width: 100%; }
+.modal-content textarea { min-height: 60px; }
+.modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 18px; }
+.toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    background: var(--teal); color: #fff; padding: 12px 22px; border-radius: var(--radius);
+    z-index: 600; box-shadow: 0 4px 14px rgba(0,0,0,.45); font-size: .95em;
+}
+.toast.err { background: var(--rouge); }
+
+.switch { display: flex; align-items: center; gap: 10px; margin: 12px 0; font-size: .92em; }
+.switch input { width: 22px; height: 22px; accent-color: var(--vert); }
+
+/* ===== Mode kiosque ===== */
+body.kiosque .tab[data-view="reglages"], body.kiosque .tab[data-view="gestion"] { display: none; }
+
+@media (max-width: 700px) {
+    .cal-cell { min-height: 60px; font-size: .68em; }
+    .view { padding: 12px; }
+    .tab { padding: 10px 10px; font-size: .85em; }
+}
+
+/* ===== Horloge & météo ===== */
+.hero-clock { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; }
+.hero-clock #horloge-heure { font-size: 3.2em; font-weight: bold; line-height: 1; }
+.hero-clock #horloge-date { font-size: 1.15em; opacity: .92; }
+.meteo-condense { padding: 10px 16px; }
+.meteo-line { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.meteo-grosse { font-size: 1.5em; font-weight: bold; }
+.meteo-ville { margin-left: auto; }
+.meteo-hero { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.meteo-hero > div:first-child { font-size: 3em; }
+.meteo-stats { display: grid; gap: 6px; flex: 1; min-width: 240px; }
+.meteo-horaire { display: flex; overflow-x: auto; gap: 6px; padding-bottom: 6px; }
+.meteo-h-item { text-align: center; background: var(--fond); border: 1px solid var(--bord); border-radius: var(--radius); padding: 8px; min-width: 64px; }
+.cell-meteo { font-size: .78em; color: var(--muted); margin-top: 2px; }
+.cal-cell .cell-meteo .hint { font-size: .9em; }
+
+/* ===== Mode tablette murale =====
+   L'en-tête complet (logo, horloge, boutons) se masque après 5 s sans
+   interaction — écran 100 % dédié au contenu. Toute interaction
+   (télécommande, toucher, souris, touche) le fait réapparaître. */
+body.mural .app-header {
+    position: fixed; top: 0; left: 0; right: 0;
+    padding: 8px 12px;
+    transition: transform .4s ease, opacity .4s ease;
+    z-index: 90;
+}
+body.mural.entete-cache .app-header {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+body.mural .app-header .tabs,
+body.mural .brand,
+body.mural .header-date,
+body.mural #btn-mural { display: none !important; }
+body.mural .view { padding: 24px; }
+/* Mode mural : le calendrier occupe TOUTE la hauteur de l'écran (100vh),
+   la grille du mois s'ajuste — pas de défilement nécessaire */
+body.mural #view-calendrier { height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+body.mural #view-calendrier .cal-grille { flex: 1; min-height: 0; }
+body.mural #view-calendrier .cal-grille .cal-cell { min-height: 0; height: auto; overflow: hidden; }
+body.mural .hero-clock #horloge-heure { font-size: 5em; }
+body.mural .hero-clock #horloge-date { font-size: 1.6em; }
+body.mural .today-grid { grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); }
+body.mural .cal-cell { min-height: 110px; }
+.btn-mural { background: var(--teal); }
+
+/* ===== Tâches récurrentes / album / mode mural ===== */
+.membres-checks { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0; }
+.membres-checks .switch { margin: 4px 0; background: var(--fond); border: 1px solid var(--bord); border-radius: var(--radius); padding: 6px 10px; }
+.mini-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin: 0 2px; vertical-align: middle; }
+.repas-cloud-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; grid-column: 1/-1; padding: 10px 14px; }
+.repas-cloud-bar .hint { flex: 1; min-width: 200px; }
+
+.cadre-full.cadre-double { display: flex; gap: 0; }
+.cadre-full.cadre-double img { flex: 2; width: 60%; object-fit: contain; }
+.cadre-resume { flex: 1; max-width: 38%; background: rgba(15,23,32,.88); color: #fff; padding: 30px; display: flex; flex-direction: column; justify-content: center; gap: 14px; font-size: 1.1em; }
+.cadre-horloge { font-size: 3.4em; font-weight: bold; line-height: 1; color: #38bdf8; }
+.cadre-date { font-size: 1.3em; text-transform: capitalize; }
+.cadre-meteo { font-size: 1.6em; }
+.cadre-item { font-size: 1em; }
+@media (max-width: 700px) {
+    .cadre-full.cadre-double { flex-direction: column; }
+    .cadre-resume { max-width: 100%; width: 100%; padding: 16px; }
+}
+
+/* ===== Objectifs étoiles / cadre agenda ===== */
+.etoiles { letter-spacing: 2px; }
+.cadre-sep { border-top: 1px solid rgba(255,255,255,.25); padding-top: 10px; margin-top: 4px; font-size: .85em; text-transform: uppercase; letter-spacing: 1px; opacity: .8; }
+
+/* ===== Tâches : cochage par personne ===== */
+.tache-bloc { border: 1px solid var(--bord); border-radius: var(--radius); padding: 8px 12px; margin-bottom: 10px; background: var(--fond); }
+.tache-bloc.done-bloc { opacity: .75; }
+.tache-entete { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-bottom: 6px; }
+.tache-personnes { display: flex; flex-wrap: wrap; gap: 6px; }
+.tache-personne { display: inline-flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--bord); border-radius: var(--radius); padding: 6px 12px; }
+.tache-personne.done .tache-pers-nom { text-decoration: line-through; opacity: .55; }
+.tache-personne input[type=checkbox] { width: 22px; height: 22px; accent-color: var(--vert); }
+.tache-pers-nom { font-weight: 600; font-size: .92em; }
+.pts-mini { font-size: .75em; color: var(--muted); }
+
+/* ===== Tableau hebdomadaire étoiles ===== */
+.tableau-hebdo-wrap { overflow-x: auto; }
+.tableau-hebdo { border-collapse: collapse; width: 100%; font-size: .88em; }
+.tableau-hebdo th, .tableau-hebdo td { border: 1px solid var(--bord); padding: 4px 6px; text-align: center; }
+.tableau-hebdo th { background: var(--fond); position: sticky; top: 0; }
+.tableau-hebdo th.auj, .tableau-hebdo td.auj { background: rgba(56,189,248,.12); }
+.tableau-hebdo .th-tache, .tableau-hebdo .td-tache { text-align: left; min-width: 150px; }
+.tableau-hebdo .td-tache strong { display: inline-block; max-width: 220px; }
+.tableau-hebdo .tache-actions { float: right; margin-left: 6px; }
+.tableau-hebdo tr.inactif { opacity: .45; }
+.cell-etoile { width: 30px; height: 30px; border: 1px solid var(--bord); border-bottom-width: 3px; border-radius: 6px; background: var(--surface); cursor: pointer; font-size: 15px; margin: 1px; padding: 0; vertical-align: middle; }
+.cell-etoile.prevu:not(.faite) { background: var(--fond); }
+.cell-etoile.faite { background: rgba(46,204,113,.25); }
+.cell-etoile:disabled { opacity: .35; cursor: not-allowed; }
+.td-total { white-space: nowrap; }
+.total-pers { font-weight: bold; margin: 0 4px; }
+.td-total-semaine { font-size: 1.1em; font-weight: bold; border-bottom-width: 3px; }
+.etoiles-grosse { font-size: 1.25em; letter-spacing: 2px; margin-top: 4px; }
+
+/* ============================================================
+   RESPONSIVE 16:9 — densité adaptative pour tous les écrans
+   (720p TV, tablettes, PC portable, moniteurs, 4K)
+   ============================================================ */
+:root {
+    --den: 1; /* densité ajustable via Réglages (0.8 compact … 1.2 espacé) */
+}
+
+/* --- Unités fluides : la typo suit la taille de l'écran (16:9) --- */
+html { font-size: clamp(13px, 0.83vw + 9px, 19px); }
+.view { max-width: min(1500px, 96vw); }
+body { min-height: 100vh; }
+
+/* --- Accueil : grille pensée 16:9 (hero pleine largeur, cartes en dessous) --- */
+.today-grid { gap: calc(14px * var(--den)); }
+.today-hero { display: flex; flex-direction: column; gap: 6px; }
+.hero-clock { display: flex; align-items: baseline; gap: 2vw; flex-wrap: wrap; }
+.hero-clock #horloge-heure { font-size: clamp(2.2em, 5.2vw, 4.6em); }
+.hero-clock #horloge-date { font-size: clamp(1em, 1.4vw, 1.5em); }
+.today-hero .hero-sous { font-size: clamp(.85em, 1vw, 1.05em); }
+
+/* --- Calendrier : cellules qui remplissent le 16:9 sans scroll --- */
+.cal-grille { gap: calc(6px * var(--den)); }
+.cal-cell { min-height: clamp(52px, 8.5vh, 110px); font-size: clamp(.62em, .78vw, .92em); }
+.cal-cell .num { font-size: clamp(.95em, 1.05vw, 1.15em); }
+
+/* --- Repas : 7 colonnes sur écran large --- */
+.repas-semaine { grid-template-columns: repeat(auto-fit, minmax(clamp(130px, 12vw, 210px), 1fr)); gap: calc(10px * var(--den)); }
+.repas-jour { min-height: clamp(96px, 14vh, 150px); padding: calc(8px * var(--den)) calc(10px * var(--den)); }
+
+/* --- Tableau hebdo tâches : lisible en 720p --- */
+.tableau-hebdo { font-size: clamp(.72em, .82vw, .95em); }
+.cell-etoile { width: clamp(24px, 2.2vw, 32px); height: clamp(24px, 2.2vw, 32px); font-size: clamp(13px, 1.2vw, 16px); }
+
+/* --- Météo horaire fluide --- */
+.meteo-h-item { min-width: clamp(56px, 5vw, 72px); }
+
+/* --- Cartes & boutons aèrent selon la densité --- */
+.card { padding: calc(14px * var(--den)) calc(16px * var(--den)); margin-bottom: calc(14px * var(--den)); }
+.btn { padding: calc(10px * var(--den)) calc(14px * var(--den)); }
+.tab { padding: calc(10px * var(--den)) calc(14px * var(--den)); font-size: clamp(.82em, .95vw, 1em); }
+
+/* --- Onglets : sur écran étroit, ils scrollent horizontalement --- */
+.tabs { flex-wrap: nowrap; overflow-x: auto; max-width: 100%; scrollbar-width: thin; }
+
+/* --- Listes : moins d'espace gaspillé en hauteur --- */
+.today-item { padding: calc(7px * var(--den)) 0; }
+
+/* --- Breakpoints 16:9 classiques --- */
+
+/* Petits écrans / tablette verticale / 720p en mode serré */
+@media (max-width: 1100px) {
+    .view { padding: 12px 14px; }
+    .today-grid { grid-template-columns: 1fr; }
+    .cal-cell { min-height: clamp(64px, 10vh, 96px); }
+}
+
+/* TV / écran 16:9 en 720p (grosse typo, tout tient à l'écran) */
+@media (min-width: 1100px) and (max-height: 800px) {
+    :root { --den: .85; }
+    .today-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .hero-clock #horloge-heure { font-size: clamp(3em, 7vw, 5.5em); }
+}
+
+/* Grands écrans / 1080p+ */
+@media (min-width: 1400px) and (min-height: 800px) {
+    .today-grid { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+    .cal-cell { min-height: clamp(70px, 10vh, 125px); }
+}
+
+/* Très grands écrans (1440p / 4K) */
+@media (min-width: 2000px) {
+    html { font-size: clamp(18px, 0.9vw, 26px); }
+    .view { max-width: min(1800px, 90vw); }
+}
+
+.meteo-jour:hover { background: var(--fond); border-radius: var(--radius); }
+
+/* ===== Gestion ===== */
+.gestion-tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 14px; }
+.gtab { background: var(--fond); color: var(--texte); border: 1px solid var(--bord); border-radius: var(--radius) var(--radius) 0 0; padding: 10px 16px; cursor: pointer; font-weight: 600; min-height: 42px; }
+.gtab.active { background: var(--teal); color: #fff; border-color: var(--teal); }
+.gpanel { display: none; }
+.gpanel.active { display: block; }
+.data-table { width: 100%; border-collapse: collapse; font-size: .92em; }
+.data-table th, .data-table td { border: 1px solid var(--bord); padding: 8px 10px; text-align: left; }
+.data-table th { background: var(--fond); }
+.data-table tr:hover td { background: rgba(56,189,248,.06); }
+
+/* Horloge mini d'en-tête (visible hors accueil) */
+.horloge-mini { margin-left: auto; font-size: 1.05em; font-weight: bold; color: var(--accent); min-width: 56px; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Licence illimitée : logo infini */
+.licence-vie { font-size: 2.2em; margin: 4px 0; text-align: left; }
+
+/* ===== Fix en-tête : logo toujours sur sa ligne, onglets en dessous si besoin ===== */
+.brand { margin-right: auto; }
+.horloge-mini { margin-left: 0; order: 5; }
+.tabs { order: 10; flex-basis: 100%; border-top: 1px solid var(--bord); margin-top: 6px; padding-top: 6px; }
+@media (min-width: 1100px) {
+    /* Grand écran : tout tient sur une ligne, logo | onglets | horloge | boutons */
+    .tabs { flex-basis: auto; border-top: none; margin-top: 0; padding-top: 0; }
+}
+/* Section plats dans Courses */
+.plats-bloc { background: var(--fond); border-radius: var(--radius); padding: 6px 10px; margin-bottom: 8px; }
+
+/* Règles plats */
+.freq-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; margin: 8px 0 14px; }
+.freq-row { display: flex; align-items: center; justify-content: space-between; background: var(--fond); border: 1px solid var(--bord); border-radius: var(--radius); padding: 6px 10px; }
+.freq-row .counter { display: flex; align-items: center; gap: 6px; }
+.freq-row .count { min-width: 64px; text-align: center; font-weight: 600; color: var(--accent); }
+
+/* ===== Réglages en tuiles ===== */
+.reglages-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; align-items: start; }
+.reglage-tile h2 { margin-bottom: 10px; }
+
+/* Sous-titres du panneau Calendrier fusionné */
+.sous-titre { margin: 26px 0 8px; padding-bottom: 6px; border-bottom: 2px solid var(--teal); font-size: 1.05em; color: var(--accent); }
+.sous-titre:first-child { margin-top: 4px; }
+
+/* ===== Tuiles Réglages équitables ===== */
+.reglages-tiles { grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); }
+.reglage-tile { display: flex; flex-direction: column; }
+.reglage-tile .panel-toolbar { margin-top: auto; }
+
+/* Zones dépliables (Gestion) */
+details.zone-depliable { margin-bottom: 18px; border: 1px solid var(--bord); border-radius: var(--radius); padding: 0 14px; background: var(--fond); }
+details.zone-depliable summary { cursor: pointer; font-weight: 600; font-size: 1.05em; color: var(--accent); padding: 12px 0; list-style: none; display: flex; align-items: center; gap: 8px; }
+details.zone-depliable summary::before { content: "▸"; transition: transform .2s; color: var(--muted); }
+details[open].zone-depliable summary::before { transform: rotate(90deg); }
+details.zone-depliable > *:not(summary) { padding-bottom: 6px; }
+
+/* En-tête : onglets TOUJOURS sous le titre (ligne 2) */
+.app-header { flex-wrap: wrap; }
+.app-header .tabs { flex-basis: 100%; order: 20; border-top: 1px solid var(--bord); margin-top: 8px; padding-top: 8px; }
+.horloge-mini { margin-left: auto; }
+
+/* Musiques */
+.musiques-liste { margin: 6px 0 12px; }
+
+/* ===== Très compact (TV 720p) : tout rétrécit ===== */
+body:has(#opt-densite) {} /* ancre */
+html[data-den="trescompact"] { font-size: 13px; }
+html[data-den="trescompact"] .card { padding: 8px 10px; margin-bottom: 8px; }
+html[data-den="trescompact"] .btn { padding: 6px 10px; min-height: 34px; font-size: .82em; }
+html[data-den="trescompact"] .tab { padding: 6px 10px; min-height: 34px; font-size: .85em; }
+html[data-den="trescompact"] .view { padding: 10px 12px; }
+html[data-den="trescompact"] .today-grid { gap: 8px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+html[data-den="trescompact"] .panel-toolbar { gap: 5px; flex-wrap: wrap; }
+html[data-den="trescompact"] .input { padding: 6px 8px; min-width: 90px; }
+html[data-den="trescompact"] h2 { font-size: 1em; }
+html[data-den="trescompact"] .hint { font-size: .72em; }
+html[data-den="trescompact"] .toast { font-size: .85em; padding: 8px 14px; }
+html[data-den="trescompact"] .modal-content { padding: 12px; max-width: 480px; }
+html[data-den="trescompact"] .reglages-tiles { grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 8px; }
+html[data-den="trescompact"] .gtab { padding: 6px 10px; min-height: 34px; font-size: .85em; }
+html[data-den="trescompact"] .data-table th, html[data-den="trescompact"] .data-table td { padding: 4px 6px; font-size: .85em; }
+html[data-den="trescompact"] details.zone-depliable { padding: 0 8px; margin-bottom: 10px; }
+html[data-den="trescompact"] details.zone-depliable summary { padding: 7px 0; font-size: .95em; }
+html[data-den="trescompact"] .freq-row { padding: 4px 8px; }
+html[data-den="trescompact"] .cell-etoile { width: 22px; height: 22px; font-size: 12px; }
+html[data-den="trescompact"] .cal-cell { min-height: 48px; }
+
+/* Radios & musiques : liste en 2 colonnes (responsive) */
+#radios-liste, #musiques-liste {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 4px 12px;
+    margin: 6px 0 10px;
+}
+#radios-liste .liste-item, #musiques-liste .liste-item {
+    padding: 5px 4px;
+    margin: 0;
+}
+
+/* ===== Glassmorphism : quand un fond d'image est actif =====
+   L'image est nette derrière ; les cartes deviennent du verre
+   translucide flouté — contenu lisible ET image visible. */
+body.fond-image .card {
+    background: rgba(30, 30, 36, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+body.fond-image .app-header {
+    background: rgba(30, 30, 36, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+body.fond-image .modal-content {
+    background: rgba(30, 30, 36, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+body.fond-image .cal-cell {
+    background: rgba(30, 30, 36, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+body.fond-image .repas-jour {
+    background: rgba(30, 30, 36, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+body.fond-image .toast {
+    background: rgba(20, 20, 24, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+body.fond-image .tab.active {
+    background: rgba(93, 156, 236, 0.85);
+}
+body.fond-image .btn {
+    background: rgba(60, 60, 68, 0.75);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+/* ===== Fond d'image : verre PLUS TRANSPARENT (l'image domine) =====
+   Réduction des opacités : l'image passe davantage à travers les cartes,
+   le blur backdrop assure seul la lisibilité des textes. */
+body.fond-image .card {
+    background: rgba(25, 25, 30, 0.30);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+}
+body.fond-image .app-header {
+    background: rgba(25, 25, 30, 0.35);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+body.fond-image .modal-content {
+    background: rgba(25, 25, 30, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+body.fond-image .cal-cell {
+    background: rgba(25, 25, 30, 0.22);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+}
+body.fond-image .repas-jour {
+    background: rgba(25, 25, 30, 0.22);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+}
+body.fond-image .btn {
+    background: rgba(40, 40, 46, 0.45);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+body.fond-image .today-hero {
+    background: rgba(25, 25, 30, 0.30);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+/* badges et éléments colorés : légère transparence pour laisser vivre l'image */
+body.fond-image .badge {
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+/* ===== Accueil réorganisé (mode mural) ===== */
+.today-grid { display: grid; grid-template-columns: 1fr 1fr; gap: calc(14px * var(--den)); }
+.today-col-gauche, .today-col-droite { display: flex; flex-direction: column; gap: calc(14px * var(--den)); }
+.today-col-gauche .card, .today-col-droite .card { margin-bottom: 0; }
+.today-grid > .card { margin-bottom: 0; }
+.meteo-semaine { display: flex; gap: 6px; overflow-x: auto; }
+.meteo-jour { flex: 1; min-width: 84px; text-align: center; padding: 8px 4px; border-radius: var(--radius); background: var(--fond); }
+.meteo-jour.meteo-auj { background: rgba(93, 156, 236, 0.25); outline: 1px solid var(--accent); }
+/* En mode mural : deux colonnes serrées pour tout voir à l'écran */
+body.mural .today-grid { grid-template-columns: 1fr 1fr; }
+body.mural .meteo-semaine { flex-wrap: wrap; }
+
+/* La taille du texte (petit/moyen/grand) : tout l'app suit la taille racine
+   car les dimensions sont en em/rem — ajustement global propre */
+
+/* Très petit texte (TV 24" et moins) : réductions ciblées pour rester net */
+html[style*="78%"] .hint { font-size: .68em; }
+html[style*="78%"] .today-item { padding: 3px 0; }
+html[style*="78%"] .cal-cell .ev { font-size: .72em; }

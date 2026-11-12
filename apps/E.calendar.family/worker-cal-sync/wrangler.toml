@@ -1,0 +1,12 @@
+name = "cal-sync"
+main = "worker.js"
+compatibility_date = "2026-11-01"
+
+routes = [
+  { pattern = "sync.edukisto.win", custom_domain = true }
+]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "cal_sync"
+database_id = "5dcbe75e-7c4f-4909-ae9b-5a5373e5b88b"

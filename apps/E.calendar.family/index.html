@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Edukisto Home · edukisto</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<meta name="theme-color" content="#333333">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-512.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="css/style.css?v=v2026-10-31.3">
+  <style>
+
+/* ===== Splash studio Edukisto ===== */
+#studio-splash {
+  position: fixed;
+  inset: 0;
+  background: #333333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: splash-bg 2.6s ease forwards;
+  pointer-events: none;
+}
+.splash-inner { text-align: center; }
+.splash-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  font-size: 54px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: #ffffff;
+  animation: splash-logo 2.6s ease forwards;
+  font-family: inherit;
+}
+.splash-star { width: 56px; height: 56px; filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.7)); }
+.splash-sub {
+  margin-top: 14px;
+  font-size: 16px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: #38bdf8;
+  animation: splash-sub 2.6s ease forwards;
+}
+@keyframes splash-logo {
+  0% { opacity: 0; transform: scale(0.86); letter-spacing: 24px; }
+  25% { opacity: 1; transform: scale(1); letter-spacing: 14px; }
+  75% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.05); }
+}
+@keyframes splash-sub {
+  0%, 15% { opacity: 0; }
+  35% { opacity: 1; }
+  75% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes splash-bg {
+  0%, 70% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+  </style>
+</head>
+<body>
+  <div id="studio-splash" aria-hidden="true">
+    <div class="splash-inner">
+      <div class="splash-logo"><svg class="splash-star" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 3l5.2 18.2 10.8-5.2-5.2 10.8L61 32l-18.2 5.2 5.2 10.8-10.8-5.2L32 61l-5.2-18.2-10.8 5.2 5.2-10.8L3 32l18.2-5.2-5.2-10.8 10.8 5.2z" fill="#38bdf8"/><path d="M32 32c-1.6-2-3-3.1-4.8-3.1a4.7 4.7 0 1 0 0 9.4c1.8 0 3.2-1.1 4.8-3.1 1.6 2 3 3.1 4.8 3.1a4.7 4.7 0 1 0 0-9.4c-1.8 0-3.2 1.1-4.8 3.1z" stroke="#0f1115" stroke-width="2.2" fill="none"/></svg>Edukisto</div>
+      <div class="splash-sub">présente</div>
+    </div>
+  </div>
+
+
+<header class="app-header">
+  <a href="https://edukisto.win/" target="_blank" rel="noopener" class="brand-logo" title="edukisto — relier & orienter">
+    <svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M32 3l5.2 18.2 10.8-5.2-5.2 10.8L61 32l-18.2 5.2 5.2 10.8-10.8-5.2L32 61l-5.2-18.2-10.8 5.2 5.2-10.8L3 32l18.2-5.2-5.2-10.8 10.8 5.2z" fill="#38bdf8"/><path d="M32 32c-1.6-2-3-3.1-4.8-3.1a4.7 4.7 0 1 0 0 9.4c1.8 0 3.2-1.1 4.8-3.1 1.6 2 3 3.1 4.8 3.1a4.7 4.7 0 1 0 0-9.4c-1.8 0-3.2 1.1-4.8 3.1z" stroke="#fff" stroke-width="2.2"/></svg>
+  </a>
+  <div class="brand">Edukisto Home</div>
+  <div class="header-date" id="header-date"></div>
+  <div class="horloge-mini" id="horloge-mini" title=""></div>
+  <button id="btn-mural" class="btn btn-mural" title="Mode tablette murale : rotation automatique des vues, plein écran">🖼️ Mode mural</button>
+  <button id="btn-mural-musique" class="btn btn-mural" title="Choisir une musique ou radio" style="display:none">🎵</button>
+  <button id="btn-mural-photos" class="btn btn-mural" title="Diaporama photo plein écran" style="display:none">🖼️</button>
+  <button id="btn-mural-prec" class="btn btn-mural" title="Écran précédent" style="display:none">◀</button>
+  <button id="btn-mural-suiv" class="btn btn-mural" title="Écran suivant" style="display:none">▶</button>
+  <button id="btn-mural-sortir" class="btn btn-mural" title="Quitter le mode mural" style="display:none">✕</button>
+  <button id="btn-mural-config" class="btn btn-mural" title="Réglages du mode mural (durée, écrans inclus)" style="display:none;padding:8px 10px">⚙️</button>
+  <nav class="tabs" id="main-tabs">
+    <button class="tab active" data-view="aujourdhui">☀️ Aujourd'hui</button>
+    <button class="tab" data-view="calendrier">📅 Calendrier</button>
+    <button class="tab" data-view="repas">🍽️ Repas</button>
+    <button class="tab" data-view="taches">✅ Tâches</button>
+    <button class="tab" data-view="listes">🏬 Magasins</button>
+    <button class="tab" data-view="musique">🎵 Musique</button>
+    <button class="tab" data-view="meteo">🌤️ Météo</button>
+    <button class="tab" data-view="photos">🖼️ Images</button>
+    <button class="tab" data-view="gestion">🗂️ Gestion</button>
+    <button class="tab" data-view="reglages">⚙️ Réglages</button>
+  </nav>
+  <span id="app-version" class="hint" style="margin-left:auto;font-size:.62em;opacity:.55;align-self:center;white-space:nowrap" title="Version de l'application"></span>
+</header>
+
+<main id="view-aujourdhui" class="view active">
+  <section class="today-hero card" id="today-hero">
+    <div class="hero-clock"><span id="horloge-heure"></span><span id="horloge-date"></span></div>
+    <div class="hero-sous" id="today-hero-badges"></div>
+  </section>
+  <section class="meteo-condense card" id="meteo-condense"></section>
+  <div id="rappel-sauvegarde"></div>
+  <div class="today-grid">
+    <div class="today-col-gauche">
+      <section class="card"><h2>🎂 5 prochains anniversaires</h2><div id="today-anniv"></div></section>
+      <section class="card"><h2>📅 Aujourd'hui au calendrier</h2><div id="today-calendrier"></div></section>
+    </div>
+    <div class="today-col-droite">
+      <section class="card"><h2>✅ Tâches du jour</h2><div id="today-taches"></div></section>
+      <section class="card"><h2>⭐ Récompenses</h2><div id="today-recompenses"></div></section>
+    </div>
+    <section class="card"><h2>🍽️ Repas de la semaine</h2><div id="today-repas"></div></section>
+    <section class="card today-meteo"><h2>🌤️ Météo de la semaine</h2><div id="today-meteo"></div></section>
+  </div>
+</main>
+
+<main id="view-calendrier" class="view">
+  <div class="cal-toolbar">
+    <button class="btn" id="cal-prec">◀</button>
+    <h1 id="cal-titre"></h1>
+    <button class="btn" id="cal-suiv">▶</button>
+    <button class="btn btn-primary" id="btn-add-event">➕ Événement</button>
+        <button class="btn" onclick="allerGestionCalendrier()">⚙️ Gérer (anniversaires, fériés, agendas…)</button>
+  </div>
+  <div id="cal-legend" class="cal-legend"></div>
+  <div id="cal-grille" class="cal-grille"></div>
+
+  
+
+  <section class="card">
+    <h2>📋 Tous les événements</h2>
+    <div id="liste-evenements"></div>
+  </section>
+</main>
+
+<main id="view-repas" class="view">
+  <div class="cal-toolbar">
+    <button class="btn" id="repas-prec">◀</button>
+    <h1 id="repas-titre"></h1>
+    <button class="btn" id="repas-suiv">▶</button>
+    <button class="btn btn-primary" id="btn-generer-repas">🎲 Générer la semaine</button>
+  </div>
+  <div id="repas-semaine" class="repas-semaine"></div>
+
+</main>
+
+<main id="view-taches" class="view">
+  <div class="panel-toolbar">
+    <button class="btn btn-primary" id="btn-add-tache">➕ Nouvelle tâche</button>
+    <button class="btn btn-primary" id="btn-add-objectif">🎯 Nouvel objectif</button>
+  </div>
+  <div class="today-grid">
+    <section class="card"><h2>📋 Tâches en cours</h2><div id="taches-liste"></div></section>
+    <section class="card"><h2>🎯 Objectifs & récompenses</h2><div id="objectifs-liste"></div></section>
+  </div>
+</main>
+
+<main id="view-listes" class="view">
+  <div class="panel-toolbar">
+    <button class="btn btn-primary" id="btn-add-liste">➕ Nouvelle liste</button>
+  </div>
+  <div id="listes-container" class="listes-container"></div>
+</main>
+
+<main id="view-meteo" class="view">
+  <div class="cal-toolbar">
+    <input type="text" id="meteo-ville" class="input" placeholder="Ville…" style="max-width:220px">
+    <button class="btn btn-primary" id="btn-meteo-ville">📍 Changer de ville</button>
+    <button class="btn" id="btn-meteo-refresh">🔄 Actualiser</button>
+    <span class="hint" id="meteo-ville-actuelle"></span>
+  </div>
+  <div id="meteo-actuelle"></div>
+  <div class="today-grid">
+    <section class="card"><h2>📅 Prochains jours</h2><div id="meteo-jours"></div></section>
+    <section class="card"><h2>⏱️ Prévisions horaires (24 h)</h2><div id="meteo-horaire"></div></section>
+  </div>
+</main>
+
+<main id="view-musique" class="view">
+  <section class="card">
+    <h2>📻 Musique & Radios</h2>
+
+    <h3 class="hint">Radios (flux internet — nécessite le réseau)</h3>
+    <div id="radios-liste" class="musiques-liste"></div>
+    <div class="panel-toolbar">
+      <input type="text" id="radio-nom" class="input" placeholder="Nom (ex. Nostalgie)" style="max-width:150px">
+      <input type="text" id="radio-url" class="input" placeholder="URL du flux (https://…/stream.mp3)">
+      <button class="btn btn-mini btn-primary" id="btn-add-radio">➕ Ajouter la radio</button>
+    </div>
+
+    <h3 class="hint">Vos MP3 (stockés dans l'app — fonctionnent hors-ligne)</h3>
+    <div class="panel-toolbar">
+      <label class="btn" for="file-musiques">🎵 Ajouter des MP3</label>
+      <input type="file" id="file-musiques" accept="audio/*" multiple hidden>
+      <button class="btn btn-mini" id="btn-musique-play">▶️ Lecture aléatoire</button>
+      <button class="btn btn-mini" id="btn-musique-stop">⏹️ Stop</button>
+      <span class="hint" id="musique-info"></span>
+    </div>
+    <div id="musiques-liste" class="musiques-liste"></div>
+  </section>
+</main>
+
+<main id="view-photos" class="view">
+
+  <section class="card">
+    <h2>🖼️ Images</h2>
+    <div class="panel-toolbar">
+      <label class="btn btn-primary" for="file-photos">➕ Ajouter des photos</label>
+      <input type="file" id="file-photos" accept="image/*" multiple hidden>
+      <button class="btn" id="btn-mode-cadre">🖼️ Mode cadre photo</button>
+      <label class="switch" style="margin-left:10px">Timing : <select id="cadre-timing" class="input" style="min-width:70px"><option value="3">3 s</option><option value="5">5 s</option><option value="8">8 s</option><option value="12">12 s</option><option value="20">20 s</option><option value="30">30 s</option></select></label>
+      <label class="switch"><input type="checkbox" id="cadre-double"> Mode double (photo + résumé du jour)</label>
+      <label class="switch"><input type="checkbox" id="cadre-aleatoire"> Ordre aléatoire</label>
+    </div>
+    <div id="photos-grid" class="photos-grid"></div>
+
+    <h3 class="hint" style="margin-top:16px">🖼️ Arrière-plan de l'app</h3>
+    <p class="hint">Affichez une image en fond, en transparence légère (opacité 50 %, flou doux) — le contenu reste parfaitement lisible par-dessus.</p>
+    <div class="panel-toolbar">
+      <select id="choix-fond" class="input">
+        <option value="">Aucun</option>
+        <option value="Photos/paysage-mer.jpg">Coucher de soleil sur mer</option>
+        <option value="Photos/paysage-montagnes.jpg">Montagnes au matin</option>
+        <option value="Photos/paysage-champs.jpg">Champs au printemps</option>
+      </select>
+      <button class="btn btn-mini" id="btn-apercu-fond">👁️ Aperçu</button>
+    </div>
+    <p class="hint" id="fond-actuel"></p>
+  </section>
+</main>
+
+<!-- ============ VUE GESTION ============ -->
+<main id="view-gestion" class="view">
+  <nav class="gestion-tabs">
+    <button class="gtab active" data-panel="calendrier-g">📅 Calendrier</button>
+    <button class="gtab" data-panel="plats">🍽️ Plats</button>
+    <button class="gtab" data-panel="membres">👨‍👩‍👧‍👦 Membres</button>
+  </nav>
+
+  <section id="panel-calendrier-g" class="gpanel card active">
+
+    <details class="zone-depliable" open>
+    <summary>🎂 Anniversaires</summary>
+    <div class="panel-toolbar">
+      <input type="text" id="recherche-personne" class="input" placeholder="Rechercher…">
+      <button class="btn btn-primary" id="btn-add-personne" style="margin-left:auto">➕ Ajouter</button>
+    </div>
+    <table class="data-table" id="table-personnes">
+      <thead><tr><th>Nom</th><th>Jour</th><th>Mois</th><th>Année</th><th>Type</th><th>Actions</th></tr></thead>
+      <tbody></tbody>
+    </table>
+
+</details>
+    <details class="zone-depliable" open>
+    <summary>🎉 Événements</summary>
+    <div class="panel-toolbar">
+      <span style="flex:1"></span>
+      <button class="btn btn-primary" id="btn-add-evenement-g">➕ Ajouter</button>
+    </div>
+    <table class="data-table" id="table-evenements-g">
+      <thead><tr><th>Date</th><th>Libellé</th><th>Actions</th></tr></thead>
+      <tbody></tbody>
+    </table>
+
+</details>
+    <details class="zone-depliable" open>
+    <summary>🏁 Jours fériés</summary>
+    <div class="panel-toolbar">
+      <select id="select-annee-feries" class="input"></select>
+      <button class="btn" id="btn-generer-feries" title="Générer les jours fériés belges pour cette année">⚙️ Générer (Belgique)</button>
+      <span style="flex:1"></span>
+      <button class="btn btn-primary" id="btn-add-ferie">➕ Ajouter</button>
+    </div>
+    <table class="data-table" id="table-feries">
+      <thead><tr><th>Date</th><th>Libellé</th><th>Actions</th></tr></thead>
+      <tbody></tbody>
+    </table>
+
+</details>
+    <details class="zone-depliable" open>
+    <summary>🏖️ Vacances</summary>
+    <div class="panel-toolbar">
+      <span style="flex:1"></span>
+      <button class="btn btn-primary" id="btn-add-vacances">➕ Ajouter</button>
+    </div>
+    <table class="data-table" id="table-vacances">
+      <thead><tr><th>Début</th><th>Fin</th><th>Libellé</th><th>Actions</th></tr></thead>
+      <tbody></tbody>
+    </table>
+
+</details>
+    <details class="zone-depliable" open>
+    <summary>🌐 Agendas Google</summary>
+    <p class="hint">Ajoutez ici l'agenda Google de chaque membre de la famille. Donnez un nom et une couleur à chaque agenda — les événements apparaîtront automatiquement dans le calendrier, mis à jour toutes les 5 minutes.</p>
+    <div class="panel-toolbar">
+      <input type="text" id="ics-nom" class="input" placeholder="Nom (ex. Papa)" style="max-width:150px">
+      <input type="color" id="ics-couleur" class="input" value="#7dd3fc" style="width:52px;height:44px;padding:2px" title="Couleur">
+      <input type="text" id="ics-url" class="input" placeholder="Adresse de l'agenda (voir mode d'emploi)">
+      <button class="btn" id="btn-import-ics-url">Importer URL</button>
+      <label class="btn" for="file-ics">📂 Fichier .ics</label>
+      <input type="file" id="file-ics" accept=".ics,text/calendar" hidden>
+      <button class="btn btn-danger btn-mini" id="btn-clear-ics">Tout effacer</button>
+    </div>
+    <div id="ics-statut"></div>
+  </section>
+
+
+
+  <section id="panel-membres" class="gpanel card">
+    <p class="hint">Les membres de la famille : leur couleur les identifie dans les tâches, étoiles et événements.</p>
+    <div class="panel-toolbar">
+      <span style="flex:1"></span>
+      <button class="btn btn-primary" id="btn-add-membre">➕ Ajouter un membre</button>
+    </div>
+    <div id="membres-liste"></div>
+  </section>
+
+  <section id="panel-plats" class="gpanel card">
+    <p class="hint">La bibliothèque de plats (reprise de Keskonmange Lulu) — utilisée dans l'onglet Repas.</p>
+    <h3 class="hint">⚖️ Règles de génération</h3>
+    <div id="regles-plats"></div>
+    <div class="panel-toolbar">
+      <select id="filtre-categorie" class="input"><option value="">Toutes catégories</option></select>
+      <input type="text" id="recherche-plat" class="input" placeholder="Rechercher un plat…">
+      <button class="btn btn-primary" id="btn-add-plat" style="margin-left:auto">➕ Ajouter un plat</button>
+    </div>
+    <div id="plats-liste" class="plats-liste"></div>
+  </section>
+
+</main>
+
+<main id="view-reglages" class="view">
+  <div class="reglages-tiles">
+
+    <section class="card reglage-tile">
+      <h2>🗝️ Licence</h2>
+      <div id="licence-statut"></div>
+      <div class="panel-toolbar" id="licence-form">
+        <input type="text" id="licence-cle" class="input" placeholder="Clé de licence">
+        <button class="btn btn-primary" id="btn-activer-licence">🗝️ Activer</button>
+      </div>
+      <p class="hint">8 €/mois ou 80 €/an · <a href="https://edukisto.win" target="_blank" rel="noopener">edukisto.win</a></p>
+    </section>
+
+    <section class="card reglage-tile">
+      <h2>💾 Sauvegarde</h2>
+      <h3 class="hint">☁️ En ligne (recommandée)</h3>
+      <div class="panel-toolbar">
+        <input type="text" id="save-nom" class="input" placeholder="Prénom et nom (ex. Zoe Demoulin)" style="max-width:200px">
+        <input type="password" id="save-mdp" class="input" placeholder="Mot de passe de sauvegarde" style="max-width:220px">
+        <button class="btn btn-primary" id="btn-save-config">✅ Activer</button>
+      </div>
+      <div id="sync-statut"></div>
+      <div class="panel-toolbar" id="sync-actions" style="display:none">
+        <button class="btn btn-primary" id="btn-cloud-save">💾 Sauvegarder</button>
+        <button class="btn" id="btn-cloud-restore">📥 Restaurer</button>
+        <button class="btn btn-mini" id="btn-save-config-edit">✏️ Modifier</button>
+      </div>
+      <h3 class="hint">💿 Par fichier</h3>
+      <div class="panel-toolbar">
+        <button class="btn" id="btn-export">💿 Exporter</button>
+        <label class="btn" for="file-import">📂 Importer</label>
+        <input type="file" id="file-import" accept=".json" hidden>
+        <label class="btn" for="file-import-calfam" title="Reprendre les données d'un export calfam.edukisto.win (anniversaires, événements, fériés, vacances)">🦑 Importer calfam</label>
+        <input type="file" id="file-import-calfam" accept=".json" hidden>
+      </div>
+    </section>
+
+    <section class="card reglage-tile">
+      <h2>🔒 Protection par code</h2>
+      <p class="hint">Un code protège les modifications (Gestion et Réglages) — utile contre les petites mains.</p>
+      <div class="panel-toolbar">
+        <input type="password" id="opt-pin" class="input" placeholder="Code PIN (4 chiffres)" style="max-width:170px" inputmode="numeric">
+        <button class="btn" id="btn-save-pin">Enregistrer</button>
+      </div>
+    </section>
+
+    <section class="card reglage-tile">
+      <h2>📱 Installation</h2>
+      <p class="hint">Icône sur l'écran d'accueil, plein écran, hors-ligne.</p>
+      <button class="btn btn-primary" onclick="installerPWA()">📱 Installer l'application</button>
+      <button class="btn" onclick="verifierMiseAJour()" title="Télécharger la dernière version publiée">🔄 Vérifier la mise à jour</button>
+    </section>
+
+    <section class="card reglage-tile">
+      <h2>🌙 Écran</h2>
+      <label class="switch"><input type="checkbox" id="opt-nuit"> Mode sombre</label>
+      <label class="switch">Taille du texte :
+        <select id="opt-taille" class="input" style="max-width:110px">
+          <option value="trespetit">Très petit (TV)</option><option value="petit">Petit</option><option value="moyen">Moyen (défaut)</option><option value="grand">Grand</option><option value="tresgrand">Très grand</option>
+        </select>
+      </label>
+      <label class="switch">Densité :
+        <select id="opt-densite" class="input" style="max-width:130px">
+          <option value="trescompact">Très compact (TV)</option><option value="compact">Compact</option><option value="normal">Normal</option><option value="espace">Espacé</option>
+        </select>
+      </label>
+      <label class="switch"><input type="checkbox" id="opt-veille"> Mode kiosque (masquer Gestion/Réglages après inactivité)</label>
+      <label class="switch"><input type="checkbox" id="opt-sons" checked> 🔔 Sons (jingles anniversaires, carillons d'étoiles, ambiance murale)</label>
+      <label class="switch"><input type="checkbox" id="opt-mural-auto" title="L'app démarre directement en mode mural — idéal pour une tablette dédiée"> 🖼️ Démarrer en mode mural (tablette dédiée)</label>
+      <label class="switch"><input type="checkbox" id="opt-recompenses" checked title="Afficher les étoiles, objectifs et récompenses — décochez si la famille n'en a pas besoin"> ⭐ Afficher les récompenses (étoiles, objectifs)</label>
+    </section>
+
+    <section class="card reglage-tile">
+      <h2>ℹ️ À propos</h2>
+      <p class="hint" style="margin-top:2px"><strong id="apropos-version"></strong></p>
+      <p class="hint"><strong>Edukisto Home</strong> — le calendrier familial tout-en-un : anniversaires, événements, agendas Google, repas, tâches & étoiles, météo, album photo.<br><br>
+      ✅ Fonctionne sur tablette, PC et télévision · installation en une icône<br>
+      ✅ Vos données restent chez vous — utilisable hors-ligne<br>
+      ✅ Mises à jour automatiques pendant l'abonnement<br><br>
+      🗝️ Licence : 8 €/mois ou 80 €/an · <a href="https://edukisto.win" target="_blank" rel="noopener">edukisto.win</a><br><br>
+      edukisto — relier & orienter.</p>
+    </section>
+
+  </div>
+</main>
+
+<!-- Modales -->
+<div id="modal" class="modal hidden"><div class="modal-content" id="modal-content"></div></div>
+<div id="cadre-full" class="cadre-full hidden"></div>
+<div id="toast" class="toast hidden"></div>
+
+<script>
+  /* Le service worker n'est enregistré que sur les navigateurs qui le supportent
+     entièrement (Cache Storage + updates fiables). Amazon Silk des Echo Show/Fire
+     gère mal les mises à jour de SW et servent des versions périmées → on s'abstient
+     là où le support est douteux ; l'app fonctionne alors en direct réseau. */
+  if ('serviceWorker' in navigator && 'caches' in window) {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  } else if ('serviceWorker' in navigator) {
+    /* Navigateur sans Cache Storage fiable (Echo Show/Silk) : retirer tout
+       ancien service worker qui servirait une version périmée */
+    navigator.serviceWorker.getRegistrations().then(function (regs) {
+      regs.forEach(function (r) { r.unregister(); });
+    }).catch(function () {});
+  }
+  let evtInstallerPWA = null;
+  window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); evtInstallerPWA = e; });
+  function installerPWA() {
+    if (evtInstallerPWA) { evtInstallerPWA.prompt(); evtInstallerPWA = null; }
+    else alert("Pour installer : menu du navigateur → « Installer l'application » / « Ajouter à l'écran d'accueil ».");
+  }
+</script>
+<script src="donnees/donnees-initiales.js?v=v2026-10-31.3"></script>
+<script src="donnees/recettes.js?v=v2026-10-31.3"></script>
+<script src="js/storage.js?v=v2026-10-31.3"></script>
+<script src="js/meteo.js?v=v2026-10-31.3"></script>
+<script src="js/sync.js?v=v2026-10-31.3"></script>
+<script src="js/sons.js?v=v2026-10-31.3"></script>
+<script src="js/app.js?v=v2026-10-31.3"></script>
+</body>
+</html>
