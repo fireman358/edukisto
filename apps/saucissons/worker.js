@@ -22,17 +22,20 @@ function dbError(e) {
   return json({ error: 'Erreur serveur : ' + m }, 500);
 }
 
-export async function onRequestGet(context) {
-  try {
-    return await handleGet(context.request, context.env, context.params);
-  } catch (e) { return dbError(e); }
-}
-
-export async function onRequestPost(context) {
-  try {
-    return await handlePost(context.request, context.env, context.params);
-  } catch (e) { return dbError(e); }
-}
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    if (url.pathname === '/api' || url.pathname.startsWith('/api/')) {
+      const route = url.pathname.slice('/api/'.length).split('/').filter(Boolean);
+      try {
+        if (request.method === 'GET') return await handleGet(request, env, { route });
+        if (request.method === 'POST') return await handlePost(request, env, { route });
+        return json({ error: 'Méthode non autorisée' }, 405);
+      } catch (e) { return dbError(e); }
+    }
+    return json({ error: 'Route inconnue' }, 404);
+  },
+};
 
 async function handleGet(request, env, params) {
   const [path] = params.route || [];

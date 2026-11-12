@@ -1,7 +1,0 @@
-name = "saucissons"
-compatibility_date = "2025-01-01"
-
-[[d1_databases]]
-binding = "DB"
-database_name = "saucissons"
-database_id = "ec63c33c-2cca-415a-96d8-769188ab30c2"

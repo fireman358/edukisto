@@ -22,18 +22,18 @@ interface admin pour gérer stock, prix, paiements et récap fournisseur.
 ## Architecture
 
 - `index.html` : SPA (HTML/CSS/JS vanilla, aucun build nécessaire)
-- `functions/api/[[route]].js` : API Cloudflare Pages Functions
+- `worker.js` : API Cloudflare Worker (export default fetch)
 - `schema.sql` : schéma de la base D1 (SQLite)
+- `wrangler.jsonc` : config du Worker (binding D1, assets dans `public/`)
 - Branding Edukisto (charte anthracite/bleu, logo, liens vers edukisto.win)
 
-## Mise en ligne (Cloudflare Pages + D1)
+## Mise en ligne (Cloudflare Worker + D1)
 
 1. **Créer la base D1** (gratuit) :
    ```bash
    npx wrangler d1 create saucissons
    ```
-   Copier le `database_id` affiché dans `wrangler.toml` (remplacer
-   `A_CREER_PUIS_REMPLACER`), puis commit + push.
+   Copier le `database_id` affiché dans `wrangler.jsonc`, puis commit + push.
 
 2. **Initialiser les tables** :
    ```bash
@@ -41,20 +41,18 @@ interface admin pour gérer stock, prix, paiements et récap fournisseur.
    ```
    (crée les tables et les 25 saveurs du Google Form)
 
-3. **Lier la base au site** : dans le projet Cloudflare Pages →
-   Settings → Functions → D1 database bindings :
-   - Variable name : `DB`
-   - Database : `saucissons`
+3. **Lier la base** : le binding D1 est déjà déclaré dans `wrangler.jsonc`
+   (variable `DB`, base `saucissons`).
 
    Le mot de passe admin par défaut est `demsau` ; pour le changer, ajoute la
    variable `ADMIN_TOKEN` (elle remplace la valeur par défaut, visible dans le repo public).
 
-4. **Déployer** : connecter le repo dans Cloudflare Pages
-   (Build command : vide — Output directory : `/`), puis brancher le domaine.
+4. **Déployer** : `npx wrangler deploy` (depuis `apps/saucissons/`),
+   puis brancher le domaine.
 
 ## Développement local
 
 ```bash
 npx wrangler d1 execute saucissons --local --file=schema.sql
-npx wrangler pages dev .
+npx wrangler dev
 ```

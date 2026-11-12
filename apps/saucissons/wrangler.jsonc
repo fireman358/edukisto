@@ -1,0 +1,15 @@
+{
+  "name": "saucissons",
+  "compatibility_date": "2026-11-12",
+  "main": "worker.js",
+  "assets": {
+    "directory": "./public"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "saucissons",
+      "database_id": "ec63c33c-2cca-415a-96d8-769188ab30c2"
+    }
+  ]
+}
