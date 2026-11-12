@@ -1,0 +1,127 @@
+======================================================================
+BARAKFIX v6 — PACKAGE FINAL — MODE D'EMPLOI PAS À PAS
+======================================================================
+
+Ce dossier contient TOUT le projet, prêt à déployer. Il remplace v4 et v5.
+
+CONTENU
+------
+Racine : package.json, index.html, tailwind.config.js, postcss.config.js,
+          tsconfig.json, vite.config.ts, .env.example
+src/    : App.tsx (avec suppression de compte bailleur), auth/ (3 écrans),
+          owner/ (5 écrans dont Logements avec suppression), tenant/ (2 écrans),
+          lib/ (3), components/ (1)
+functions/api/ : tenant-login.ts, tenant-create.ts, owner-delete.ts
+          (format Cloudflare Pages Functions, zéro dépendance externe)
+supabase/migrations/ : 001, 002, 003 (démo), 004 (cascade bailleur)
+
+======================================================================
+ÉTAPE 1 — RÉCUPÉRER LE DOSSIER
+======================================================================
+1. Clic droit sur ce dossier Drive → Télécharger → décompressez le zip
+2. Vous obtenez un dossier « Barakfix-v6-cloudflare-FINAL »
+
+======================================================================
+ÉTAPE 2 — CRÉER LE FICHIER .ENV (OBLIGATOIRE)
+======================================================================
+Dans le dossier décompressé, créez un fichier nommé exactement « .env »
+(Notepad → Enregistrer sous → Type : « Tous les fichiers » → nom : .env)
+
+Contenu (remplacez les valeurs par VOS clés complètes depuis
+Supabase → Project Settings → API) :
+
+VITE_SUPABASE_URL=https://ghnwmqsvvvezvfmjneep.supabase.co
+VITE_SUPABASE_ANON_KEY=sb_publishable_...CLÉ-COMPLÈTE...
+SUPABASE_SERVICE_ROLE_KEY=sb_secret_...CLÉ-COMPLÈTE...
+SUPABASE_JWT_SECRET=votre-jwt-secret
+
+⚠️ Attention pièges déjà rencontrés :
+- Vérifiez l'URL caractère par caractère : ghnwmqsvvvezVFMjneep (pas vfrm)
+- Les clés font ~70 caractères — si ça s'arrête à ~45, c'est tronqué
+
+======================================================================
+ÉTAPE 3 — INSTALLER ET CONSTRUIRE
+======================================================================
+Ouvrez un terminal dans le dossier (Explorateur → barre d'adresse →
+tapez « cmd » → Entrée), puis :
+
+npm install
+npm run build
+
+(2-3 minutes la première fois. Le dossier dist/ apparaît à la fin.)
+
+======================================================================
+ÉTAPE 4 — COPIER LES FONCTIONS DANS DIST
+======================================================================
+Toujours dans le même terminal :
+
+xcopy functions dist\functions\ /E /I
+
+======================================================================
+ÉTAPE 5 — DÉPLOYER SUR CLOUDFLARE
+======================================================================
+
+npx wrangler pages deploy dist --project-name barakfix
+
+(remplacez « dist » par le point si message d'erreur, mais dist est le bon
+dossier : c'est le site CONSTRUIT + les fonctions)
+
+URL finale : https://barakfix.pages.dev
+
+======================================================================
+ÉTAPE 6 — VARIABLES DANS LE DASHBOARD CLOUDFLARE
+======================================================================
+dash.cloudflare.com → Workers & Pages → barakfix → Settings →
+Variables and Bindings → Add (type Texte) :
+
+- VITE_SUPABASE_URL = https://ghnwmqsvvvezvfmjneep.supabase.co
+- VITE_SUPABASE_ANON_KEY = sb_publishable_...CLÉ-COMPLÈTE
+- SUPABASE_SERVICE_ROLE_KEY = sb_secret_...CLÉ-COMPLÈTE
+  ⚠️ le nom finit par KEY (avec le Y final !)
+- SUPABASE_JWT_SECRET = votre jwt secret
+
+Puis REDEPLOYEZ (retour Étape 5) pour être sûr que tout est cohérent.
+
+======================================================================
+ÉTAPE 7 — MIGRATIONS SQL (une seule fois)
+======================================================================
+Supabase → SQL Editor → New query → collez et exécutez (bouton Run) :
+
+1. 001_schema.sql
+2. 002_rls.sql
+3. 004_owner_cascade.sql   ← nouveau, pour la suppression de compte
+
+(003_seed.sql : facultatif, données de démo — les PIN ne marchent
+pas avec ces données, il faut recréer les locataires via l'interface)
+
+Si vous avez déjà exécuté 001 et 002 précédemment, faites UNIQUEMENT
+004_owner_cascade.sql.
+
+======================================================================
+ÉTAPE 8 — TESTS FINAUX
+======================================================================
+1. Ouvrez https://barakfix.pages.dev
+2. « Je suis bailleur » → inscrivez-vous ou connectez-vous
+3. Logements → créez : « 12 Rue Haute, 1070 Anderlecht »
+   → le code du type AND-HAU-12 s'affiche
+4. Locataires → créez le locataire avec un PIN → doit marcher
+   (si « Session bailleur invalide » : Déconnexion → reconnexion,
+   et vérifiez les variables Cloudflare de l'Étape 6)
+5. Test locataire : « Je suis locataire » → code + email + PIN →
+   il voit ses demandes, le téléphone du bailleur en urgence,
+   jamais les coûts
+6. Suppression : Logements → « Supprimer le logement » (rouge) ;
+   et en haut à droite : « Supprimer mon compte » (testez sur un
+   compte jetable, pas votre compte principal !)
+
+======================================================================
+DÉPANNAGE RAPIDE
+======================================================================
+- Page « Configuration requise » → le .env manquait au build (Étape 2+3)
+- Page blanche → vous avez déployé le dossier source au lieu de dist (Étape 5)
+- « Failed to fetch » → URL Supabase mal orthographiée dans .env (Étape 2)
+- « Session bailleur invalide » → déconnexion/reconnexion + variables (Étape 6)
+- Locataire ne peut pas se connecter → il a été créé avec une ancienne
+  version : Révoquer l'accès puis recréez-le
+
+Bon bricolage ! 🏠

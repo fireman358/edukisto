@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mémo — CardScore</title>
+<link rel="icon" href="icon.svg">
+<style>
+:root{
+  --bg:#333333; --surface:#3d3d3d; --text:#ffffff; --muted:rgba(255,255,255,.72);
+  --accent:#38bdf8; --accent-soft:#7dd3fc; --ink:#0f1115;
+  --border:#4a4a4a; --radius:8px; --header-bg:rgba(16,16,16,.92); --surface-2:#454545;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  background:radial-gradient(900px 400px at 50% -120px, rgba(56,189,248,.14), transparent 65%), var(--bg);
+  color:var(--text);line-height:1.7;padding-bottom:60px}
+header{background:var(--header-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);
+  padding:18px 16px;text-align:center}
+header h1{font-size:clamp(20px,4vw,28px);font-weight:800}
+header h1 em{color:var(--accent);font-style:normal}
+.retour{display:inline-block;margin-top:10px;color:var(--accent);font-weight:600;text-decoration:none;
+  border-bottom:1.5px solid var(--accent)}
+main{max-width:820px;margin:0 auto;padding:22px 16px}
+.sel-jeu{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:22px}
+.sel-jeu button{font:inherit;font-size:14px;font-weight:700;cursor:pointer;padding:9px 14px;
+  border-radius:99px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);transition:all .15s}
+.sel-jeu button.actif{border-color:var(--accent);background:rgba(14,116,144,.25);transform:translateY(-2px)}
+section.jeu{display:none}
+section.jeu.actif{display:block;animation:apparait .3s ease}
+@keyframes apparait{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2{color:var(--accent-soft);font-size:19px;margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+h2:first-child{margin-top:0}
+h3{font-size:15.5px;margin:16px 0 6px}
+p,li{color:var(--muted);font-size:15px}
+ul{padding-left:22px}
+b,strong{color:var(--text)}
+.acc{color:var(--accent-soft);font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:10px 0;background:var(--surface);
+  border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+th,td{padding:9px 12px;text-align:left}
+th{background:#2a2a2a;color:var(--accent-soft);font-size:12px;letter-spacing:1px;text-transform:uppercase}
+td{border-top:1px solid #333;color:var(--muted)}
+td:first-child{color:var(--text);font-weight:600}
+td b{color:var(--accent-soft)}
+.note{background:rgba(14,116,144,.15);border:1px solid var(--accent);border-radius:var(--radius);
+  padding:12px 14px;font-size:14px;color:var(--text);margin:12px 0}
+footer{margin-top:40px;text-align:center;color:var(--muted);font-size:13px}
+footer a{color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1.5px solid var(--accent)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Mémo <em>CardScore</em></h1>
+  <a class="retour" href="./">← Retour au marqueur</a>
+</header>
+<main>
+<div class="sel-jeu" id="selJeu"></div>
+
+<section class="jeu" data-jeu="belote">
+<h2>🂡 Belote</h2>
+<h3>Valeur des cartes</h3>
+<table>
+  <tr><th>Carte</th><th>À l'atout</th><th>Hors atout</th></tr>
+  <tr><td>Valet</td><td><b>20</b> (le plus fort)</td><td>2</td></tr>
+  <tr><td>9</td><td><b>14</b></td><td>0</td></tr>
+  <tr><td>As</td><td>11</td><td><b>11</b> (le plus fort)</td></tr>
+  <tr><td>10</td><td>10</td><td>10</td></tr>
+  <tr><td>Roi</td><td>4</td><td>4</td></tr>
+  <tr><td>Dame</td><td>3</td><td>3</td></tr>
+  <tr><td>8 / 7</td><td>0</td><td>0</td></tr>
+</table>
+<p>Total : <b class="acc">152</b> + dix de der = <b class="acc">162</b>. Chute si l'attaque fait moins de 81.
+Capot = 252. Litige 81-81 : la défense marque 81, le reste au vainqueur de la donne suivante.</p>
+<h3>Annonces</h3>
+<table>
+  <tr><th>Annonce</th><th>Points</th></tr>
+  <tr><td>Carré de Valets</td><td><b>200</b></td></tr>
+  <tr><td>Carré de 9</td><td><b>150</b></td></tr>
+  <tr><td>Carré d'As</td><td><b>110</b></td></tr>
+  <tr><td>Carré de 10</td><td><b>100</b></td></tr>
+  <tr><td>Carré de Rois</td><td><b>80</b></td></tr>
+  <tr><td>Carré de Dames</td><td><b>60</b></td></tr>
+  <tr><td>Suite à l'as / Quinte</td><td><b>100</b></td></tr>
+  <tr><td>Cinquante</td><td><b>50</b></td></tr>
+  <tr><td>Quarante</td><td><b>40</b></td></tr>
+  <tr><td>Trente</td><td><b>20</b></td></tr>
+</table>
+<div class="note">Une carte ne compte que dans <b>une seule</b> annonce ; seule l'équipe avec la
+<b>meilleure</b> annonce marque. La belote & rebelote (Roi + Dame d'atout, <b>20 pts</b>) compte toujours.</div>
+<h3>Sans atout / Tout atout (coinche)</h3>
+<p><b>SA</b> : As 19, 10 → 10, Roi 4, Dame 3, Valet 2, autres 0.
+<b>TA</b> : Valet 14, 9 → 9, As 6, 10 → 5, Roi 3, Dame 1, autres 0. Total ramené à 162.</p>
+<h3>Contrée / coinche</h3>
+<p>Enchères 80 → 160 par 10. Contré ×2, surcontré ×4. Contrat réussi : points faits + contrat.
+Chuté : défense marque 162 + contrat.</p>
+<h3>Belote à 2 et à 3</h3>
+<p>À 2 : chacun pour soi avec talon (aucune obligation tant qu'on pioche). À 3 : le preneur contre
+les deux autres, la défense partage les points.</p>
+</section>
+
+<section class="jeu" data-jeu="couillon">
+<h2>🃏 Couillon</h2>
+<p>Jeu de plis wallon, 4 joueurs en 2 équipes, jeu de 32 cartes (souvent réduit aux 24 cartes en
+retirant 7 et 8). La carte retournée propose l'atout.</p>
+<h3>Valeur des figures (le comptage)</h3>
+<table>
+  <tr><th>Carte</th><th>Points</th></tr>
+  <tr><td>As</td><td><b>4</b></td></tr>
+  <tr><td>Roi</td><td><b>3</b></td></tr>
+  <tr><td>Dame</td><td><b>2</b></td></tr>
+  <tr><td>Valet</td><td><b>1</b></td></tr>
+  <tr><td>Autres cartes</td><td>0</td></tr>
+</table>
+<p>Total par donne : <b class="acc">40 points</b> (variantes : certaines tables comptent aussi les
+petites cartes — 7-8-9-10 à 1 pt, total 72).</p>
+<h3>Les couillons (les lignes à effacer)</h3>
+<ul>
+  <li>Chaque équipe démarre avec un nombre de <b>lignes (couillons)</b> à effacer : 5, 10, 15 ou 20 selon les tables.</li>
+  <li>L'équipe qui totalise le plus de points <b>efface une ligne</b>.</li>
+  <li>Si l'équipe qui a <b>pris</b> perd la donne : les adversaires effacent une ligne <b>et</b> l'équipe qui a pris s'en <b>rajoute une</b>.</li>
+  <li>Égalité (20-20) : <b>« craie dans le trou »</b> — on trace un cercle ; le vainqueur de la donne suivante effacera <b>deux lignes</b>.</li>
+  <li>Première équipe à avoir tout effacé gagne la partie.</li>
+</ul>
+<div class="note">Variantes courantes : <b>Couillon forcé</b> (l'atout est imposé si personne ne prend),
+<b>Mit'</b> (la Dame de pique devient un atout entre l'As et le Roi si annoncée), nombre de lignes libre.</div>
+</section>
+
+<section class="jeu" data-jeu="rami">
+<h2>🂮 Rami</h2>
+<p>Jeu de combinaisons : on vide sa main en formant séries (même valeur) ou suites (même couleur).</p>
+<h3>Points des cartes restées en main</h3>
+<table>
+  <tr><th>Carte</th><th>Points</th></tr>
+  <tr><td>Figures (V, D, R)</td><td><b>10</b></td></tr>
+  <tr><td>As</td><td><b>1 ou 11</b> selon les tables</td></tr>
+  <tr><td>Autres cartes</td><td>Leur valeur (2-10)</td></tr>
+  <tr><td>Joker</td><td><b>25</b></td></tr>
+</table>
+<p>Le gagnant de la manche marque <b>0</b>. Chaque manche, les autres comptent leurs cartes restantes.
+Le premier joueur à dépasser l'objectif (100, 200 ou 500) a perdu — <b>le total le plus bas gagne</b>.</p>
+</section>
+
+<section class="jeu" data-jeu="whist">
+<h2>♠ Whist</h2>
+<p>4 joueurs en 2 équipes, 52 cartes, 13 levées par donne. L'atout est la dernière carte distribuée
+(retournée). Pas d'enchères : on joue les plis.</p>
+<h3>Comptage</h3>
+<ul>
+  <li>Chaque levée au-delà de 6 (la « mise en main ») vaut <b>1 point</b>.</li>
+  <li>6-6 : personne ne marque.</li>
+  <li>La partie se joue en <b>3, 5, 7 ou 9 points</b> selon les tables.</li>
+</ul>
+<div class="note">Le whist est l'ancêtre du bridge — c'est son comptage simple que le bridge a
+complexifié (contrats, vulnérabilité, honneurs).</div>
+</section>
+
+<section class="jeu" data-jeu="bridge">
+<h2>🂱 Bridge (rubber)</h2>
+<h3>Points de contrat (par levée utile)</h3>
+<table>
+  <tr><th>Couleur</th><th>Par levée</th><th>Contré ×2</th><th>Surcontré ×4</th></tr>
+  <tr><td>♣ / ♦ (mineures)</td><td>20</td><td>40</td><td>80</td></tr>
+  <tr><td>♥ / ♠ (majeures)</td><td>30</td><td>60</td><td>120</td></tr>
+  <tr><td>Sans atout</td><td>40 (1re) puis 30</td><td>×2</td><td>×4</td></tr>
+</table>
+<h3>Bonus</h3>
+<ul>
+  <li><b>Manche</b> (100+ points de contrat cumulés) : 300 non vulnérable, <b>500 vulnérable</b>.</li>
+  <li>Partiel : <b>50</b>.</li>
+  <li>Petit chelem (12 levées) : 500 non vul, <b>750 vul</b>. Grand chelem (13) : 1000 / <b>1500</b>.</li>
+  <li>Contrat contré réussi : <b>+50</b> (« pour l'insulte »), surcontré : +100.</li>
+</ul>
+<h3>Surlevées</h3>
+<p>Chaque levée en plus : valeur simple (20/30) ; contré : 100 non vul / <b>200 vul</b> ; surcontré : 200 / 400.</p>
+<h3>Chutes (par levée manquante)</h3>
+<table>
+  <tr><th></th><th>1re</th><th>Suivantes</th></tr>
+  <tr><td>Non contré (non vul)</td><td>50</td><td>50</td></tr>
+  <tr><td>Contré (non vul)</td><td>100</td><td>200, puis 300…</td></tr>
+  <tr><td>Contré (vul)</td><td>200</td><td>300</td></tr>
+  <tr><td>Surcontré</td><td>×2</td><td>×2</td></tr>
+</table>
+<h3>Honneurs (rubber)</h3>
+<p>Détenteur de 4 des 5 premières (A R D V 10) de l'atout : <b>100</b> ; les 5 : <b>150</b>.
+À SA : 4 as : <b>150</b> (3 as : 30 selon les tables). Les honneurs comptent même en cas de chute,
+pour le camp qui les détient (même la défense).</p>
+</section>
+
+<section class="jeu" data-jeu="tarot">
+<h2>🃜 Tarot</h2>
+<p>Le preneur (choisi par enchères) joue contre la défense. Objectif de points selon les bouts
+(petits) du preneur :</p>
+<table>
+  <tr><th>Bouts</th><th>Points requis</th></tr>
+  <tr><td>3</td><td><b>36</b></td></tr>
+  <tr><td>2</td><td><b>41</b></td></tr>
+  <tr><td>1</td><td><b>51</b></td></tr>
+  <tr><td>0</td><td><b>56</b></td></tr>
+</table>
+<h3>Multiplicateurs</h3>
+<p>Prise <b>×1</b> · Garde <b>×2</b> · Garde sans <b>×4</b> · Garde contre <b>×6</b>.</p>
+<p>Gain = (points du preneur − obligation) × multiplicateur + primes
+(poignée simple +20, double +30, petit au bout +10 × mult., chelem +400).
+La défense se partage les points en sens inverse.</p>
+</section>
+
+<section class="jeu" data-jeu="manille">
+<h2>🂲 Manille</h2>
+<p>Cousine de la belote : la manille (le 10) est la plus forte carte. Total par donne :
+<b class="acc">120 points</b>. Le preneur doit faire plus de 60, sinon il est « dedans »
+(la défense marque 120 + ses points). Objectif usuel : <b>101 points</b>.</p>
+</section>
+
+<section class="jeu" data-jeu="libre">
+<h2>🎯 Mode libre</h2>
+<p>Pour tout autre jeu : encode simplement les points de chaque donne par joueur ou équipe
+(valeurs négatives acceptées). Choisis la cible (points ou nombre de donnes) dans les paramètres.</p>
+</section>
+
+</main>
+<footer>Un outil <a href="https://edukisto.win" target="_blank" rel="noopener">Edukisto</a> — votre informaticien de proximité.</footer>
+<script>
+const jeux=["belote","couillon","rami","whist","bridge","tarot","manille","libre"];
+const icones={belote:"🂡",couillon:"🃏",rami:"🂮",whist:"♠",bridge:"🂱",tarot:"🃜",manille:"🂲",libre:"🎯"};
+const params=new URLSearchParams(location.search);
+let courant=params.get("jeu")||"belote";
+if(!jeux.includes(courant))courant="belote";
+const sel=document.getElementById("selJeu");
+jeux.forEach(j=>{
+  const b=document.createElement("button");
+  b.textContent=icones[j]+" "+j[0].toUpperCase()+j.slice(1);
+  b.className=j===courant?"actif":"";
+  b.onclick=()=>{location.search="?jeu="+j};
+  sel.appendChild(b);
+});
+document.querySelectorAll("section.jeu").forEach(s=>{
+  s.classList.toggle("actif",s.dataset.jeu===courant);
+});
+</script>
+</body>
+</html>

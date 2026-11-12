@@ -1,0 +1,19 @@
+{
+  "name": "PENDU — le jeu du pendu en 2.5D",
+  "short_name": "PENDU",
+  "description": "Huit mécaniques de pendu, de 6 à 11 traits, seul ou à deux, avec définitions et lexique français de plus de 7 000 mots.",
+  "lang": "fr",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#05070f",
+  "theme_color": "#05070f",
+  "categories": ["games", "education"],
+  "icons": [
+    { "src": "assets/img/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="fr" data-version="1.3.0">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>PENDU — le jeu du pendu en 2.5D · Edukisto</title>
+<meta name="description" content="Le jeu du pendu en 2.5D : 8 mécaniques de jeu, solo ou à deux, indices, chrono, pendu diabolique. Un lexique français de plus de 7 000 mots avec définitions." />
+<meta name="theme-color" content="#05070f" />
+<meta name="color-scheme" content="dark" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="PENDU" />
+<meta name="mobile-web-app-capable" content="yes" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="apple-touch-icon" href="assets/img/icon-192.png" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="PENDU — le jeu du pendu en 2.5D" />
+<meta property="og:description" content="Huit mécaniques, de 6 à 11 traits, seul ou à deux. Plus de 7 000 mots français avec leur définition." />
+<meta property="og:image" content="assets/img/og.png" />
+<meta property="og:locale" content="fr_FR" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="PENDU — le jeu du pendu en 2.5D" />
+<meta name="twitter:description" content="Huit mécaniques, de 6 à 11 traits, seul ou à deux. Plus de 7 000 mots français avec leur définition." />
+<meta name="twitter:image" content="assets/img/og.png" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2338bdf8'/%3E%3Cstop offset='1' stop-color='%23ffd23f'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%23070c18'/%3E%3Cpath d='M16 4l3.2 7.1 7.8.9-5.8 5.4 1.6 7.7L16 21.4 9.2 25l1.6-7.7L5 11.9l7.8-.9z' fill='url(%23g)'/%3E%3C/svg%3E" />
+<link rel="stylesheet" href="assets/style.css?v=1.3.0" />
+</head>
+<body>
+
+<!-- ============================ DÉCOR DE FOND ============================ -->
+<div class="sky" aria-hidden="true">
+  <canvas id="sky"></canvas>
+  <div class="sky-glow"></div>
+  <div class="sky-grid"></div>
+</div>
+
+<div id="app">
+
+  <!-- ================================ EN-TÊTE ============================= -->
+  <header class="topbar">
+    <a class="brand" href="#" data-action="home" aria-label="Pendu, accueil">
+      <span class="brand-star" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="26" height="26"><use href="#i-star"/></svg>
+      </span>
+      <span class="brand-name">PENDU</span>
+      <span class="brand-by">par <b>Edukisto</b></span>
+    </a>
+
+    <nav class="topbar-actions" aria-label="Menu">
+      <button class="btn btn-ghost btn-icon" data-action="install" id="btn-install-top" hidden title="Installer l’application">
+        <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><use href="#i-download"/></svg>
+      </button>
+      <button class="btn btn-ghost" data-action="rules" title="Règles du jeu (R)">
+        <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><use href="#i-book"/></svg>
+        <span class="hide-sm">Règles</span>
+      </button>
+      <button class="btn btn-ghost" data-action="settings" title="Réglages (S)">
+        <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><use href="#i-gear"/></svg>
+        <span class="hide-sm">Réglages</span>
+      </button>
+      <button class="btn btn-ghost btn-icon" data-action="sound" id="btn-sound" title="Son (M)" aria-pressed="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><use href="#i-sound"/></svg>
+      </button>
+      <button class="btn btn-ghost btn-icon" data-action="fullscreen" title="Plein écran (F)">
+        <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><use href="#i-expand"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ================================= PLATEAU =========================== -->
+  <main id="stage" class="stage">
+
+    <section class="scene-holder" aria-label="Scène du pendu">
+      <canvas id="scene"></canvas>
+
+      <div class="scene-hud">
+        <div class="chip" id="chip-mode">
+          <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><use href="#i-play"/></svg>
+          <span>Classique</span>
+        </div>
+        <div class="chip" id="chip-theme" hidden>
+          <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><use href="#i-tag"/></svg>
+          <span>Thème</span>
+        </div>
+        <div class="chip chip-errors" id="chip-errors">
+          <span class="chip-dot"></span>
+          <span id="errors-label">0 / 8 erreurs</span>
+        </div>
+        <div class="chip chip-gore" id="chip-gore" hidden>
+          <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><use href="#i-skull"/></svg>
+          <span>Manga gore</span>
+        </div>
+        <div class="chip chip-timer" id="chip-timer" hidden>
+          <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><use href="#i-clock"/></svg>
+          <span id="timer-label">20 s</span>
+          <i class="timer-ring" id="timer-ring"></i>
+        </div>
+      </div>
+
+      <div class="scene-foot">
+        <div class="strokes" id="strokes" role="img" aria-label="Tracés du dessin"></div>
+        <div class="turn" id="turn-label">À toi de jouer</div>
+      </div>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      <div class="curtain" id="curtain" hidden>
+        <div class="curtain-inner">
+          <div class="curtain-star"><svg viewBox="0 0 32 32" width="46" height="46"><use href="#i-star"/></svg></div>
+          <p class="curtain-title">Passe l’écran au meneur</p>
+          <p class="curtain-sub">Il saisit le mot secret, puis on reprend.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------ CONSOLE ---------------------------- -->
+    <section class="console" aria-label="Proposition des lettres">
+
+      <div class="word-zone">
+        <div class="word-head">
+          <span class="eyebrow" id="word-eyebrow">Mot secret</span>
+          <span class="word-meta" id="word-meta"></span>
+        </div>
+        <div class="word" id="word" role="status" aria-live="polite" aria-label="Mot à deviner"></div>
+        <p class="hint" id="hint"><span class="hint-key">Indice</span> Aucun indice pour l’instant.</p>
+      </div>
+
+      <div class="console-note" id="console-note">
+        <span class="note-ico"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-play"/></svg></span>
+        <div class="note-body">
+          <b id="note-title">Classique</b>
+          <span id="note-desc">Le pendu de toujours : un mot, des lettres, 6 à 11 traits.</span>
+          <small id="note-meta">Difficulté mixte · 8 erreurs</small>
+        </div>
+      </div>
+
+      <div class="keyboard-wrap">
+        <div class="keyboard" id="keyboard" role="group" aria-label="Clavier des lettres"></div>
+        <div class="keyboard-legend">
+          <span><i class="legend-dot ok"></i>dans le mot</span>
+          <span><i class="legend-dot bad"></i>absent</span>
+          <span><i class="legend-dot"></i>restant</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-soft" id="btn-hint" data-action="hint">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><use href="#i-bulb"/></svg>
+          <span>Indice</span>
+        </button>
+        <button class="btn btn-soft" id="btn-unhook" hidden data-action="unhook">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><use href="#i-scissors"/></svg>
+          <span>Retirer le dernier</span>
+        </button>
+        <button class="btn btn-primary" id="btn-guess" data-action="guess">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><use href="#i-keyboard"/></svg>
+          <span>Le mot entier</span>
+        </button>
+        <button class="btn btn-ghost btn-icon" id="btn-giveup" data-action="giveup" title="Abandonner la manche">
+          <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><use href="#i-flag"/></svg>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span><b>PENDU</b> · 2.5D</span>
+    <span class="sep">·</span>
+    <span>Lexique <a href="https://www.lexique.org" target="_blank" rel="noopener">Lexique.org</a> + <a href="https://fr.wiktionary.org" target="_blank" rel="noopener">Wiktionnaire</a></span>
+    <span class="sep">·</span>
+    <span>© <a href="https://github.com/fireman358" target="_blank" rel="noopener">Edukisto</a></span>
+  </footer>
+</div>
+
+<!-- ============================== ÉCRANS ================================= -->
+<div class="screen" id="screen-home" hidden>
+
+  <div class="home-panel">
+    <header class="home-head">
+      <div class="home-kicker">Jeu du pendu · édition 2.5D</div>
+      <h1 class="home-title">LE <span>PENDU</span></h1>
+      <p class="home-sub">Choisis un mot, propose des lettres, apprends en jouant.<br>
+        Huit mécaniques, de 6 à 11 traits, seul ou à deux.</p>
+    </header>
+
+    <div class="home-tabs" role="tablist" aria-label="Nombre de joueurs">
+      <button class="tab is-on" data-players="1" role="tab" aria-selected="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><use href="#i-user"/></svg>
+        <span>Je joue seul</span>
+        <small>L’ordinateur choisit le mot</small>
+      </button>
+      <button class="tab" data-players="2" role="tab" aria-selected="false">
+        <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><use href="#i-users"/></svg>
+        <span>À deux</span>
+        <small>Un meneur, un devineur</small>
+      </button>
+    </div>
+
+    <div class="modes" id="modes"></div>
+
+    <div class="home-foot">
+      <div class="home-difficulty">
+        <span class="label">Difficulté</span>
+        <div class="segmented" id="seg-difficulty" role="group" aria-label="Difficulté">
+          <button data-diff="facile">Facile</button>
+          <button data-diff="moyen">Moyen</button>
+          <button data-diff="difficile">Difficile</button>
+          <button data-diff="mixte" class="is-on">Mixte</button>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-lg" data-action="start">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-play"/></svg>
+        <span id="start-label">Nouvelle partie</span>
+      </button>
+    </div>
+
+    <details class="recall" open>
+      <summary>
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><use href="#i-book"/></svg>
+        Rappel des règles
+      </summary>
+      <ul>
+        <li>Un mot secret est choisi, un tiret par lettre s’affiche.</li>
+        <li><b>Lettre présente</b> : elle s’écrit à toutes ses positions. <b>Lettre absente</b> : un trait du dessin s’ajoute.</li>
+        <li><b>Mot complété</b> : victoire du devineur. <b>Dessin terminé</b> : victoire du meneur.</li>
+        <li>Le nombre d’erreurs (6 à 11 traits, potence comprise) se règle dans <button class="link" data-action="settings">Réglages</button>.</li>
+      </ul>
+    </details>
+  </div>
+</div>
+
+<div class="screen" id="screen-rules" hidden>
+  <div class="sheet">
+    <header class="sheet-head">
+      <h2>Règles du jeu</h2>
+      <button class="btn btn-icon btn-ghost" data-action="close-screen" aria-label="Fermer">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </header>
+    <div class="sheet-body rules-body">
+      <h3>Le principe</h3>
+      <p>Un mot secret est choisi et l’on trace un tiret par lettre. Chacun propose des lettres une à une.</p>
+      <ul class="rules-list">
+        <li><b>Lettre présente</b> : elle s’écrit aussitôt à toutes ses positions.</li>
+        <li><b>Lettre absente</b> : un trait du dessin s’ajoute.</li>
+        <li><b>Mot complété</b> : victoire du devineur. <b>Dessin terminé</b> : victoire du meneur.</li>
+        <li>Classique : de <b>6 à 11 erreurs</b> selon le nombre de traits dessinés (potence incluse ou non), réglable dans les paramètres.</li>
+      </ul>
+
+      <h3>Les huit mécaniques</h3>
+      <div class="rules-grid" id="rules-modes"></div>
+
+      <h3>Les options de partie</h3>
+      <ul class="rules-list">
+        <li><b>Sans répétition</b> — reproposer une lettre déjà dite compte comme une erreur.</li>
+        <li><b>Première et dernière lettre offertes</b> — version facilitée pour les enfants.</li>
+        <li><b>Voyelles limitées</b> — trois voyelles proposables au maximum : version stratégique.</li>
+        <li><b>Indice contre pénalité</b> — révéler la catégorie ou un indice coûte un trait supplémentaire.</li>
+        <li><b>Deviner le mot entier</b> — une fois par partie, ou en coûtant un trait si l’on se trompe.</li>
+        <li><b>Version gore (manga)</b> — un condamné déjà pendu, dont chaque erreur sectionne un membre :
+          à activer dans les réglages, <b>désactivée par défaut</b>.</li>
+      </ul>
+
+      <h3>Les définitions</h3>
+      <p>À la fin de chaque manche, la définition du mot s’affiche : on apprend toujours quelque chose.
+        Le lexique provient de <a href="https://www.lexique.org" target="_blank" rel="noopener">Lexique.org</a>
+        et les définitions du <a href="https://fr.wiktionary.org" target="_blank" rel="noopener">Wiktionnaire francophone</a>.</p>
+    </div>
+    <footer class="sheet-foot">
+      <button class="btn btn-primary" data-action="close-screen">J’ai compris</button>
+    </footer>
+  </div>
+</div>
+
+<div class="screen" id="screen-settings" hidden>
+  <div class="sheet sheet-settings">
+    <header class="sheet-head">
+      <h2>Réglages</h2>
+      <button class="btn btn-icon btn-ghost" data-action="close-screen" aria-label="Fermer">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </header>
+
+    <nav class="set-tabs" role="tablist" aria-label="Sections des réglages">
+      <button class="set-tab is-on" data-set-tab="jeu" role="tab" aria-selected="true">Jeu</button>
+      <button class="set-tab" data-set-tab="ambiance" role="tab" aria-selected="false">Ambiance</button>
+      <button class="set-tab" data-set-tab="app" role="tab" aria-selected="false">Application</button>
+      <button class="set-tab" data-set-tab="data" role="tab" aria-selected="false">Données</button>
+    </nav>
+
+    <div class="sheet-body settings-body" id="set-body">
+
+      <!-- ------------------------------------------------ onglet Jeu -->
+      <section class="set-panel" data-panel="jeu">
+        <section class="set-block">
+          <h3>Difficulté du lexique</h3>
+          <div class="segmented segmented-wide" id="set-difficulty" role="group" aria-label="Difficulté">
+            <button data-diff="facile">Facile</button>
+            <button data-diff="moyen">Moyen</button>
+            <button data-diff="difficile">Difficile</button>
+            <button data-diff="mixte">Mixte</button>
+          </div>
+          <p class="set-note">Facile : mots courants, lettres fréquentes, au moins deux voyelles. Difficile : lettres rares, peu de voyelles, beaucoup de lettres distinctes.</p>
+        </section>
+
+        <section class="set-block">
+          <h3>Nombre d’erreurs autorisées <span class="set-value" id="set-errors-value">8</span></h3>
+          <input type="range" id="set-errors" min="6" max="11" step="1" value="8" aria-label="Nombre d’erreurs">
+          <div class="range-legend"><span>6 · potence offerte</span><span>11 · tout à dessiner</span></div>
+        </section>
+
+        <section class="set-block">
+          <h3>Temps par proposition (mode chronométré)</h3>
+          <div class="segmented segmented-wide" id="set-timer" role="group" aria-label="Temps par lettre">
+            <button data-timer="0">Illimité</button>
+            <button data-timer="10">10 s</button>
+            <button data-timer="20">20 s</button>
+            <button data-timer="30">30 s</button>
+          </div>
+        </section>
+
+        <section class="set-block" id="set-guess-block"></section>
+
+        <section class="set-block">
+          <h3>Options de partie</h3>
+          <div class="toggles" id="set-toggles-game"></div>
+        </section>
+      </section>
+
+      <!-- -------------------------------------------- onglet Ambiance -->
+      <section class="set-panel" data-panel="ambiance" hidden>
+        <section class="set-block">
+          <h3>Son et vibrations</h3>
+          <div class="toggles" id="set-toggles-ambiance"></div>
+        </section>
+        <section class="set-block">
+          <h3>Version gore (manga)</h3>
+          <div class="toggles toggles-single" id="set-toggles-gore"></div>
+          <p class="set-note">Personnage déjà pendu, membres sectionnés à chaque erreur, sang stylisé et explosion au dernier coup. Désactivée par défaut ; s’applique à la prochaine manche.</p>
+        </section>
+      </section>
+
+      <!-- ----------------------------------------- onglet Application -->
+      <section class="set-panel" data-panel="app" hidden>
+        <section class="set-block">
+          <h3>Installer l’application</h3>
+          <div class="app-card">
+            <img src="assets/img/icon-192.png" width="56" height="56" alt="" class="app-icon" />
+            <div class="app-info">
+              <b>PENDU</b>
+              <span id="install-note">Ajoute le jeu à ton écran d’accueil pour le lancer en plein écran.</span>
+            </div>
+            <button class="btn btn-primary" id="btn-install-app" data-action="install">Installer</button>
+          </div>
+          <p class="set-note">Une fois installée, l’application démarre en plein écran et fonctionne hors ligne : le lexique et les définitions sont embarqués. Sur iPhone/iPad, utiliser « Partager → Sur l’écran d’accueil ».</p>
+        </section>
+
+        <section class="set-block">
+          <h3>À propos</h3>
+          <p class="set-note">PENDU — version <b id="app-version">1.3.0</b> · <a href="https://github.com/fireman358/pendu" target="_blank" rel="noopener">Code source</a> · <button class="link" data-action="rules">Règles du jeu</button></p>
+          <p class="set-note" id="sw-status">Hors ligne : vérification…</p>
+          <div class="set-row-actions">
+            <button class="btn btn-soft" data-action="force-update">Forcer la mise à jour</button>
+          </div>
+          <p class="set-note">Vide le cache de l’application et recharge la dernière version publiée.</p>
+        </section>
+      </section>
+
+      <!-- --------------------------------------------- onglet Données -->
+      <section class="set-panel" data-panel="data" hidden>
+        <section class="set-block">
+          <h3>Statistiques</h3>
+          <div class="stats-grid" id="stats-grid"></div>
+        </section>
+        <section class="set-block">
+          <h3>Mémoire locale</h3>
+          <p class="set-note">Tout reste dans ce navigateur : réglages, statistiques et mots déjà vus. Rien n’est envoyé sur un serveur.</p>
+          <div class="set-row-actions">
+            <button class="btn btn-soft" data-action="reset-deck">Mots déjà vus</button>
+            <button class="btn btn-soft" data-action="reset-stats">Statistiques</button>
+            <button class="btn btn-danger" data-action="reset-all">Tout effacer</button>
+          </div>
+        </section>
+      </section>
+
+    </div>
+    <footer class="sheet-foot sheet-foot-split">
+      <button class="btn btn-ghost" data-action="reset-settings">Réinitialiser les réglages</button>
+      <button class="btn btn-primary" data-action="close-screen">Terminé</button>
+    </footer>
+  </div>
+</div>
+
+<!-- ============================ MODALES ================================= -->
+<div class="modal" id="modal-setup" hidden>
+  <div class="modal-card">
+    <header class="modal-head">
+      <h2>Le mot du meneur</h2>
+      <button class="btn btn-icon btn-ghost" data-action="cancel-setup" aria-label="Annuler">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </header>
+    <p class="modal-sub">Le meneur saisit son mot en secret. Le devineur ne doit pas regarder&nbsp;!</p>
+
+    <label class="field">
+      <span>Mot ou expression</span>
+      <input id="setup-word" type="text" inputmode="text" autocomplete="off" spellcheck="false"
+             maxlength="48" placeholder="Ex. : BIBLIOTHÈQUE" />
+    </label>
+
+    <div class="field-row">
+      <label class="field">
+        <span>Thème annoncé <small>(facultatif)</small></span>
+        <input id="setup-theme" type="text" maxlength="28" autocomplete="off" placeholder="Ex. : Animaux" />
+      </label>
+      <label class="field">
+        <span>Erreurs autorisées</span>
+        <select id="setup-errors">
+          <option>6</option><option>7</option><option selected>8</option><option>9</option>
+          <option>10</option><option>11</option>
+        </select>
+      </label>
+    </div>
+
+    <label class="field">
+      <span>Indice ou définition <small>(facultatif, révélé en fin de manche)</small></span>
+      <textarea id="setup-hint" rows="2" maxlength="220" placeholder="Ex. : Un lieu plein de livres que l’on peut emprunter."></textarea>
+    </label>
+
+    <p class="form-error" id="setup-error" hidden></p>
+
+    <footer class="modal-foot">
+      <button class="btn btn-ghost" data-action="cancel-setup">Annuler</button>
+      <button class="btn btn-primary" data-action="valid-setup">C’est parti</button>
+    </footer>
+  </div>
+</div>
+
+<div class="modal" id="modal-guess" hidden>
+  <div class="modal-card modal-card-sm">
+    <header class="modal-head">
+      <h2>Deviner le mot entier</h2>
+      <button class="btn btn-icon btn-ghost" data-action="cancel-guess" aria-label="Fermer">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </header>
+    <p class="modal-sub" id="guess-sub">Une seule tentative. Si tu te trompes, tu prends un trait de pénalité.</p>
+    <label class="field">
+      <span>Ta proposition</span>
+      <input id="guess-input" type="text" autocomplete="off" spellcheck="false" maxlength="48" placeholder="Écris le mot en entier" />
+    </label>
+    <p class="form-error" id="guess-error" hidden></p>
+    <footer class="modal-foot">
+      <button class="btn btn-ghost" data-action="cancel-guess">Annuler</button>
+      <button class="btn btn-primary" data-action="valid-guess">Valider</button>
+    </footer>
+  </div>
+</div>
+
+<div class="modal" id="modal-result" hidden>
+  <div class="modal-card modal-card-lg result-card" id="result-card">
+    <div class="result-badge" id="result-badge">
+      <svg viewBox="0 0 32 32" width="34" height="34"><use href="#i-star"/></svg>
+    </div>
+    <p class="result-kicker" id="result-kicker">Manche terminée</p>
+    <h2 class="result-title" id="result-title">Bravo&nbsp;!</h2>
+    <p class="result-word" id="result-word">MAISON</p>
+
+    <div class="definition" id="result-definition">
+      <span class="definition-label">Définition</span>
+      <p class="definition-text" id="result-def-text"></p>
+      <span class="definition-meta" id="result-def-meta"></span>
+    </div>
+
+    <ul class="result-stats" id="result-stats"></ul>
+
+    <footer class="modal-foot modal-foot-center">
+      <button class="btn btn-ghost" data-action="result-menu">Menu</button>
+      <button class="btn btn-ghost" data-action="result-roles" id="btn-roles" hidden>Changer les rôles</button>
+      <button class="btn btn-primary" data-action="result-again">
+        <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><use href="#i-refresh"/></svg>
+        Rejouer
+      </button>
+    </footer>
+  </div>
+</div>
+
+<!-- ======================== SPRITE D'ICÔNES SVG ========================= -->
+<svg xmlns="http://www.w3.org/2000/svg" class="sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="starGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#ffd23f"/>
+    </linearGradient>
+  </defs>
+  <symbol id="i-star" viewBox="0 0 32 32">
+    <path d="M16 3.2l3.4 7.6 8.2.9-6.1 5.7 1.7 8.1L16 21.3 8.8 25.5l1.7-8.1-6.1-5.7 8.2-.9z" fill="url(#starGrad)"/>
+  </symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20v3H6.5A2.5 2.5 0 0 1 4 20.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 8h7M9 11.5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.8v2.4M12 18.8v2.4M4.5 12H2.1M21.9 12h-2.4M5.6 5.6l1.7 1.7M16.7 16.7l1.7 1.7M18.4 5.6l-1.7 1.7M7.3 16.7l-1.7 1.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="7.4" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".45"/></symbol>
+  <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9.5h3.2L12 5.5v13L7.2 14.5H4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18.2 6.2a8 8 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9.5h3.2L12 5.5v13L7.2 14.5H4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 9.5l5 5M21 9.5l-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7.5 5.2l11 6.8-11 6.8z" fill="currentColor"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M11.2 3H20v8.8L11.6 20.2a1.6 1.6 0 0 1-2.3 0l-6-6a1.6 1.6 0 0 1 0-2.3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="16.2" cy="7.4" r="1.5" fill="currentColor"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12.8" r="7.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 8.6v4.4l3 1.8M9.3 2.6h5.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 17.5a6 6 0 1 1 6 0v2.2H9z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M10 21h4M12 2.5v1.8M4.6 6l1.5 1M19.4 6l-1.5 1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="i-keyboard" viewBox="0 0 24 24"><rect x="2.4" y="6" width="19.2" height="12" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M6 10h.01M9 10h.01M12 10h.01M15 10h.01M18 10h.01M8 14h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M6 21V3.5M6 4h10.5l-1.6 3.4 1.6 3.4H6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 5v6h-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4.5 20c.8-3.8 3.9-5.8 7.5-5.8s6.7 2 7.5 5.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.4" r="3.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M2.6 19.6c.7-3.4 3.4-5.2 6.4-5.2s5.7 1.8 6.4 5.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M16 5.6a3.2 3.2 0 0 1 0 6.2M17.4 14.6c2.3.4 3.9 2.1 4.4 4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <!-- icônes des modes -->
+  <symbol id="i-mode-classique" viewBox="0 0 24 24"><path d="M4 20h16M7 20V6h10v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M17 9v3M17 12c0 1.2-1.2 1.6-1.2 2.6S17 16 17 16s1.2-.8 1.2-1.4S17 13.2 17 12z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="17" cy="5.4" r="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-mode-theme" viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.5l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-mode-phrases" viewBox="0 0 24 24"><path d="M9.5 7.5c-2.4 0-4 1.6-4 3.8 0 1.9 1.3 3.2 3 3.2 1.4 0 2.4-.8 2.4-2 0-1.1-.8-1.9-1.9-1.9-.3 0-.6 0-.8.1.2-1 1-1.6 2.1-1.7zM18.5 7.5c-2.4 0-4 1.6-4 3.8 0 1.9 1.3 3.2 3 3.2 1.4 0 2.4-.8 2.4-2 0-1.1-.8-1.9-1.9-1.9-.3 0-.6 0-.8.1.2-1 1-1.6 2.1-1.7z" fill="currentColor"/><path d="M4 17.4c4.5 1.8 11.5 1.8 16 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".55"/></symbol>
+  <symbol id="i-mode-indices" viewBox="0 0 24 24"><path d="M9 17.2a6 6 0 1 1 6 0v2.2H9z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M10.2 21.4h3.6M12 2.4v1.6M4.2 5.8l1.3 1.3M19.8 5.8l-1.3 1.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-mode-chrono" viewBox="0 0 24 24"><circle cx="12" cy="13" r="7.4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 9v4.2l2.8 1.7M9.4 2.8h5.2M12 2.8v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-mode-inverse" viewBox="0 0 24 24"><path d="M5 8.5h11l-3-3M19 15.5H8l3 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-mode-dedans" viewBox="0 0 24 24"><path d="M3 8h11l-2.6-2.6M3 8l2.6 2.6M21 16H10l2.6-2.6M21 16l-2.6 2.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16.4" cy="8" r="1.6" fill="currentColor"/><circle cx="7.6" cy="16" r="1.6" fill="currentColor"/></symbol>
+  <symbol id="i-mode-diabolique" viewBox="0 0 24 24"><path d="M12 3c1.6 3 .4 4.6 1.8 6.2C15 10.8 17 10 17 8c2.6 2.1 3.4 5.6 2 8.6C17.6 19.4 15 21 12 21s-5.6-1.6-7-4.4C3.6 13.6 4.4 10.1 7 8c0 2 2 2.8 3.2 1.2C11.6 7.6 10.4 6 12 3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8 5.4H4.6v1.8A3 3 0 0 0 8 10M16 5.4h3.4v1.8A3 3 0 0 1 16 10M12 13v4M8.5 20h7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6.2" cy="18" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="6.2" cy="6" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.4 7.6L20 18M8.4 16.4L20 6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="i-skull" viewBox="0 0 24 24"><path d="M12 3.2c-4.1 0-6.8 2.8-6.8 6.5 0 2.2 1 3.6 2.2 4.6v2.4c0 1.1.9 1.9 2 1.9h5.2c1.1 0 2-.8 2-1.9v-2.4c1.2-1 2.2-2.4 2.2-4.6 0-3.7-2.7-6.5-6.8-6.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="9.4" cy="10.4" r="1.5" fill="currentColor"/><circle cx="14.6" cy="10.4" r="1.5" fill="currentColor"/><path d="M11 14.4h2M10.4 18.6v-1.6M13.6 18.6v-1.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.5v10M8.2 9.8L12 13.6l3.8-3.8M4.5 15.5v3a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<!-- ============================== SCRIPTS =============================== -->
+<script src="assets/lexique.js?v=1.3.0"></script>
+<script src="assets/annexes.js?v=1.3.0"></script>
+<script src="assets/gore.js?v=1.3.0"></script>
+<script src="assets/scene.js?v=1.3.0"></script>
+<script src="assets/game.js?v=1.3.0"></script>
+</body>
+</html>

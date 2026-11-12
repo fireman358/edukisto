@@ -1,0 +1,15 @@
+# Données sources (téléchargées automatiquement)
+data/_raw/
+
+# Sorties temporaires
+_shot.png
+_shot*.png
+_shots/
+.tmp/
+*.part
+debug.log
+
+# Systèmes
+Thumbs.db
+desktop.ini
+.DS_Store

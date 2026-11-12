@@ -1,0 +1,1293 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CardScore — marqueur de points pour jeux de cartes</title>
+<meta name="description" content="Marqueur de points pour jeux de cartes : belote, couillon, rami, whist, bridge, tarot, manille et mode libre.">
+<link rel="icon" href="icon.svg">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#333333">
+<style>
+:root{
+  --bg:#333333; --surface:#3d3d3d; --text:#ffffff; --muted:rgba(255,255,255,.72);
+  --accent:#38bdf8; --accent-soft:#7dd3fc; --ink:#0f1115;
+  --border:#4a4a4a; --radius:8px;
+  --header-bg:rgba(16,16,16,.92); --surface-2:#454545; --danger:#f87171;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  background:radial-gradient(900px 400px at 50% -120px, rgba(56,189,248,.14), transparent 65%), var(--bg);
+  color:var(--text); line-height:1.6; min-height:100vh; padding-bottom:70px;
+}
+header{background:var(--header-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:22px 16px 26px;text-align:center}
+.logo{display:inline-flex;align-items:center;gap:14px}
+.logo .cartes{position:relative;width:64px;height:52px;perspective:400px}
+.logo .cartes span{
+  position:absolute;inset:0;border-radius:6px;display:grid;place-items:center;font-size:26px;
+  background:#fff;color:#0f1115;box-shadow:0 6px 14px rgba(0,0,0,.5);
+}
+.logo .cartes span:nth-child(1){transform:rotate(-14deg) translate(-13px,3px)}
+.logo .cartes span:nth-child(2){transform:rotate(-4deg);z-index:1}
+.logo .cartes span:nth-child(3){transform:rotate(11deg) translate(14px,4px);background:#fff;border:2px solid var(--accent)}
+h1{font-size:clamp(22px,4.5vw,32px);font-weight:800;letter-spacing:.5px}
+h1 em{color:var(--accent);font-style:normal}
+.tagline{color:var(--muted);font-size:14px;margin-top:4px}
+.nav-outils{margin-top:12px;display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap}
+.nav-outils a{color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1.5px solid var(--accent);font-size:14px}
+.nav-outils button.small{padding:9px 16px;font-size:13.5px}
+main{max-width:980px;margin:0 auto;padding:18px 16px}
+
+.grille-jeux{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:20px}
+.jeu-carte{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:16px 12px;text-align:center;cursor:pointer;font:inherit;color:var(--text);
+  transform:perspective(800px) rotateX(4deg);transition:all .2s;
+  box-shadow:0 12px 26px -12px rgba(0,0,0,.6);
+}
+.jeu-carte:hover{transform:perspective(800px) rotateX(0) translateY(-4px);border-color:var(--accent)}
+.jeu-carte.actif{border-color:var(--accent);background:linear-gradient(180deg,rgba(14,116,144,.35),var(--surface));
+  transform:perspective(800px) rotateX(0) translateY(-4px)}
+.jeu-carte .ico{font-size:30px}
+.jeu-carte .nom{font-weight:800;font-size:15.5px;margin-top:4px}
+.jeu-carte .desc{font-size:11.5px;color:var(--muted);margin-top:2px;line-height:1.4}
+
+.config{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:0;transform:perspective(900px) rotateX(1.5deg);
+  box-shadow:0 14px 30px -12px rgba(0,0,0,.55)}
+.config>summary{
+  list-style:none;cursor:pointer;padding:14px 16px;font-size:15px;font-weight:800;color:var(--accent-soft);
+  display:flex;justify-content:space-between;align-items:center;gap:10px;user-select:none;
+}
+.config>summary::-webkit-details-marker{display:none}
+.config>summary .resume{font-size:12.5px;color:var(--muted);font-weight:600;text-align:right}
+.config>summary .fleche{transition:transform .2s;font-size:12px;color:var(--muted)}
+.config[open]>summary .fleche{transform:rotate(180deg)}
+.config .interieur{padding:0 14px 14px;display:grid;gap:12px;border-top:1px solid var(--border)}
+.config details.sous{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface-2)}
+.config details.sous>summary{
+  list-style:none;cursor:pointer;padding:10px 14px;font-size:13px;font-weight:800;
+  text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);display:flex;
+  justify-content:space-between;align-items:center;user-select:none}
+.config details.sous>summary::-webkit-details-marker{display:none}
+.config details.sous>summary b{color:var(--accent-soft);font-size:13px;text-transform:none;letter-spacing:0}
+.config details.sous[open]>summary{border-bottom:1px solid var(--border)}
+.config .contenu-sous{padding:12px 14px;display:grid;gap:12px}
+.config .rangee{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.config label{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);font-weight:700;margin-right:4px}
+.zone-noms{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.zone-noms input{
+  font:inherit;font-size:14px;font-weight:600;color:var(--text);padding:9px 10px;
+  border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);
+}
+.zone-noms input:focus{outline:none;border-color:var(--accent)}
+.seg{display:inline-flex;gap:6px;flex-wrap:wrap}
+.seg button{
+  font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;padding:8px 14px;
+  border-radius:var(--radius);border:1px solid var(--border);background:var(--surface-2);color:var(--text);
+  transition:all .15s;
+}
+.seg button:hover{border-color:var(--accent)}
+.seg button.actif{background:var(--accent);border-color:var(--accent);color:var(--ink);font-weight:700;transform:translateY(-2px);box-shadow:0 8px 16px -6px rgba(56,189,248,.45)}
+
+.joueurs{display:grid;gap:16px;margin:20px 0}
+.joueurs.c2{grid-template-columns:1fr 1fr}
+.joueurs.c3{grid-template-columns:1fr 1fr 1fr}
+.joueurs.c4{grid-template-columns:repeat(4,1fr)}
+.joueurs.c5{grid-template-columns:repeat(5,1fr)}
+.joueurs.c6{grid-template-columns:repeat(3,1fr)}
+.carte-joueur{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:16px;position:relative;
+  transform:perspective(900px) rotateX(4deg);transition:transform .25s,border-color .2s,box-shadow .25s;
+  box-shadow:0 16px 34px -14px rgba(0,0,0,.6);
+}
+.carte-joueur:hover{transform:perspective(900px) rotateX(0) translateY(-4px);border-color:var(--accent);
+  box-shadow:0 24px 44px -14px rgba(0,0,0,.7)}
+.carte-joueur.meneur{border-color:var(--accent)}
+.carte-joueur .num{position:absolute;top:10px;right:12px;font-size:20px;opacity:.85;transform:rotate(8deg)}
+.carte-joueur label{font-size:11px;text-transform:uppercase;letter-spacing:1.4px;color:var(--muted);font-weight:700}
+.carte-joueur input{
+  display:block;width:100%;border:none;border-bottom:1px dashed var(--border);background:transparent;
+  color:var(--text);font-size:16px;font-weight:700;padding:5px 2px;margin-top:3px;
+}
+.carte-joueur input:focus{outline:none;border-bottom-color:var(--accent)}
+.carte-joueur .score{font-size:42px;font-weight:800;line-height:1.1;margin-top:8px;
+  text-shadow:0 3px 0 rgba(0,0,0,.35), 0 0 24px rgba(56,189,248,.15)}
+.carte-joueur.meneur .score{color:var(--accent-soft)}
+.carte-joueur .progress{height:7px;background:#2a2a2a;border-radius:99px;margin-top:12px;overflow:hidden}
+.carte-joueur .progress i{display:block;height:100%;border-radius:99px;
+  background:linear-gradient(90deg,#0e7490,var(--accent));transition:width .5s ease}
+
+.actions{display:flex;gap:12px;justify-content:center;margin:6px 0 20px;flex-wrap:wrap}
+button.btn{
+  font:inherit;cursor:pointer;border:none;border-radius:var(--radius);
+  padding:13px 24px;font-weight:700;font-size:15.5px;color:var(--ink);
+  background:var(--accent);border:1px solid var(--accent);
+  box-shadow:0 5px 0 #0e7490, 0 16px 26px -10px rgba(56,189,248,.5);
+  transform:translateY(-2px);transition:transform .15s,box-shadow .15s,filter .15s;
+}
+button.btn:hover{filter:brightness(1.08)}
+button.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #0e7490}
+button.btn.ghost{background:var(--surface-2);color:var(--text);border-color:var(--border);box-shadow:0 4px 0 #2a2a2a}
+button.btn.ghost:active{box-shadow:0 2px 0 #2a2a2a}
+button.btn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:0 4px 0 #2a2a2a}
+
+.tableau{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;box-shadow:0 16px 34px -14px rgba(0,0,0,.6);transform:perspective(1200px) rotateX(1.2deg)}
+.tableau h2{font-size:13px;text-transform:uppercase;letter-spacing:1.4px;color:var(--muted);
+  padding:13px 16px;background:var(--header-bg);border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.tableau h2 b{color:var(--accent)}
+.tableau .scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:460px}
+th,td{padding:10px 10px;text-align:center}
+thead th{background:#2a2a2a;color:var(--accent-soft);font-size:11.5px;letter-spacing:1px;text-transform:uppercase}
+tbody tr{border-bottom:1px solid #333333;animation:apparait .35s ease both;cursor:pointer}
+tbody tr:hover{background:var(--surface-2)}
+.total td{background:var(--header-bg);font-weight:800;font-size:15px;border-top:2px solid var(--accent)}
+.tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:10.5px;font-weight:800;letter-spacing:.5px;
+  background:rgba(14,116,144,.2);color:var(--accent-soft);margin:1px}
+.tag.capot{background:var(--danger);color:#0f1115}
+.tag.chute{background:#fbbf24;color:#0f1115}
+.tag.coinche{background:var(--accent);color:var(--ink)}
+.tag.litige{background:#a78bfa;color:#0f1115}
+.tag.fausse{background:#6b7280;color:#0f1115}
+.tag.ok{background:#34d399;color:#0f1115}
+.vide{padding:30px;text-align:center;color:var(--muted);font-style:italic}
+.indice{font-size:12px;color:var(--muted);text-align:center;margin-top:8px}
+@keyframes apparait{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+.historique{margin-top:22px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:14px;box-shadow:0 12px 26px -14px rgba(0,0,0,.5)}
+.historique h2{font-size:13px;text-transform:uppercase;letter-spacing:1.4px;color:var(--muted);margin-bottom:10px;
+  display:flex;justify-content:space-between;align-items:center;gap:10px}
+.historique h2 button{font:inherit;font-size:12px;background:none;border:1px solid var(--border);
+  border-radius:var(--radius);color:var(--muted);padding:5px 10px;cursor:pointer}
+.historique ul{list-style:none}
+.historique li{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  padding:8px 4px;border-bottom:1px solid #333;font-size:14px;color:var(--muted)}
+.historique li b{color:var(--accent-soft)}
+.historique .vide-liste{color:var(--muted);font-style:italic;font-size:14px}
+
+.voile{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);
+  display:none;place-items:center;z-index:50;padding:14px}
+.voile.ouvert{display:grid}
+.modale{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  width:min(560px,100%);max-height:90vh;overflow:auto;padding:22px;
+  box-shadow:0 40px 80px -20px rgba(0,0,0,.8);animation:monte .3s ease both}
+@keyframes monte{from{opacity:0;transform:translateY(28px) rotateX(8deg)}to{opacity:1;transform:none}}
+.modale h3{font-size:19px;margin-bottom:14px;color:var(--accent-soft)}
+.champ{margin-bottom:15px}
+.champ>span{display:block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-bottom:7px}
+.seg.plein{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.seg.plein.c3{grid-template-columns:1fr 1fr 1fr}
+.seg.plein.c4{grid-template-columns:1fr 1fr 1fr 1fr}
+.ligne{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ligne input[type=number]{
+  flex:1;min-width:90px;font:inherit;font-size:20px;font-weight:800;color:var(--text);
+  padding:10px 12px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface-2);
+}
+.ligne input:focus{outline:none;border-color:var(--accent)}
+.mini{
+  font:inherit;font-size:13px;font-weight:700;cursor:pointer;padding:9px 12px;border-radius:var(--radius);
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);transition:all .12s;
+}
+.mini:hover{border-color:var(--accent)}
+.mini:active{transform:translateY(1px)}
+.interr{display:flex;gap:8px;flex-wrap:wrap}
+.interr label{
+  display:inline-flex;align-items:center;gap:7px;padding:9px 13px;border-radius:99px;
+  background:var(--surface-2);border:1.5px solid var(--border);font-weight:600;font-size:13.5px;cursor:pointer;
+  transition:all .15s;user-select:none}
+.interr input{accent-color:var(--accent);width:16px;height:16px}
+.interr label:has(input:checked){background:rgba(14,116,144,.25);border-color:var(--accent);transform:translateY(-2px)}
+.aide{font-size:13px;color:var(--muted);margin-top:12px;line-height:1.5;
+  background:var(--surface-2);border-radius:var(--radius);padding:10px 12px;border:1px solid var(--border)}
+.aide b{color:var(--accent-soft)}
+.modale .barre{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+.apercu{margin-top:14px;padding:12px;border-radius:var(--radius);border:1px dashed var(--accent);
+  background:rgba(14,116,144,.12);font-size:14.5px;line-height:1.7}
+.apercu b{color:var(--accent-soft)}
+
+.annonce-bloc{border:1px solid var(--border);border-radius:var(--radius);padding:10px;margin-bottom:10px;background:var(--surface-2)}
+.annonce-bloc .titre{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.annonce-bloc .titre b{font-size:14px}
+.annonce-bloc .total-ann{color:var(--accent-soft);font-weight:800;font-size:16px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{
+  font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;padding:6px 10px;border-radius:99px;
+  background:#2a2a2a;border:1px solid var(--border);color:var(--text);transition:all .12s}
+.chip:hover{border-color:var(--accent)}
+.chip:active{transform:scale(.95)}
+
+.trophee{position:fixed;inset:0;display:none;place-items:center;z-index:55;pointer-events:none}
+.trophee.ouvert{display:grid}
+.trophee .carton{background:var(--surface);border:1px solid var(--accent);border-radius:var(--radius);
+  padding:34px 44px;text-align:center;box-shadow:0 50px 90px -20px rgba(0,0,0,.9);animation:monte .4s ease both}
+.trophee .emoji{font-size:60px}
+.trophee h3{font-size:22px;margin-top:8px;color:var(--accent-soft)}
+.trophee p{color:var(--muted);margin-top:4px}
+.confetti{position:fixed;top:-20px;width:10px;height:15px;z-index:60;pointer-events:none;animation:tombe linear forwards}
+@keyframes tombe{to{transform:translateY(105vh) rotate(720deg);opacity:.9}}
+.melangeur{background:rgba(14,116,144,.15);border:1px dashed var(--accent);border-radius:var(--radius);
+  padding:10px 14px;font-size:14.5px;text-align:center;margin-bottom:16px}
+.melangeur b{color:var(--accent-soft)}
+.barre-jeu{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;
+  background:linear-gradient(180deg,rgba(14,116,144,.3),var(--surface));border:1px solid var(--accent);
+  border-radius:var(--radius);padding:10px 16px;margin-bottom:16px;font-weight:800;font-size:16px}
+.barre-jeu .barre-jeu-boutons{display:flex;gap:8px;flex-wrap:wrap}
+.barre-jeu .barre-jeu-boutons button{font-size:13px;padding:8px 14px}
+.rangee-demarrage{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.couillons{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}
+.couillons i{display:block;width:5px;height:26px;border-radius:3px;background:var(--muted);opacity:.85}
+.couillons i.efface{background:var(--accent);opacity:.25;transform:rotate(14deg) translateY(4px)}
+footer{margin-top:36px;text-align:center;color:var(--muted);font-size:13px;padding:0 16px}
+footer a{color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1.5px solid var(--accent)}
+@media (max-width:640px){
+  main{padding:12px 10px}
+  .joueurs.c2,.joueurs.c3,.joueurs.c4,.joueurs.c5,.joueurs.c6{grid-template-columns:1fr 1fr}
+  .carte-joueur{transform:none}
+  .carte-joueur:hover{transform:translateY(-3px)}
+  .carte-joueur .score{font-size:36px}
+  .tableau,.config,.jeu-carte{transform:none}
+  .seg button{padding:11px 14px;font-size:14px}
+  .mini{padding:11px 13px;font-size:14px}
+  button.btn{padding:14px 20px;font-size:15px}
+  .modale{width:100%;max-height:94vh;padding:16px;border-radius:0}
+  .voile{padding:0}
+  table{font-size:13.5px}
+  th,td{padding:9px 6px}
+  .zone-noms{grid-template-columns:1fr 1fr}
+  .actions{gap:8px}
+  .actions button.btn{flex:1;min-width:130px;padding:12px 8px}
+  .carte-joueur .num{font-size:16px}
+  .melangeur{font-size:13.5px}
+}
+@media (max-width:400px){
+  .joueurs.c2,.joueurs.c3,.joueurs.c4,.joueurs.c5,.joueurs.c6{grid-template-columns:1fr}
+  .actions button.btn{min-width:110px;font-size:13.5px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="cartes"><span>♣</span><span>♠</span><span>♦</span></div>
+    <h1>Edukisto <em>CardScore</em></h1>
+  </div>
+  <p class="tagline">Un seul marqueur pour tous vos jeux de cartes</p>
+  <nav class="nav-outils">
+    <a href="regles.html" id="lienRegles">📖 Règles</a>
+    <button id="btnInstaller" class="btn ghost small" style="display:none">📲 Installer l'app</button>
+  </nav>
+</header>
+
+<main>
+  <section class="grille-jeux" id="grilleJeux"></section>
+
+  <div class="barre-jeu" id="barreJeu" style="display:none">
+    <span id="barreJeuNom"></span>
+    <span class="barre-jeu-boutons">
+      <button class="btn ghost small" id="btnParametres">✏️ Paramètres</button>
+      <button class="btn ghost small" id="btnAutreJeu">🎯 Changer de jeu</button>
+    </span>
+  </div>
+
+  <details class="config" id="configDetails" open>
+    <summary>
+      <span>⚙️ Paramètres de la partie</span>
+      <span class="resume" id="resumeConfig"></span>
+      <span class="fleche">▼</span>
+    </summary>
+    <div class="interieur">
+      <div class="rangee-demarrage">
+        <button class="btn" id="btnCommencer">▶️ Commencer la partie</button>
+        <button class="btn ghost" id="btnRetourJeux">🎯 Autres jeux</button>
+      </div>
+      <details class="sous" id="sousJeu" open>
+        <summary><span>🂡 Jeu</span><b id="resJeu"></b></summary>
+        <div class="contenu-sous" id="contenuJeu"></div>
+      </details>
+      <details class="sous" id="sousJoueurs" open>
+        <summary><span>👥 Joueurs &amp; mélange</span><b id="resJoueurs"></b></summary>
+        <div class="contenu-sous">
+          <div class="rangee">
+            <div class="seg" id="segFormat"></div>
+          </div>
+          <div class="rangee" id="rangeeNoms">
+            <label>Noms</label>
+            <div class="zone-noms" id="zoneNoms"></div>
+          </div>
+          <div class="rangee">
+            <label>Premier mélange</label>
+            <div class="seg" id="segMelangeur"></div>
+          </div>
+        </div>
+      </details>
+      <details class="sous" id="sousFin">
+        <summary><span>🏁 Fin de partie</span><b id="resFin"></b></summary>
+        <div class="contenu-sous">
+          <div class="rangee">
+            <div class="seg" id="segObjectif"></div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </details>
+
+  <div class="melangeur" id="bandeauMelangeur"></div>
+
+  <section class="joueurs c2" id="zoneJoueurs"></section>
+
+  <div class="actions">
+    <button class="btn" id="btnDonne">➕ Nouvelle donne</button>
+    <button class="btn ghost" id="btnFausse">🚫 Fausse donne</button>
+    <button class="btn ghost" id="btnAnnuler" disabled>↩︎ Annuler</button>
+    <button class="btn ghost" id="btnPartager">📤 Partager</button>
+    <button class="btn ghost" id="btnReset">🔄 Nouvelle partie</button>
+  </div>
+
+  <section class="tableau">
+    <h2><span>Donnes de la partie</span><span id="cibleTxt"></span></h2>
+    <div class="scroll">
+      <table>
+        <thead><tr id="entete"></tr></thead>
+        <tbody id="corps"></tbody>
+        <tfoot><tr class="total" id="ligneTotal"></tr></tfoot>
+      </table>
+    </div>
+    <div class="vide" id="vide">Aucune donne — clique sur « Nouvelle donne » pour commencer.</div>
+    <p class="indice">💡 Touche une ligne du tableau pour modifier une donne.</p>
+  </section>
+
+  <section class="historique" id="secHistorique">
+    <h2><span>🏆 Historique des parties terminées</span><button id="btnViderHist">Vider</button></h2>
+    <ul id="listeHist"></ul>
+    <p class="vide-liste" id="videHist">Aucune partie terminée pour l'instant.</p>
+  </section>
+
+  <footer>Un outil <a href="https://edukisto.win" target="_blank" rel="noopener">Edukisto</a> — votre informaticien de proximité.</footer>
+</main>
+
+<div class="voile" id="voile">
+  <div class="modale" role="dialog" aria-modal="true">
+    <h3 id="titreModale">Nouvelle donne</h3>
+    <div id="zoneChamps"></div>
+    <p class="aide" id="aide"></p>
+    <div class="apercu" id="apercu"></div>
+    <div class="barre">
+      <button class="btn ghost" id="fermer">Annuler</button>
+      <button class="btn" id="valider">✔ Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<div class="trophee" id="trophee">
+  <div class="carton">
+    <div class="emoji">🏆</div>
+    <h3 id="vainqueur">Victoire !</h3>
+    <p id="scoreFinal"></p>
+  </div>
+</div>
+
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+
+const AOUTS=[{s:"♠",n:"Pique"},{s:"♥",n:"Cœur"},{s:"♦",n:"Carreau"},{s:"♣",n:"Trèfle"}];
+const ANNONCES_BELOTE=[
+  {n:"Carré de Valets",v:200},{n:"Carré de 9",v:150},{n:"Carré d'As",v:110},
+  {n:"Carré de 10",v:100},{n:"Carré de Rois",v:80},{n:"Carré de Dames",v:60},
+  {n:"Suite à l'as",v:100},{n:"Cinquante",v:50},{n:"Quarante",v:40},
+  {n:"Trente",v:30},{n:"Vingt",v:20}
+];
+function arr10(x){return Math.round(x/10)*10}
+
+const JEUX={
+  belote:{
+    nom:"Belote",icone:"🂡",desc:"Classique, annonces, contrée, coinche",
+    formats:{"2eq":{nb:2,eq:true,mel:4,label:"2 équipes (2c2)"},"2j":{nb:2,eq:false,mel:2,label:"2 joueurs"},"3j":{nb:3,eq:false,mel:3,label:"3 joueurs"}},
+    objectifs:[{v:"501",l:"501 pts"},{v:"1001",l:"1001 pts"},{v:"2001",l:"2001 pts"},{v:"3001",l:"3001 pts"},{v:"D8",l:"8 donnes"},{v:"D12",l:"12 donnes"},{v:"D16",l:"16 donnes"}],
+    sens:"max",variantes:true
+  },
+  couillon:{
+    nom:"Couillon",icone:"🃏",desc:"Jeu wallon : effacez vos couillons",
+    formats:{"2eq":{nb:2,eq:true,mel:4,label:"2 équipes (2c2)"}},
+    objectifs:[{v:"5",l:"5 couillons"},{v:"10",l:"10 couillons"},{v:"15",l:"15 couillons"},{v:"20",l:"20 couillons"}],
+    sens:"max",lignes:true
+  },
+  whist:{
+    nom:"Whist",icone:"♠",desc:"1 pt par levée au-delà de 6",
+    formats:{"2eq":{nb:2,eq:true,mel:4,label:"2 équipes (2c2)"}},
+    objectifs:[{v:"3",l:"3 pts"},{v:"5",l:"5 pts"},{v:"7",l:"7 pts"},{v:"9",l:"9 pts"}],
+    sens:"max"
+  },
+  rami:{
+    nom:"Rami",icone:"🂮",desc:"Cartes restantes, le plus bas gagne",
+    formats:{"2j":{nb:2,eq:false,mel:2,label:"2 joueurs"},"3j":{nb:3,eq:false,mel:3,label:"3 joueurs"},
+      "4j":{nb:4,eq:false,mel:4,label:"4 joueurs"},"5j":{nb:5,eq:false,mel:5,label:"5 joueurs"},"6j":{nb:6,eq:false,mel:6,label:"6 joueurs"}},
+    objectifs:[{v:"100",l:"100 pts"},{v:"200",l:"200 pts"},{v:"500",l:"500 pts"}],
+    sens:"min"
+  },
+  bridge:{
+    nom:"Bridge",icone:"🂱",desc:"Contrats et levées (comptage simplifié)",
+    formats:{"2eq":{nb:2,eq:true,mel:4,label:"2 équipes (2c2)"}},
+    objectifs:[{v:"700",l:"700 pts"},{v:"1000",l:"1000 pts"},{v:"1500",l:"1500 pts"}],
+    sens:"max"
+  },
+  tarot:{
+    nom:"Tarot",icone:"🃜",desc:"Prise, garde, bouts, poignée",
+    formats:{"3j":{nb:3,eq:false,mel:3,label:"3 joueurs"},"4j":{nb:4,eq:false,mel:4,label:"4 joueurs"},"5j":{nb:5,eq:false,mel:5,label:"5 joueurs"}},
+    objectifs:[{v:"500",l:"500 pts"},{v:"1000",l:"1000 pts"},{v:"1500",l:"1500 pts"}],
+    sens:"max"
+  },
+  manille:{
+    nom:"Manille",icone:"🂲",desc:"Cousine de la belote, 101 pts",
+    formats:{"2eq":{nb:2,eq:true,mel:4,label:"2 équipes (2c2)"}},
+    objectifs:[{v:"101",l:"101 pts"},{v:"201",l:"201 pts"},{v:"501",l:"501 pts"}],
+    sens:"max"
+  },
+  libre:{
+    nom:"Libre",icone:"🎯",desc:"Tout autre jeu : points libres",
+    formats:{"2j":{nb:2,eq:false,mel:2,label:"2 joueurs/équipes"},"3j":{nb:3,eq:false,mel:3,label:"3 joueurs/équipes"},
+      "4j":{nb:4,eq:false,mel:4,label:"4 joueurs/équipes"},"5j":{nb:5,eq:false,mel:5,label:"5 joueurs/équipes"},"6j":{nb:6,eq:false,mel:6,label:"6 joueurs/équipes"}},
+    objectifs:[{v:"100",l:"100 pts"},{v:"500",l:"500 pts"},{v:"1000",l:"1000 pts"},{v:"2000",l:"2000 pts"},{v:"D8",l:"8 donnes"},{v:"D12",l:"12 donnes"}],
+    sens:"max"
+  }
+};
+
+let etat={jeu:"belote",format:"2eq",objectif:"1001",variante:"classique",arrondi:0,
+  noms:["Nous","Eux","Solo","J1","J2","J3"],donnes:[],melangeur:0,report:0,craie:false,historique:[]};
+
+function sauver(){localStorage.setItem("cards-points-v1",JSON.stringify(etat))}
+function charger(){
+  try{const d=JSON.parse(localStorage.getItem("cards-points-v1"));
+    if(d&&Array.isArray(d.donnes)&&d.noms)etat=d}catch(e){}
+  if(!JEUX[etat.jeu])etat.jeu="belote";
+  const j=JEUX[etat.jeu];
+  if(!j.formats[etat.format])etat.format=Object.keys(j.formats)[0];
+  if(!j.objectifs.some(o=>o.v===etat.objectif))etat.objectif=j.objectifs[0].v;
+  if(!(etat.melangeur>=0&&etat.melangeur<6))etat.melangeur=0;
+  if(!Array.isArray(etat.historique))etat.historique=[];
+  if(!Array.isArray(etat.noms)||etat.noms.length<6)etat.noms=["Nous","Eux","Solo","J1","J2","J3"];
+  rendre();
+}
+function nom(i){return (etat.noms[i]||("Joueur "+(i+1))).trim()||("Joueur "+(i+1))}
+function jeu(){return JEUX[etat.jeu]}
+function fmt(){return jeu().formats[etat.format]}
+function nbJ(){return fmt().nb}
+function parEquipe(){return fmt().eq}
+function nbMel(){return fmt().mel||nbJ()}
+function totaux(){
+  const t=Array(nbJ()).fill(0);
+  etat.donnes.forEach(d=>d.p.forEach((v,i)=>{if(i<nbJ())t[i]+=v}));
+  return t;
+}
+function objectifTxt(){
+  const j=jeu();
+  if(/^D/.test(etat.objectif))return "Partie en <b>"+etat.objectif.slice(1)+" donnes</b>";
+  if(j.lignes)return "Première équipe à <b>effacer ses "+etat.objectif+" couillons</b>";
+  if(j.sens==="min")return "Fin quand un joueur atteint <b>"+etat.objectif+" pts</b> — le plus bas gagne";
+  return "Premier à <b>"+etat.objectif+" points</b>";
+}
+
+let mode=etat.donnes.length?"jeu":"choix";
+function appliquerMode(){
+  $("grilleJeux").style.display=(mode==="choix")?"grid":"none";
+  $("configDetails").style.display=(mode==="jeu")?"none":"block";
+  $("barreJeu").style.display=(mode==="jeu")?"flex":"none";
+  if(mode==="jeu"){
+    $("barreJeuNom").textContent=jeu().icone+" "+jeu().nom+(jeu().variantes?" · "+({classique:"Classique",annonces:"Avec annonces",contree:"Contrée",coinche:"Coinche"})[etat.variante]:"")+" · "+etat.noms.slice(0,nbJ()).join(" & ");
+    $("configDetails").open=false;
+  }else{
+    $("configDetails").open=true;
+  }
+}
+function rendre(){
+  const j=jeu();
+  appliquerMode();
+  const gj=$("grilleJeux");gj.innerHTML="";
+  Object.entries(JEUX).forEach(([cle,def])=>{
+    const b=document.createElement("button");
+    b.className="jeu-carte"+(cle===etat.jeu?" actif":"");
+    b.innerHTML=`<div class="ico">${def.icone}</div><div class="nom">${def.nom}</div><div class="desc">${def.desc}</div>`;
+    b.onclick=()=>{
+      if(cle===etat.jeu){mode="config";appliquerMode();return}
+      if(etat.donnes.length&&!confirm("Changer de jeu ? La partie en cours sera perdue."))return;
+      etat.jeu=cle;etat.format=Object.keys(def.formats)[0];
+      etat.objectif=def.objectifs[0].v;etat.donnes=[];etat.report=0;etat.craie=false;
+      mode="config";rendre();
+    };
+    gj.appendChild(b);
+  });
+
+  const cj=$("contenuJeu");cj.innerHTML="";
+  if(j.variantes){
+    cj.innerHTML=`<div class="rangee"><label>Variante</label>
+      <div class="seg" id="segVariante">
+        <button data-v="classique">Classique</button>
+        <button data-v="annonces">Avec annonces</button>
+        <button data-v="contree">Contrée</button>
+        <button data-v="coinche">Coinche</button>
+      </div></div>
+      <div class="rangee"><div class="seg" id="segArrondi">
+        <button data-a="0">Arrondi dizaine : non</button>
+        <button data-a="1">Arrondi dizaine : oui</button>
+      </div></div>`;
+    document.querySelectorAll("#segVariante button").forEach(b=>{
+      b.classList.toggle("actif",b.dataset.v===etat.variante);
+      b.onclick=()=>{etat.variante=b.dataset.v;etat.donnes=[];etat.report=0;rendre()};
+    });
+    document.querySelectorAll("#segArrondi button").forEach(b=>{
+      b.classList.toggle("actif",+b.dataset.a===+etat.arrondi);
+      b.onclick=()=>{etat.arrondi=+b.dataset.a;rendre()};
+    });
+  }else{
+    cj.innerHTML=`<p style="font-size:13.5px;color:var(--muted)">${j.desc}</p>`;
+  }
+
+  const sf=$("segFormat");sf.innerHTML="";
+  Object.entries(j.formats).forEach(([cle,f])=>{
+    const b=document.createElement("button");
+    b.textContent=f.label;
+    b.classList.toggle("actif",cle===etat.format);
+    b.onclick=()=>{etat.format=cle;etat.donnes=[];etat.report=0;rendre()};
+    sf.appendChild(b);
+  });
+
+  const zn=$("zoneNoms");zn.innerHTML="";
+  for(let i=0;i<nbJ();i++){
+    const inp=document.createElement("input");
+    inp.maxLength=16;inp.value=nom(i);
+    inp.addEventListener("input",()=>{etat.noms[i]=inp.value;majMelangeur();sauver()});
+    zn.appendChild(inp);
+  }
+
+  const so=$("segObjectif");so.innerHTML="";
+  j.objectifs.forEach(o=>{
+    const b=document.createElement("button");
+    b.textContent=o.l;
+    b.classList.toggle("actif",o.v===etat.objectif);
+    b.onclick=()=>{etat.objectif=o.v;rendre()};
+    so.appendChild(b);
+  });
+
+  $("lienRegles").href="regles.html?jeu="+etat.jeu;
+  $("resJeu").textContent=j.nom+(j.variantes?" · "+({classique:"Classique",annonces:"Avec annonces",contree:"Contrée",coinche:"Coinche"})[etat.variante]+(etat.arrondi?" · arrondi":""):"");
+  $("resJoueurs").textContent=nbJ()+(parEquipe()?" équipes":" joueurs");
+  $("resFin").textContent=/^D/.test(etat.objectif)?etat.objectif.slice(1)+" donnes":etat.objectif+" pts";
+  $("resumeConfig").textContent=j.nom+" · "+(/D/.test(etat.objectif)?etat.objectif.slice(1)+" donnes":etat.objectif+" pts");
+  $("configDetails").open=!etat.donnes.length;
+  $("cibleTxt").innerHTML=objectifTxt();
+
+  const zone=$("zoneJoueurs");
+  zone.className="joueurs c"+nbJ();
+  zone.innerHTML="";
+  const t=totaux();
+  const cibleNumerique=/^D/.test(etat.objectif)?1000:+etat.objectif;
+  for(let i=0;i<nbJ();i++){
+    const c=document.createElement("div");
+    let meneur;
+    if(j.sens==="min")meneur=t[i]===Math.min(...t)&&etat.donnes.length>0;
+    else meneur=t[i]===Math.max(...t)&&t[i]>0;
+    const effaces=j.lignes?Math.max(0,t[i]):0;
+    const affiche=j.lignes?Math.max(0,cibleNumerique-effaces):t[i];
+    c.className="carte-joueur"+(meneur?" meneur":"");
+    const etiquette=parEquipe()&&nbJ()===2?["Équipe 1","Équipe 2"][i]:"Joueur "+(i+1);
+    c.innerHTML=`<span class="num">${["🂡","🂱","🃁","🃑","🂵","🃓"][i]}</span>
+      <label>${etiquette}</label>
+      <input data-i="${i}" maxlength="16" value="${nom(i).replace(/"/g,"&quot;")}">
+      <div class="score">${affiche}<small style="font-size:13px;color:var(--muted)"> ${j.lignes?"restants":"pts"}</small></div>
+      ${j.lignes?`<div class="couillons">${Array.from({length:cibleNumerique},(_,k)=>
+        `<i class="${k<effaces?"efface":""}"></i>`).join("")}</div>`:""}
+      <div class="progress"><i style="width:${Math.min(100,(j.lignes?effaces:t[i])/cibleNumerique*100)}%"></i></div>`;
+    zone.appendChild(c);
+  }
+  zone.querySelectorAll("input").forEach(inp=>inp.addEventListener("input",()=>{
+    etat.noms[+inp.dataset.i]=inp.value;majMelangeur();sauver();
+  }));
+
+  const ent=$("entete");
+  ent.innerHTML="<th>N°</th>"+Array.from({length:nbJ()},(_,i)=>`<th>${nom(i)}</th>`).join("")+"<th>Info</th>";
+  const lt=$("ligneTotal");
+  lt.innerHTML="<td>Total</td>"+t.map(v=>`<td>${j.lignes?Math.max(0,v)+" effacés":v}</td>`).join("")+"<td></td>";
+
+  $("btnAnnuler").disabled=!etat.donnes.length;
+  $("vide").style.display=etat.donnes.length?"none":"block";
+  majMelangeur();
+  rendreTable();rendreHistorique();sauver();
+}
+function majMelangeur(){
+  const sm=$("segMelangeur");sm.innerHTML="";
+  for(let i=0;i<nbMel();i++){
+    const b=document.createElement("button");
+    b.textContent=nom(i);
+    b.classList.toggle("actif",i===etat.melangeur);
+    b.onclick=()=>{etat.melangeur=i;rendre()};
+    sm.appendChild(b);
+  }
+  const prochain=etat.donnes.length?(etat.melangeur+etat.donnes.length)%nbMel():etat.melangeur;
+  $("bandeauMelangeur").innerHTML="🃏 C'est <b>"+nom(prochain)+
+    "</b> qui mélange et distribue"+(etat.donnes.length?" (donne n°"+(etat.donnes.length+1)+")":"")+"."+
+    (etat.report?" &nbsp;⚖️ <b>"+etat.report+" pts en litige</b> pour le vainqueur de cette donne.":"")+
+    (etat.craie?" &nbsp;⭕ <b>Craie dans le trou</b> — le prochain vainqueur efface 2 couillons.":"");
+}
+function rendreTable(){
+  const corps=$("corps");corps.innerHTML="";
+  etat.donnes.forEach((d,i)=>{
+    const tr=document.createElement("tr");
+    tr.title="Toucher pour modifier cette donne";
+    tr.onclick=()=>ouvrirModale(i);
+    tr.innerHTML=`<td>${i+1}</td>`+d.p.slice(0,nbJ()).map(v=>`<td><b>${v}</b></td>`).join("")+
+      `<td>${(d.tags||[]).map(t=>`<span class="tag ${t.c||""}">${t.t}</span>`).join(" ")||"—"}</td>`;
+    corps.appendChild(tr);
+  });
+}
+function rendreHistorique(){
+  const ul=$("listeHist");ul.innerHTML="";
+  $("videHist").style.display=etat.historique.length?"none":"block";
+  etat.historique.slice().reverse().forEach(h=>{
+    const li=document.createElement("li");
+    li.innerHTML=`<span>${h.date} · <b>${h.jeu}</b> · ${h.noms.join(" / ")}</span>
+      <span><b>${h.totaux.join(" — ")}</b></span>`;
+    ul.appendChild(li);
+  });
+}
+
+let m={};
+let editIdx=-1;
+function ouvrirModale(idx){
+  editIdx=(typeof idx==="number")?idx:-1;
+  $("titreModale").textContent=editIdx>=0?"Modifier la donne n°"+(editIdx+1):"Nouvelle donne";
+  m={ann:Array.from({length:nbJ()},()=>[]),raw:editIdx>=0?Object.assign({},etat.donnes[editIdx].raw):{}};
+  const z=$("zoneChamps");z.innerHTML="";
+  jeu().construire(z);
+  majAide();
+  $("voile").classList.add("ouvert");
+  setTimeout(()=>{const p=z.querySelector("input[type=number]");if(p)p.focus()},80);
+}
+function fermerModale(){$("voile").classList.remove("ouvert")}
+
+function champAttaquant(z,cle,titre){
+  const d=document.createElement("div");d.className="champ";
+  d.innerHTML=`<span>${titre||"Qui a pris ? (attaque)"}</span>`;
+  const seg=document.createElement("div");
+  seg.className="seg plein"+(nbJ()===3?" c3":nbJ()===4?" c4":"");
+  m[cle]=(m.raw[cle]!==undefined)?m.raw[cle]:0;
+  for(let i=0;i<nbJ();i++){
+    const b=document.createElement("button");
+    b.textContent=["🂡 ","🂱 ","🃁 ","🃑 ","🂵 ","🃓 "][i]+nom(i);
+    if(m[cle]===i)b.classList.add("actif");
+    b.onclick=()=>{m[cle]=i;[...seg.children].forEach((x,j)=>x.classList.toggle("actif",j===i));majAide()};
+    seg.appendChild(b);
+  }
+  d.appendChild(seg);z.appendChild(d);
+}
+function champNombre(z,cle,titre,min,max,minis){
+  const d=document.createElement("div");d.className="champ";
+  d.innerHTML=`<span>${titre}</span>`;
+  const l=document.createElement("div");l.className="ligne";
+  const inp=document.createElement("input");
+  inp.type="number";inp.id="in_"+cle;inp.min=min;inp.max=max;
+  inp.placeholder=min+" à "+max;
+  if(m.raw[cle]!==undefined&&m.raw[cle]!==null)inp.value=m.raw[cle];
+  inp.addEventListener("input",majAide);
+  l.appendChild(inp);
+  (minis||[]).forEach(mn=>{
+    const b=document.createElement("button");b.className="mini";b.textContent=mn.l;
+    b.onclick=()=>{inp.value=mn.add?(+inp.value||0)+mn.add:mn.v;majAide()};
+    l.appendChild(b);
+  });
+  d.appendChild(l);z.appendChild(d);
+}
+function champInterrupteurs(z,cle,titre,opts){
+  const d=document.createElement("div");d.className="champ";
+  d.innerHTML=`<span>${titre}</span>`;
+  const w=document.createElement("div");w.className="interr";
+  m[cle]=m.raw[cle]?(Array.isArray(m.raw[cle])?m.raw[cle].slice():[m.raw[cle]]):[];
+  opts.forEach((o,i)=>{
+    const l=document.createElement("label");
+    const cb=document.createElement("input");cb.type="checkbox";
+    cb.checked=m[cle].includes(o.v);
+    cb.onchange=()=>{
+      if(cb.checked&&o.excl){
+        m[cle]=[o.v];w.querySelectorAll("input").forEach((x,k)=>{if(k!==i)x.checked=false});
+      }else if(cb.checked){m[cle].push(o.v)}
+      else{m[cle]=m[cle].filter(v=>v!==o.v)}
+      majAide();
+    };
+    l.appendChild(cb);l.appendChild(document.createTextNode(" "+o.l));
+    w.appendChild(l);
+  });
+  d.appendChild(w);z.appendChild(d);
+}
+function champAnnonces(z,liste){
+  const d=document.createElement("div");d.className="champ";
+  d.innerHTML=`<span>Annonces — un clic par annonce, « − » retire la dernière</span>`;
+  if(m.raw.annT)m.raw.annT.forEach((t,i)=>{if(t>0)m.ann[i]=[t]});
+  for(let i=0;i<nbJ();i++){
+    const bloc=document.createElement("div");bloc.className="annonce-bloc";
+    bloc.innerHTML=`<div class="titre"><b>${nom(i)}</b><span class="total-ann" id="tAnn${i}">0</span></div>`;
+    const chips=document.createElement("div");chips.className="chips";
+    liste.forEach(a=>{
+      const ch=document.createElement("button");ch.className="chip";ch.textContent=`${a.n} · ${a.v}`;
+      ch.onclick=()=>{m.ann[i].push(a.v);majAide()};
+      chips.appendChild(ch);
+    });
+    const moins=document.createElement("button");moins.className="chip";moins.textContent="−";
+    moins.onclick=()=>{m.ann[i].pop();majAide()};
+    chips.appendChild(moins);
+    bloc.appendChild(chips);d.appendChild(bloc);
+  }
+  z.appendChild(d);
+}
+function annTotal(i){return m.ann[i].reduce((a,b)=>a+b,0)}
+function val(cle){const e=$("in_"+cle);return e?e.value:""}
+function majAide(){
+  const j=jeu();
+  $("aide").innerHTML=j.aide?j.aide():"";
+  for(let i=0;i<nbJ();i++){const e=$("tAnn"+i);if(e)e.textContent=annTotal(i)}
+  const r=calculer(false);
+  $("apercu").innerHTML="Aperçu : "+Array.from({length:nbJ()},(_,i)=>`<b>${nom(i)}</b> ${r.p[i]>=0?"+":""}${r.p[i]}`).join(" · ");
+}
+function capture(){
+  const r={};
+  ["atk","pts","contrat","niveau","faites","levees","bouts","couleur","type","atout","contratT","mult"].forEach(k=>{
+    if(m[k]!==undefined)r[k]=m[k];
+    const e=$("in_"+k);if(e&&e.value!=="")r[k]=+e.value;
+  });
+  ["belote","coinche","primes"].forEach(k=>{if(m[k]&&m[k].length)r[k]=m[k].slice()});
+  if($("litige"))r.litige=$("litige").checked;
+  if($("doubler"))r.doubler=$("doubler").checked;
+  const annT=Array.from({length:nbJ()},(_,i)=>annTotal(i));
+  if(annT.some(v=>v>0))r.annT=annT;
+  return r;
+}
+
+/* ================= MOTEURS PAR JEU ================= */
+
+/* ---------- BELOTE ---------- */
+const VARIANTES_BELOTE={
+  classique:{annonces:false,contrat:false,taSa:false},
+  annonces:{annonces:true,contrat:false,taSa:false},
+  contree:{annonces:true,contrat:true,taSa:false},
+  coinche:{annonces:true,contrat:true,taSa:true}
+};
+JEUX.belote.construire=(z)=>{
+  const cfg=VARIANTES_BELOTE[etat.variante];
+  champAttaquant(z,"atk");
+  if(cfg.taSa){
+    const d=document.createElement("div");d.className="champ";
+    d.innerHTML=`<span>Type de contrat</span>`;
+    const seg=document.createElement("div");seg.className="seg";
+    m.type=m.raw.type||"couleur";
+    [["couleur","Couleur"],["sa","Sans atout"],["ta","Tout atout"]].forEach(([v,l])=>{
+      const b=document.createElement("button");b.textContent=l;b.dataset.t=v;
+      if(m.type===v)b.classList.add("actif");
+      b.onclick=()=>{m.type=v;[...seg.children].forEach(x=>x.classList.toggle("actif",x.dataset.t===v));majAide()};
+      seg.appendChild(b);
+    });
+    d.appendChild(seg);z.appendChild(d);
+  }
+  if(cfg.contrat)champNombre(z,"contrat","Contrat annoncé",80,160,
+    [{l:"80",v:80},{l:"90",v:90},{l:"100",v:100},{l:"110",v:110},{l:"160",v:160}]);
+  const dA=document.createElement("div");dA.className="champ";
+  dA.innerHTML=`<span>Atout</span>`;
+  const za=document.createElement("div");za.className="interr";
+  m.atout=m.raw.atout||"";
+  AOUTS.forEach(a=>{
+    const l=document.createElement("label");
+    const cb=document.createElement("input");cb.type="radio";cb.name="atout";cb.value=a.s;
+    if(m.atout===a.s)cb.checked=true;
+    cb.onchange=()=>{m.atout=a.s;majAide()};
+    l.appendChild(cb);l.appendChild(document.createTextNode(` ${a.s} ${a.n}`));
+    za.appendChild(l);
+  });
+  if(cfg.taSa)["SA","TA"].forEach(t=>{
+    const l=document.createElement("label");
+    const cb=document.createElement("input");cb.type="radio";cb.name="atout";
+    if(m.atout===t)cb.checked=true;
+    cb.onchange=()=>{m.atout=t;m.type=t.toLowerCase();majAide()};
+    l.appendChild(cb);l.appendChild(document.createTextNode(" "+t));
+    za.appendChild(l);
+  });
+  dA.appendChild(za);z.appendChild(dA);
+  champNombre(z,"pts","Points réalisés par l'attaque",0,162,
+    [{l:"+10",add:10},{l:"+1",add:1},{l:"81",v:81},{l:"162",v:162}]);
+  champInterrupteurs(z,"belote","Belote & rebelote (20 pts)",
+    Array.from({length:nbJ()},(_,i)=>({v:i,l:nom(i),excl:nbJ()===2})));
+  if(!cfg.contrat){
+    const d=document.createElement("div");d.className="champ";
+    d.innerHTML=`<span>Égalité 81 – 81 ?</span>`;
+    const w=document.createElement("div");w.className="interr";
+    const l=document.createElement("label");
+    const cb=document.createElement("input");cb.type="checkbox";cb.id="litige";
+    if(m.raw.litige)cb.checked=true;
+    cb.onchange=majAide;
+    l.appendChild(cb);l.appendChild(document.createTextNode(" ⚖️ Litige — la défense marque 81, le reste reporté à la prochaine donne"));
+    w.appendChild(l);d.appendChild(w);z.appendChild(d);
+  }
+  if(cfg.contrat)champInterrupteurs(z,"coinche","Coinche",
+    [{v:2,l:"Coinché (×2)",excl:true},{v:4,l:"Surcoinché (×4)",excl:true}]);
+  if(cfg.annonces)champAnnonces(z,ANNONCES_BELOTE);
+};
+JEUX.belote.aide=()=>{
+  const cfg=VARIANTES_BELOTE[etat.variante];
+  const pts=+val("pts")||0;
+  let t;
+  if(pts===162)t="<b>🃏 Capot !</b> L'attaque marque 162 + 90 de prime.";
+  else if(cfg.contrat&&pts<(+val("contrat")||80))t="<b>⚠️ Chute</b> : la défense marque 162 + contrat.";
+  else if(!cfg.contrat&&pts<81)t="<b>⚠️ Chute</b> (moins de 81) : la défense marque 162 + ses bonus.";
+  else if(!cfg.contrat&&pts===81)t="<b>⚖️ 81–81</b> : coche « Litige » si égalité parfaite.";
+  else t="<b>✔️ Contrat tenu</b> : la défense prend le complément (162 − points).";
+  if(cfg.taSa)t+=`<br><b>${{couleur:"Couleur",sa:"Sans atout",ta:"Tout atout"}[m.type||"couleur"]}</b> — grille adaptée (SA : as 19… / TA : valet 14, 9→9…).`;
+  if(etat.report)t+=`<br>⚖️ <b>${etat.report} pts en litige</b> ajoutés au vainqueur de cette donne.`;
+  return t;
+};
+JEUX.belote.calculer=(avecReport)=>{
+  const cfg=VARIANTES_BELOTE[etat.variante];
+  let pts=Math.max(0,+val("pts")||0);pts=Math.min(pts,162);
+  const contrat=cfg.contrat?Math.max(80,+val("contrat")||80):0;
+  const coinche=(m.coinche||[]).includes(4)?4:((m.coinche||[]).includes(2)?2:1);
+  const litige=!cfg.contrat&&pts===81&&($("litige")&&$("litige").checked);
+  const belote=Array.from({length:nbJ()},(_,i)=>(m.belote||[]).includes(i)?20:0);
+  const ann=Array.from({length:nbJ()},(_,i)=>cfg.annonces?annTotal(i):0);
+  const atk=m.atk,def=[...Array(nbJ()).keys()].filter(i=>i!==atk);
+  const capot=pts===162,chute=cfg.contrat?(pts<contrat):(pts<81);
+  const p=Array(nbJ()).fill(0);
+  const R=etat.arrondi?arr10:(x=>x);
+  if(litige){
+    def.forEach(d=>p[d]=Math.round(81/def.length)+ann[d]+belote[d]);
+    p[atk]=ann[atk]+belote[atk];
+  }else if(cfg.contrat){
+    if(chute){
+      const base=162+contrat;
+      def.forEach(d=>p[d]=R(Math.round(base/def.length))+ann[d]+belote[d]);
+      p[atk]=belote[atk];
+    }else{
+      p[atk]=R(pts)+(capot?90:0)+contrat+ann[atk]+belote[atk];
+      def.forEach(d=>p[d]=R(Math.round(Math.max(0,162-pts)/def.length))+ann[d]+belote[d]);
+    }
+    p[chute?def[0]:atk]*=coinche;
+  }else{
+    if(chute){
+      def.forEach(d=>p[d]=R(Math.round(162/def.length))+ann[d]+belote[d]);
+      p[atk]=R(pts)+ann[atk]+belote[atk];
+    }else{
+      p[atk]=R(pts)+(capot?90:0)+ann[atk]+belote[atk];
+      def.forEach(d=>p[d]=R(Math.round(Math.max(0,162-pts)/def.length))+ann[d]+belote[d]);
+    }
+  }
+  let report=0;
+  if(avecReport&&etat.report){p[chute?def[0]:atk]+=etat.report;report=etat.report}
+  const tags=[{t:nom(atk)+(m.atout?" "+m.atout:"")+(m.type&&m.type!=="couleur"?" "+({sa:"SA",ta:"TA"})[m.type]:"")+(contrat?" · "+contrat:"")}];
+  if(capot)tags.push({t:"Capot",c:"capot"});
+  if(chute)tags.push({t:"Chute",c:"chute"});
+  if(litige)tags.push({t:"Litige",c:"litige"});
+  if(coinche>1)tags.push({t:"×"+coinche,c:"coinche"});
+  if((m.belote||[]).length)tags.push({t:"B&R"});
+  if(report)tags.push({t:"+"+report+" reportés",c:"litige"});
+  return{p,tags,raw:capture(),litige,report};
+};
+
+/* ---------- COUILLON ---------- */
+JEUX.couillon.construire=(z)=>{
+  champAttaquant(z,"atk","Quelle équipe a pris ?");
+  champNombre(z,"pts","Points de figures de l'équipe qui a pris (As 4 · Roi 3 · Dame 2 · Valet 1 — total 40)",0,40,
+    [{l:"+1",add:1},{l:"+4",add:4},{l:"20",v:20},{l:"21",v:21}]);
+  if(etat.craie){
+    const d=document.createElement("div");d.className="champ";
+    d.innerHTML=`<span>⭕ Craie dans le trou en attente</span>`;
+    const w=document.createElement("div");w.className="interr";
+    const l=document.createElement("label");
+    const cb=document.createElement("input");cb.type="checkbox";cb.id="doubler";
+    if(m.raw.doubler)cb.checked=true;
+    l.appendChild(cb);l.appendChild(document.createTextNode(" Le vainqueur de cette donne efface 2 couillons"));
+    w.appendChild(l);d.appendChild(w);z.appendChild(d);
+  }
+};
+JEUX.couillon.aide=()=>{
+  const pts=+val("pts")||0;
+  const autre=40-pts;
+  if(pts>autre)return "<b>✔️ Pris et gagné</b> ("+pts+" contre "+autre+") : l'équipe qui a pris efface un couillon.";
+  if(pts<autre)return "<b>⚠️ Pris et perdu</b> ("+pts+" contre "+autre+") : les adversaires effacent un couillon ET l'équipe qui a pris en rajoute un.";
+  return "<b>⭕ Égalité 20–20</b> : « craie dans le trou » — le vainqueur de la prochaine donne effacera 2 couillons.";
+};
+JEUX.couillon.calculer=()=>{
+  let pts=Math.max(0,+val("pts")||0);pts=Math.min(pts,40);
+  const atk=m.atk,def=1-atk;
+  const autre=40-pts;
+  const p=[0,0];
+  const double=($("doubler")&&$("doubler").checked)||m.raw.doubler;
+  const tags=[{t:(pts>autre?"Pris gagné":pts<autre?"Pris perdu":"Égalité")+" · "+pts+"–"+autre}];
+  let craie=false;
+  if(pts>autre){
+    p[atk]+=(double?2:1);
+    if(double)tags.push({t:"2 effacés",c:"ok"});
+  }else if(pts<autre){
+    p[def]+=(double?2:1);
+    p[atk]-=1;
+    tags.push({t:"+1 couillon (prise perdue)",c:"chute"});
+    if(double)tags.push({t:"2 effacés",c:"ok"});
+  }else{
+    craie=true;
+    tags.push({t:"Craie dans le trou",c:"litige"});
+  }
+  return{p,tags,raw:capture(),craie};
+};
+
+/* ---------- WHIST ---------- */
+JEUX.whist.construire=(z)=>{
+  champNombre(z,"levees","Levées remportées par "+nom(0)+" (sur 13)",0,13,
+    [{l:"+1",add:1},{l:"6",v:6},{l:"7",v:7},{l:"13",v:13}]);
+};
+JEUX.whist.aide=()=>{
+  const l=+val("levees")||0;
+  const a=Math.max(0,l-6),b=Math.max(0,13-l-6);
+  if(l>6)return "<b>✔️</b> "+l+" levées : <b>"+a+" point"+(a>1?"s":"")+"</b> pour "+nom(0)+".";
+  if(l===6)return "<b>—</b> 6 levées de chaque côté : personne ne marque.";
+  return "<b>✔️</b> "+(13-l)+" levées pour "+nom(1)+" : <b>"+b+" point"+(b>1?"s":"")+"</b>.";
+};
+JEUX.whist.calculer=()=>{
+  let l=Math.max(0,+val("levees")||0);l=Math.min(l,13);
+  const a=Math.max(0,l-6),b=Math.max(0,13-l-6);
+  const tags=[{t:l+" levées"}];
+  if(a>0)tags.push({t:nom(0)+" +"+a,c:"ok"});
+  if(b>0)tags.push({t:nom(1)+" +"+b,c:"ok"});
+  return{p:[a,b],tags,raw:capture()};
+};
+
+/* ---------- BRIDGE ---------- */
+JEUX.bridge.construire=(z)=>{
+  champAttaquant(z,"atk","Équipe déclarante");
+  champNombre(z,"niveau","Niveau du contrat (1 à 7)",1,7,
+    [{l:"1",v:1},{l:"3",v:3},{l:"4",v:4},{l:"5",v:5},{l:"6",v:6},{l:"7",v:7}]);
+  const d=document.createElement("div");d.className="champ";
+  d.innerHTML=`<span>Couleur du contrat</span>`;
+  const seg=document.createElement("div");seg.className="seg";
+  m.couleur=m.raw.couleur||"♣";
+  [["♣","Trèfle (20/levée)"],["♦","Carreau (20)"],["♥","Cœur (30)"],["♠","Pique (30)"],["SA","Sans atout (40 puis 30)"]].forEach(([v,l])=>{
+    const b=document.createElement("button");b.textContent=v;b.dataset.c=v;
+    if(m.couleur===v)b.classList.add("actif");
+    b.onclick=()=>{m.couleur=v;[...seg.children].forEach(x=>x.classList.toggle("actif",x.dataset.c===v));majAide()};
+    seg.appendChild(b);
+  });
+  d.appendChild(seg);z.appendChild(d);
+  champInterrupteurs(z,"contre","Contre",[{v:2,l:"Contré (×2)",excl:true},{v:4,l:"Surcontré (×4)",excl:true}]);
+  champInterrupteurs(z,"vuln","Vulnérabilité du déclarant",[{v:1,l:"Vulnérable"}]);
+  champInterrupteurs(z,"vulnDef","Vulnérabilité de la défense",[{v:1,l:"Vulnérable"}]);
+  champNombre(z,"faites","Levées faites par le déclarant (sur 13)",0,13,
+    [{l:"+1",add:1},{l:"6",v:6},{l:"7",v:7},{l:"13",v:13}]);
+  champInterrupteurs(z,"honneurs","Honneurs (rubber)",
+    [{v:"h100_0",l:"Déclarant 100"},{v:"h150_0",l:"Déclarant 150"},
+     {v:"h100_1",l:"Défense 100"},{v:"h150_1",l:"Défense 150"}]);
+};
+JEUX.bridge.aide=()=>{
+  const niv=+val("niveau")||1,faites=+val("faites")||0;
+  const besoin=6+niv;
+  const vuln=(m.vuln||[]).includes(1);
+  if(faites>=besoin)return "<b>✔️ Contrat réussi</b> ("+faites+"/"+besoin+")"+(vuln?" · déclarant <b>vulnérable</b>":"")+
+    " : points de contrat + surlevées + bonus (manche si ≥100).";
+  return "<b>⚠️ Chute</b> ("+faites+"/"+besoin+") : pénalités "+(vuln?"<b>vulnérables</b> (100/levée)":"non vulnérables (50/levée)")+
+    " — doublées si contré.";
+};
+JEUX.bridge.calculer=()=>{
+  const niv=Math.max(1,+val("niveau")||1),faites=Math.max(0,+val("faites")||0);
+  const besoin=6+niv;
+  const mult=(m.contre||[]).includes(4)?4:((m.contre||[]).includes(2)?2:1);
+  const vuln=(m.vuln||[]).includes(1);
+  const atk=m.atk,def=1-atk;
+  const p=[0,0];
+  const tags=[{t:niv+m.couleur+(mult>1?" ×"+mult:"")+" · "+faites+"/"+besoin+(vuln?" · vul":"")}];
+  const hon=(m.honneurs||[]);
+  let hon0=0,hon1=0;
+  if(hon.includes("h100_0"))hon0+=100;
+  if(hon.includes("h150_0"))hon0+=150;
+  if(hon.includes("h100_1"))hon1+=100;
+  if(hon.includes("h150_1"))hon1+=150;
+  if(faites>=besoin){
+    let pts=(m.couleur==="♣"||m.couleur==="♦")?20*niv:(m.couleur==="SA"?30*niv+10:30*niv);
+    pts*=mult;
+    const over=faites-besoin;
+    let ptsOver;
+    if(mult===1)ptsOver=over*((m.couleur==="♣"||m.couleur==="♦")?20:30);
+    else if(mult===2)ptsOver=over*(vuln?200:100);
+    else ptsOver=over*(vuln?400:200);
+    let bonus=pts>=100?(vuln?500:300):50;
+    if(niv===6)bonus+=vuln?750:500;
+    if(niv===7)bonus+=vuln?1500:1000;
+    if(mult===2)bonus+=50;
+    if(mult===4)bonus+=100;
+    p[atk]=Math.round(pts+ptsOver+bonus+hon0);
+    p[def]=hon1;
+    tags.push({t:"+"+p[atk],c:"ok"});
+    if(pts>=100)tags.push({t:"Manche",c:"ok"});
+    if(niv===6)tags.push({t:"Petit chelem",c:"capot"});
+    if(niv===7)tags.push({t:"Grand chelem",c:"capot"});
+  }else{
+    const manque=besoin-faites;
+    let pen;
+    if(mult===1)pen=(vuln?100:50)*manque;
+    else if(mult===2){
+      pen=vuln?200:100;
+      for(let k=2;k<=manque;k++)pen+=vuln?300:200;
+    }else{
+      pen=vuln?400:200;
+      for(let k=2;k<=manque;k++)pen+=vuln?600:400;
+    }
+    p[def]=Math.round(pen+hon1);
+    p[atk]=hon0;
+    tags.push({t:"Chute −"+manque,c:"chute"});
+    tags.push({t:nom(def)+" +"+p[def],c:"ok"});
+  }
+  if(hon0||hon1)tags.push({t:"Honneurs",c:"litige"});
+  return{p,tags,raw:capture()};
+};
+
+/* ---------- TAROT ---------- */
+JEUX.tarot.construire=(z)=>{
+  champAttaquant(z,"atk","Qui a pris ?");
+  const d=document.createElement("div");d.className="champ";
+  d.innerHTML=`<span>Contrat</span>`;
+  const seg=document.createElement("div");seg.className="seg";
+  m.contratT=m.raw.contratT||"prise";m.mult=m.raw.mult||1;
+  [["prise","Prise (×1)",1],["garde","Garde (×2)",2],["gsans","Garde sans (×4)",4],["gcontre","Garde contre (×6)",6]].forEach(([v,l,mu])=>{
+    const b=document.createElement("button");b.textContent=l;b.dataset.m=mu;b.dataset.v=v;
+    if(m.contratT===v)b.classList.add("actif");
+    b.onclick=()=>{m.contratT=v;m.mult=mu;[...seg.children].forEach(x=>x.classList.toggle("actif",x===b));majAide()};
+    seg.appendChild(b);
+  });
+  d.appendChild(seg);z.appendChild(d);
+  champNombre(z,"pts","Points du preneur (sur 91)",0,91,
+    [{l:"+1",add:1},{l:"+10",add:10},{l:"56",v:56},{l:"91",v:91}]);
+  champNombre(z,"bouts","Bouts (petits) du preneur (0 à 3)",0,3,
+    [{l:"0",v:0},{l:"1",v:1},{l:"2",v:2},{l:"3",v:3}]);
+  champInterrupteurs(z,"primes","Primes",
+    [{v:"poignee20",l:"Poignée simple (+20)"},{v:"poignee30",l:"Poignée double (+30)"},
+     {v:"petitBout",l:"Petit au bout (+10 × mult.)"},{v:"chelem",l:"Chelem (+400)"}]);
+};
+JEUX.tarot.aide=()=>{
+  const pts=+val("pts")||0,bouts=Math.min(3,+val("bouts")||0);
+  const obligation=[56,51,41,36][bouts];
+  if(pts>=obligation)return "<b>✔️ Contrat réussi</b> : "+pts+" ≥ "+obligation+" requis ("+bouts+" bout"+(bouts>1?"s":"")+").";
+  return "<b>⚠️ Chute</b> : "+pts+" < "+obligation+" requis ("+bouts+" bout"+(bouts>1?"s":"")+").";
+};
+JEUX.tarot.calculer=()=>{
+  const pts=Math.max(0,+val("pts")||0);
+  const bouts=Math.min(3,Math.max(0,+val("bouts")||0));
+  const obligation=[56,51,41,36][bouts];
+  const mult=m.mult||1;
+  const atk=m.atk;
+  const def=[...Array(nbJ()).keys()].filter(i=>i!==atk);
+  let gain=(pts-obligation)*mult;
+  let primes=0;
+  if((m.primes||[]).includes("poignee20"))primes+=20;
+  if((m.primes||[]).includes("poignee30"))primes+=30;
+  if((m.primes||[]).includes("petitBout"))primes+=10*mult;
+  if((m.primes||[]).includes("chelem"))primes+=400;
+  gain+=primes;
+  const p=Array(nbJ()).fill(0);
+  const reussi=gain>=0;
+  const total=Math.abs(gain);
+  p[atk]=reussi?total:-total;
+  const part=Math.round(total/def.length);
+  def.forEach(d=>p[d]=reussi?-part:part);
+  const tags=[{t:nom(atk)+" · "+({prise:"Prise",garde:"Garde",gsans:"Garde sans",gcontre:"Garde contre"})[m.contratT]}];
+  tags.push({t:pts+"/"+obligation,c:reussi?"ok":"chute"});
+  if(primes)tags.push({t:"+"+primes+" de primes",c:"ok"});
+  return{p,tags,raw:capture()};
+};
+
+/* ---------- MANILLE ---------- */
+JEUX.manille.construire=(z)=>{
+  champAttaquant(z,"atk");
+  const dA=document.createElement("div");dA.className="champ";
+  dA.innerHTML=`<span>Atout</span>`;
+  const za=document.createElement("div");za.className="interr";
+  m.atout=m.raw.atout||"";
+  AOUTS.forEach(a=>{
+    const l=document.createElement("label");
+    const cb=document.createElement("input");cb.type="radio";cb.name="atout";cb.value=a.s;
+    if(m.atout===a.s)cb.checked=true;
+    cb.onchange=()=>{m.atout=a.s;majAide()};
+    l.appendChild(cb);l.appendChild(document.createTextNode(` ${a.s} ${a.n}`));
+    za.appendChild(l);
+  });
+  dA.appendChild(za);z.appendChild(dA);
+  champNombre(z,"pts","Points réalisés par l'attaque (total 120)",0,120,
+    [{l:"+10",add:10},{l:"+1",add:1},{l:"60",v:60},{l:"120",v:120}]);
+};
+JEUX.manille.aide=()=>{
+  const pts=+val("pts")||0;
+  if(pts===120)return "<b>🃏 Capot !</b> 120 points d'un coup.";
+  if(pts<60)return "<b>⚠️ Dedans</b> (moins de 60) : la défense marque 120 + ses points.";
+  return "<b>✔️</b> La défense marque le complément (120 − "+pts+").";
+};
+JEUX.manille.calculer=()=>{
+  let pts=Math.max(0,+val("pts")||0);pts=Math.min(pts,120);
+  const atk=m.atk,def=1-atk;
+  const p=[0,0];
+  const chute=pts<60,capot=pts===120;
+  if(chute){p[def]=120+Math.max(0,120-pts);p[atk]=pts}
+  else{p[atk]=pts+(capot?10:0);p[def]=Math.max(0,120-pts)}
+  const tags=[{t:nom(atk)+(m.atout?" "+m.atout:"")}];
+  if(capot)tags.push({t:"Capot",c:"capot"});
+  if(chute)tags.push({t:"Dedans",c:"chute"});
+  return{p,tags,raw:capture()};
+};
+
+/* ---------- RAMI ---------- */
+JEUX.rami.construire=(z)=>{
+  for(let i=0;i<nbJ();i++){
+    champNombre(z,"r"+i,"Points restants en main — "+nom(i),0,200,
+      [{l:"+1",add:1},{l:"+5",add:5},{l:"+10",add:10},{l:"0",v:0}]);
+  }
+};
+JEUX.rami.aide=()=>"Chaque joueur marque les points des cartes qui lui restent en main (figures 10, autres leur valeur, joker 25). Le premier à dépasser l'objectif perd — le plus bas gagne.";
+JEUX.rami.calculer=()=>{
+  const p=Array.from({length:nbJ()},(_,i)=>Math.max(0,+val("r"+i)||0));
+  const gagnant=p.indexOf(Math.min(...p));
+  const tags=p.map((v,i)=>({t:nom(i)+(i===gagnant?" 👑":"")}));
+  if(p[gagnant]===0)tags.push({t:"Sortie sans points",c:"ok"});
+  return{p,tags,raw:capture()};
+};
+
+/* ---------- LIBRE ---------- */
+JEUX.libre.construire=(z)=>{
+  for(let i=0;i<nbJ();i++){
+    champNombre(z,"r"+i,"Points — "+nom(i),-500,9999,
+      [{l:"+1",add:1},{l:"+5",add:5},{l:"+10",add:10},{l:"+100",add:100}]);
+  }
+};
+JEUX.libre.aide=()=>"Mode libre : encode les points de la donne pour chaque joueur/équipe. Valeurs négatives acceptées.";
+JEUX.libre.calculer=()=>{
+  const p=Array.from({length:nbJ()},(_,i)=>+val("r"+i)||0);
+  return{p,tags:[{t:"Donne"}],raw:capture()};
+};
+
+/* ================= VALIDATION / FIN ================= */
+function calculer(avecReport){return jeu().calculer(avecReport)}
+function valider(){
+  const r=calculer(true);
+  if(editIdx>=0){
+    const ancienne=etat.donnes[editIdx];
+    if(ancienne&&ancienne.litige)etat.report=0;
+    if(ancienne&&ancienne.report)etat.report=ancienne.report;
+    if(etat.jeu==="couillon"&&ancienne&&ancienne.craie)etat.craie=false;
+    etat.donnes[editIdx]=r;
+  }else{
+    etat.donnes.push(r);
+  }
+  if(etat.jeu==="belote"){if(r.litige)etat.report=81;else if(etat.report&&r.report)etat.report=0}
+  if(etat.jeu==="couillon")etat.craie=!!r.craie;
+  fermerModale();rendre();verifierFin();
+}
+function fausseDonne(){
+  etat.donnes.push({p:Array(nbJ()).fill(0),tags:[{t:"Fausse donne",c:"fausse"}],raw:{}});
+  rendre();
+}
+function verifierFin(){
+  const j=jeu();
+  const t=totaux();
+  let fini=false,g=0;
+  if(/^D/.test(etat.objectif)){
+    fini=etat.donnes.length>=+etat.objectif.slice(1);
+    if(fini)g=(j.sens==="min")?t.indexOf(Math.min(...t)):t.indexOf(Math.max(...t));
+  }else if(j.sens==="min"){
+    fini=t.some(v=>v>=+etat.objectif);
+    if(fini)g=t.indexOf(Math.min(...t));
+  }else{
+    fini=t.some(v=>v>=+etat.objectif);
+    if(fini)g=t.indexOf(Math.max(...t));
+  }
+  if(!fini)return;
+  $("vainqueur").textContent="🏆 "+nom(g)+" gagne la partie !";
+  $("scoreFinal").textContent=t.join(" — ");
+  $("trophee").classList.add("ouvert");feter();
+  setTimeout(()=>$("trophee").classList.remove("ouvert"),3200);
+  etat.historique.push({date:new Date().toLocaleDateString("fr-BE"),
+    jeu:j.nom,noms:etat.noms.slice(0,nbJ()),totaux:t});
+  if(etat.historique.length>30)etat.historique.shift();
+  sauver();rendreHistorique();
+}
+function feter(){
+  const couleurs=["#38bdf8","#7dd3fc","#0e7490","#ffffff"];
+  for(let i=0;i<90;i++){
+    const c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.background=couleurs[i%couleurs.length];
+    c.style.animationDuration=(2+Math.random()*2.5)+"s";
+    c.style.animationDelay=Math.random()*.8+"s";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),6000);
+  }
+}
+function partager(){
+  const t=totaux();
+  const lignes=["🂡 Cards Points — "+jeu().nom,
+    etat.noms.slice(0,nbJ()).map((n,i)=>n+": "+t[i]).join(" | "),
+    ...etat.donnes.map((d,i)=>(i+1)+". "+d.p.slice(0,nbJ()).join(" / ")+
+      " ("+(d.tags||[]).map(x=>x.t).join(", ")+")")];
+  const txt=lignes.join("\n");
+  if(navigator.share){navigator.share({text:txt}).catch(()=>{})}
+  else if(navigator.clipboard){navigator.clipboard.writeText(txt).then(()=>alert("Feuille de score copiée !"))}
+  else{prompt("Copie la feuille de score :",txt)}
+}
+
+/* ================= ÉVÉNEMENTS ================= */
+$("btnDonne").onclick=()=>{mode="jeu";appliquerMode();ouvrirModale()};
+$("btnCommencer").onclick=()=>{mode="jeu";appliquerMode();window.scrollTo({top:0})};
+$("btnRetourJeux").onclick=()=>{mode="choix";appliquerMode()};
+$("btnParametres").onclick=()=>{mode="config";appliquerMode()};
+$("btnAutreJeu").onclick=()=>{
+  if(etat.donnes.length&&!confirm("Changer de jeu ? La partie en cours sera perdue."))return;
+  etat.donnes=[];etat.report=0;etat.craie=false;mode="choix";rendre();
+};
+$("btnFausse").onclick=()=>{if(confirm("Fausse donne ? Aucun point, le mélangeur passe au suivant."))fausseDonne()};
+$("btnPartager").onclick=partager;
+$("fermer").onclick=fermerModale;
+$("voile").addEventListener("click",e=>{if(e.target===$("voile"))fermerModale()});
+$("valider").onclick=valider;
+$("btnAnnuler").onclick=()=>{
+  if(!etat.donnes.length)return;
+  const d=etat.donnes[etat.donnes.length-1];
+  if(d.litige)etat.report=0;
+  if(d.report)etat.report=d.report;
+  if(d.craie)etat.craie=false;
+  etat.donnes.pop();rendre();
+};
+$("btnReset").onclick=()=>{
+  if(confirm("Nouvelle partie ? Les scores seront remis à zéro.")){etat.donnes=[];etat.report=0;etat.craie=false;rendre()}
+};
+$("btnViderHist").onclick=()=>{
+  if(confirm("Vider l'historique des parties ?")){etat.historique=[];rendreHistorique();sauver()}
+};
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape")fermerModale();
+  if(e.key==="Enter"&&$("voile").classList.contains("ouvert"))valider();
+});
+charger();
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("sw.js").catch(()=>{});
+}
+let evInstaller=null;
+window.addEventListener("beforeinstallprompt",e=>{
+  e.preventDefault();evInstaller=e;
+  $("btnInstaller").style.display="inline-block";
+});
+$("btnInstaller").addEventListener("click",async()=>{
+  if(!evInstaller)return;
+  evInstaller.prompt();
+  await evInstaller.userChoice;
+  evInstaller=null;
+  $("btnInstaller").style.display="none";
+});
+window.addEventListener("appinstalled",()=>{$("btnInstaller").style.display="none"});
+</script>
+</body>
+</html>
