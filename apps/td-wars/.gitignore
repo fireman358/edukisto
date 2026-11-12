@@ -1,0 +1,8 @@
+node_modules/
+dist/
+dist-ssr/
+.tmp/
+.npm-cache/
+td-wars.html
+*.local
+.DS_Store

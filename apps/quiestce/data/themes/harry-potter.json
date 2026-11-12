@@ -1,0 +1,52 @@
+{
+  "id": "harry-potter",
+  "nom": "Harry Potter",
+  "sousTitre": "Magie à Poudlard",
+  "description": "Sorciers, créatures et professeurs : un plateau ensorcelé où chaque détail peut trahir un secret.",
+  "emoji": "⚡",
+  "palette": {
+    "accent": "#e7c46b",
+    "accent2": "#b98cff",
+    "fond": "#120a16",
+    "lueur": "#b98cff"
+  },
+  "attributs": [
+    { "id": "gryffondor", "nom": "Gryffondor", "type": "bool", "categorie": "Maison", "icone": "🦁", "question": "Ton personnage appartient-il à Gryffondor ?" },
+    { "id": "serpentard", "nom": "Serpentard", "type": "bool", "categorie": "Maison", "icone": "🐍", "question": "Ton personnage appartient-il à Serpentard ?" },
+    { "id": "professeur", "nom": "Professeur", "type": "bool", "categorie": "Rôle", "icone": "🎓", "question": "Ton personnage est-il professeur à Poudlard ?" },
+    { "id": "ordre_phoenix", "nom": "Ordre du Phénix", "type": "bool", "categorie": "Allégeance", "icone": "🔥", "question": "Ton personnage fait-il partie de l'Ordre du Phénix ?" },
+    { "id": "mangemort", "nom": "Mangemort", "type": "bool", "categorie": "Allégeance", "icone": "💀", "question": "Ton personnage a-t-il été un Mangemort ?" },
+    { "id": "non_humain", "nom": "Non humain", "type": "bool", "categorie": "Espèce", "icone": "🦉", "question": "Ton personnage n'est-il pas humain ?" },
+    { "id": "adulte", "nom": "Adulte", "type": "bool", "categorie": "Âge", "icone": "🧑", "question": "Ton personnage est-il adulte ?" },
+    { "id": "mort", "nom": "Mort dans la saga", "type": "bool", "categorie": "Histoire", "icone": "🕯️", "question": "Ton personnage meurt-il dans la saga ?" },
+    { "id": "animal", "nom": "Animal de compagnie", "type": "bool", "categorie": "Compagnons", "icone": "🐾", "question": "Ton personnage possède-t-il un animal de compagnie ?" },
+    { "id": "change_forme", "nom": "Change de forme", "type": "bool", "categorie": "Capacités", "icone": "🌙", "question": "Ton personnage peut-il changer de forme ?" },
+    { "id": "lunettes", "nom": "Lunettes", "type": "bool", "categorie": "Apparence", "icone": "👓", "question": "Ton personnage porte-t-il des lunettes ?" }
+  ],
+  "personnages": [
+    { "id": "harry", "nom": "Harry Potter", "emoji": "⚡", "attributs": { "gryffondor": true, "serpentard": false, "professeur": false, "ordre_phoenix": true, "mangemort": false, "non_humain": false, "adulte": false, "mort": false, "animal": true, "change_forme": false, "lunettes": true } },
+    { "id": "hermione", "nom": "Hermione Granger", "emoji": "📚", "attributs": { "gryffondor": true, "serpentard": false, "professeur": false, "ordre_phoenix": true, "mangemort": false, "non_humain": false, "adulte": false, "mort": false, "animal": true, "change_forme": false, "lunettes": false } },
+    { "id": "ron", "nom": "Ron Weasley", "emoji": "🧡", "attributs": { "gryffondor": true, "serpentard": false, "professeur": false, "ordre_phoenix": true, "mangemort": false, "non_humain": false, "adulte": false, "mort": false, "animal": true, "change_forme": false, "lunettes": false } },
+    { "id": "drago", "nom": "Drago Malefoy", "emoji": "🐍", "attributs": { "gryffondor": false, "serpentard": true, "professeur": false, "ordre_phoenix": false, "mangemort": true, "non_humain": false, "adulte": false, "mort": false, "animal": false, "change_forme": false, "lunettes": false } },
+    { "id": "dumbledore", "nom": "Albus Dumbledore", "emoji": "🧙‍♂️", "attributs": { "gryffondor": true, "serpentard": false, "professeur": true, "ordre_phoenix": true, "mangemort": false, "non_humain": false, "adulte": true, "mort": true, "animal": true, "change_forme": false, "lunettes": true } },
+    { "id": "voldemort", "nom": "Lord Voldemort", "emoji": "🐍", "attributs": { "gryffondor": false, "serpentard": true, "professeur": false, "ordre_phoenix": false, "mangemort": true, "non_humain": false, "adulte": true, "mort": true, "animal": true, "change_forme": false, "lunettes": false } },
+    { "id": "rogue", "nom": "Severus Rogue", "emoji": "🧪", "attributs": { "gryffondor": false, "serpentard": true, "professeur": true, "ordre_phoenix": false, "mangemort": true, "non_humain": false, "adulte": true, "mort": true, "animal": false, "change_forme": false, "lunettes": false } },
+    { "id": "hagrid", "nom": "Rubeus Hagrid", "emoji": "🧔", "attributs": { "gryffondor": true, "serpentard": false, "professeur": true, "ordre_phoenix": true, "mangemort": false, "non_humain": false, "adulte": true, "mort": false, "animal": true, "change_forme": false, "lunettes": false } },
+    { "id": "sirius", "nom": "Sirius Black", "emoji": "🐺", "attributs": { "gryffondor": true, "serpentard": false, "professeur": false, "ordre_phoenix": true, "mangemort": false, "non_humain": false, "adulte": true, "mort": true, "animal": true, "change_forme": true, "lunettes": false } },
+    { "id": "lupin", "nom": "Remus Lupin", "emoji": "🌕", "attributs": { "gryffondor": true, "serpentard": false, "professeur": true, "ordre_phoenix": true, "mangemort": false, "non_humain": false, "adulte": true, "mort": true, "animal": false, "change_forme": true, "lunettes": false } },
+    { "id": "bellatrix", "nom": "Bellatrix Lestrange", "emoji": "🔮", "attributs": { "gryffondor": false, "serpentard": true, "professeur": false, "ordre_phoenix": false, "mangemort": true, "non_humain": false, "adulte": true, "mort": true, "animal": false, "change_forme": false, "lunettes": false } },
+    { "id": "luna", "nom": "Luna Lovegood", "emoji": "🌙", "attributs": { "gryffondor": false, "serpentard": false, "professeur": false, "ordre_phoenix": true, "mangemort": false, "non_humain": false, "adulte": false, "mort": false, "animal": false, "change_forme": false, "lunettes": false } },
+    { "id": "neville", "nom": "Neville Londubat", "emoji": "🌿", "attributs": { "gryffondor": true, "serpentard": false, "professeur": false, "ordre_phoenix": true, "mangemort": false, "non_humain": false, "adulte": false, "mort": false, "animal": false, "change_forme": false, "lunettes": false } },
+    { "id": "ginny", "nom": "Ginny Weasley", "emoji": "🔥", "attributs": { "gryffondor": true, "serpentard": false, "professeur": false, "ordre_phoenix": true, "mangemort": false, "non_humain": false, "adulte": false, "mort": false, "animal": false, "change_forme": false, "lunettes": false } },
+    { "id": "mcgonagall", "nom": "Minerva McGonagall", "emoji": "🐈", "attributs": { "gryffondor": true, "serpentard": false, "professeur": true, "ordre_phoenix": true, "mangemort": false, "non_humain": false, "adulte": true, "mort": false, "animal": false, "change_forme": true, "lunettes": false } },
+    { "id": "dobby", "nom": "Dobby", "emoji": "🧦", "attributs": { "gryffondor": false, "serpentard": false, "professeur": false, "ordre_phoenix": false, "mangemort": false, "non_humain": true, "adulte": true, "mort": true, "animal": false, "change_forme": false, "lunettes": false } },
+    { "id": "cedric", "nom": "Cedric Diggory", "emoji": "🦡", "attributs": { "gryffondor": false, "serpentard": false, "professeur": false, "ordre_phoenix": false, "mangemort": false, "non_humain": false, "adulte": false, "mort": true, "animal": false, "change_forme": false, "lunettes": false } },
+    { "id": "fleur", "nom": "Fleur Delacour", "emoji": "🌸", "attributs": { "gryffondor": false, "serpentard": false, "professeur": false, "ordre_phoenix": false, "mangemort": false, "non_humain": false, "adulte": true, "mort": false, "animal": false, "change_forme": false, "lunettes": false } },
+    { "id": "krum", "nom": "Viktor Krum", "emoji": "🦅", "attributs": { "gryffondor": false, "serpentard": false, "professeur": false, "ordre_phoenix": false, "mangemort": false, "non_humain": false, "adulte": true, "mort": false, "animal": false, "change_forme": false, "lunettes": false } },
+    { "id": "tonks", "nom": "Nymphadora Tonks", "emoji": "🦋", "attributs": { "gryffondor": false, "serpentard": false, "professeur": false, "ordre_phoenix": true, "mangemort": false, "non_humain": false, "adulte": true, "mort": true, "animal": false, "change_forme": true, "lunettes": false } },
+    { "id": "moody", "nom": "Alastor Maugrey", "emoji": "👁️", "attributs": { "gryffondor": false, "serpentard": false, "professeur": true, "ordre_phoenix": true, "mangemort": false, "non_humain": false, "adulte": true, "mort": true, "animal": false, "change_forme": false, "lunettes": false } },
+    { "id": "ombrage", "nom": "Dolores Ombrage", "emoji": "🐸", "attributs": { "gryffondor": false, "serpentard": true, "professeur": true, "ordre_phoenix": false, "mangemort": false, "non_humain": false, "adulte": true, "mort": false, "animal": true, "change_forme": false, "lunettes": false } },
+    { "id": "lucius", "nom": "Lucius Malefoy", "emoji": "🐍", "attributs": { "gryffondor": false, "serpentard": true, "professeur": false, "ordre_phoenix": false, "mangemort": true, "non_humain": false, "adulte": true, "mort": false, "animal": false, "change_forme": false, "lunettes": false } },
+    { "id": "hedwig", "nom": "Hedwige", "emoji": "🦉", "attributs": { "gryffondor": false, "serpentard": false, "professeur": false, "ordre_phoenix": false, "mangemort": false, "non_humain": true, "adulte": true, "mort": true, "animal": false, "change_forme": false, "lunettes": false } }
+  ]
+}

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0d1526" />
+    <meta
+      name="description"
+      content="TD Wars — tower defense spatial : 4 secteurs, 60 vagues, 9 armes et 2 spécialisations par arme. Jouable à la souris, au doigt et en plein écran."
+    />
+    <title>TD Wars — Tower Defense</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="TD Wars — Tower Defense" />
+    <meta
+      property="og:description"
+      content="4 secteurs, 60 vagues, 9 armes : un tower defense spatial jouable au navigateur."
+    />
+    <meta property="og:image" content="https://fireman358.github.io/td-wars/og.png" />
+    <meta property="og:url" content="https://fireman358.github.io/td-wars/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://fireman358.github.io/td-wars/og.png" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230d1526'/%3E%3Cpath d='M32 8l6 18 18 6-18 6-6 18-6-18-18-6 18-6z' fill='%23ffd23f'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header id="hud">
+        <div class="hud-row">
+          <span class="brand">TD WARS</span>
+          <div class="hud-stats">
+            <span class="stat"
+              ><span class="hud-label">Crédits</span><span id="credits" class="stat-val credits">0</span></span
+            >
+            <span class="stat"
+              ><span class="hud-label">Vies</span
+              ><span id="lives" class="stat-val lives" aria-live="polite">20</span></span
+            >
+            <span class="stat" id="shield-stat"
+              ><span class="hud-label">Bouclier</span><span id="shield" class="stat-val shield">0</span></span
+            >
+            <span class="stat"
+              ><span class="hud-label">Vague</span
+              ><span id="wave" class="stat-val wave" aria-live="polite">0/60</span></span
+            >
+          </div>
+          <span id="sector" class="sector"></span>
+          <div class="hud-saber">
+            <span class="hud-label">Sabre</span>
+            <span id="saber-bar" role="progressbar" aria-label="Énergie du sabre" aria-valuemin="0" aria-valuemax="100">
+              <span id="saber-fill"></span>
+            </span>
+          </div>
+        </div>
+        <div class="hud-row hud-controls">
+          <button id="btn-start" class="btn primary" type="button">Lancer la vague</button>
+          <div class="hud-btn-group">
+            <button id="btn-speed" class="btn" type="button" aria-label="Vitesse du jeu">x1</button>
+            <button id="btn-sound" class="btn" type="button" title="Tout couper / rétablir" aria-label="Couper le son">
+              🔊
+            </button>
+            <button
+              id="btn-sector"
+              class="btn is-hidden"
+              type="button"
+              title="Mode test"
+              aria-label="Mode test : choisir un secteur"
+            >
+              🧪
+            </button>
+            <button id="btn-meta" class="btn" type="button" aria-label="Perks de commandement">⭐ Perks</button>
+            <button id="btn-fullscreen" class="btn" type="button" title="Plein écran" aria-label="Plein écran">
+              ⛶
+            </button>
+            <button id="btn-help" class="btn" type="button" aria-label="Comment jouer">❓</button>
+            <button id="btn-settings" class="btn" type="button" title="Paramètres" aria-label="Paramètres">⚙️</button>
+          </div>
+        </div>
+      </header>
+      <div id="game-wrap">
+        <div id="play-row">
+          <div id="canvas-holder">
+            <canvas
+              id="game"
+              width="960"
+              height="540"
+              tabindex="0"
+              aria-label="Terrain de jeu : cliquez pour placer une tour, maintenez pour allumer le sabre"
+              >Votre navigateur ne prend pas en charge le canvas HTML5, requis pour jouer.</canvas
+            >
+            <div id="studio-splash">
+              <div class="splash-inner">
+                <div class="splash-logo">
+                  <svg class="splash-star" viewBox="0 0 64 64" aria-hidden="true">
+                    <path
+                      d="M32 3l5.2 18.2 10.8-5.2-5.2 10.8L61 32l-18.2 5.2 5.2 10.8-10.8-5.2L32 61l-5.2-18.2-10.8 5.2 5.2-10.8L3 32l18.2-5.2-5.2-10.8 10.8 5.2z"
+                      fill="#38bdf8"
+                    />
+                    <path
+                      d="M32 32c-1.6-2-3-3.1-4.8-3.1a4.7 4.7 0 1 0 0 9.4c1.8 0 3.2-1.1 4.8-3.1 1.6 2 3 3.1 4.8 3.1a4.7 4.7 0 1 0 0-9.4c-1.8 0-3.2 1.1-4.8 3.1z"
+                      stroke="#0f1115"
+                      stroke-width="2.2"
+                      fill="none"
+                    />
+                  </svg>
+                  Edukisto
+                </div>
+                <div class="splash-sub">présente</div>
+              </div>
+            </div>
+          </div>
+          <aside id="side-panel" aria-label="Informations de vague et de tour"><div id="info-panel"></div></aside>
+        </div>
+        <div id="bottom-bar">
+          <div id="build-bar" role="toolbar" aria-label="Arsenal"></div>
+        </div>
+      </div>
+    </div>
+    <footer id="site-footer">
+      <a href="https://edukisto.win" target="_blank" rel="noopener" class="brand-link">
+        <svg class="brand-star" viewBox="0 0 64 64" aria-hidden="true">
+          <path
+            d="M32 3l5.2 18.2 10.8-5.2-5.2 10.8L61 32l-18.2 5.2 5.2 10.8-10.8-5.2L32 61l-5.2-18.2-10.8 5.2 5.2-10.8L3 32l18.2-5.2-5.2-10.8 10.8 5.2z"
+            fill="#38bdf8"
+          />
+          <path
+            d="M32 32c-1.6-2-3-3.1-4.8-3.1a4.7 4.7 0 1 0 0 9.4c1.8 0 3.2-1.1 4.8-3.1 1.6 2 3 3.1 4.8 3.1a4.7 4.7 0 1 0 0-9.4c-1.8 0-3.2 1.1-4.8 3.1z"
+            stroke="#0f1115"
+            stroke-width="2.2"
+            fill="none"
+          />
+        </svg>
+        <span>Edukisto</span>
+      </a>
+      <span class="sep">·</span>
+      <span id="credit-name" title="David Demoulin">TD Wars — un jeu original de David Demoulin</span>
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

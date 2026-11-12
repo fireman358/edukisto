@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trivial Quest par tranche d'âge — Edukisto</title>
+<meta name="description" content="Jeu de quiz dans le navigateur : chaque joueur reçoit des questions adaptées à son âge. Plateau de 73 cases, 6 diamants, 9 packs à thème.">
+<link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#333333">
+  <link rel="icon" type="image/png" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Trivial Quest">
+</head>
+<body>
+  <div id="studio-splash" aria-hidden="true">
+    <div class="splash-inner">
+      <div class="splash-logo"><svg class="splash-star" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 3l5.2 18.2 10.8-5.2-5.2 10.8L61 32l-18.2 5.2 5.2 10.8-10.8-5.2L32 61l-5.2-18.2-10.8 5.2 5.2-10.8L3 32l18.2-5.2-5.2-10.8 10.8 5.2z" fill="#38bdf8"/><path d="M32 32c-1.6-2-3-3.1-4.8-3.1a4.7 4.7 0 1 0 0 9.4c1.8 0 3.2-1.1 4.8-3.1 1.6 2 3 3.1 4.8 3.1a4.7 4.7 0 1 0 0-9.4c-1.8 0-3.2 1.1-4.8 3.1z" stroke="#0f1115" stroke-width="2.2" fill="none"/></svg>Edukisto</div>
+      <div class="splash-sub">présente</div>
+    </div>
+  </div>
+
+<header class="app-header">
+    <div class="brand">
+      <a href="https://edukisto.win/" target="_blank" rel="noopener" class="brand-logo" title="edukisto — relier & orienter"><svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M32 3l5.2 18.2 10.8-5.2-5.2 10.8L61 32l-18.2 5.2 5.2 10.8-10.8-5.2L32 61l-5.2-18.2-10.8 5.2 5.2-10.8L3 32l18.2-5.2-5.2-10.8 10.8 5.2z" fill="#38bdf8"/><path d="M32 32c-1.6-2-3-3.1-4.8-3.1a4.7 4.7 0 1 0 0 9.4c1.8 0 3.2-1.1 4.8-3.1 1.6 2 3 3.1 4.8 3.1a4.7 4.7 0 1 0 0-9.4c-1.8 0-3.2 1.1-4.8 3.1z" stroke="#0f1115" stroke-width="2.4"/></svg></a>
+      <span class="brand-name">◈ Trivial <span>Quest</span></span>
+    </div>
+    <button id="btn-newgame-header" class="header-newgame hidden" title="Effacer la partie en cours et revenir à la configuration">↺ Nouvelle partie</button>
+    <button id="btn-install" class="header-newgame" title="Installer Trivial Quest sur votre appareil (fonctionne hors-ligne)">⬇ Installer l'app</button>
+    <span id="app-version" class="app-version" title="Version de l'application"></span>
+  </header>
+
+<!-- Bannière de mise à jour disponible -->
+<div id="update-banner" class="update-banner hidden">
+  <span>🔄 Une mise à jour est disponible !</span>
+  <button id="btn-update" class="btn-update">Actualiser</button>
+</div>
+
+<div id="app">
+
+  <!-- ÉCRAN 1 : Configuration -->
+  <section id="setup-screen">
+    <div class="panel">
+      <h2>1. Ajoutez les joueurs</h2>
+      <div id="players-list"></div>
+      <p class="hint">Choisissez un pion ci-dessous, puis cliquez sur Ajouter. Chaque pion est unique : un par catégorie.</p>
+      <div id="pawn-picker"></div>
+      <div class="add-player">
+        <input type="text" id="new-player-name" placeholder="Nom du joueur" maxlength="20">
+        <input type="number" id="new-player-age" placeholder="Âge" min="4" max="120">
+        <button id="btn-add-player">Ajouter</button>
+      </div>
+      <p class="hint">Chaque joueur reçoit des questions correspondant à son âge — on peut aussi jouer seul ! L'âge peut rester secret : il n'est jamais affiché pendant la partie.</p>
+    </div>
+
+    <div class="panel">
+      <h2>2. Recharges</h2>
+      <p class="hint">La culture générale reste le cœur du jeu. Une recharge remplace les 6 catégories par celles du thème — pour une soirée sur mesure.</p>
+      <select id="theme-select"></select>
+    </div>
+
+    <div class="panel">
+      <h2>3. Rappel des règles</h2>
+      <ul class="rules">
+        <li>Le dé impose son nombre exact de cases : cliquez sur la case de destination (elles s'illuminent en blanc).</li>
+        <li>Répondez à une question de la catégorie de la case où vous arrivez — chaque question est adaptée à l'âge du joueur qui répond.</li>
+        <li>Les QG ◈ (losanges en bout de rayon, sur l'anneau extérieur) mettent un diamant en jeu : bonne réponse = diamant gagné qui rejoint votre réserve.</li>
+        <li>Chaque question a un temps limité (selon l'âge) : à expiration, la réponse est comptée mauvaise.</li>
+        <li>Avec les 6 diamants, revenez au centre et répondez à la question finale : victoire !</li>
+        <li>Bonne réponse = on rejoue ; mauvaise réponse (ou temps écoulé) = au joueur suivant.</li>
+        <li>Les cases blanches ↻ « Relancer le dé » permettent de relancer immédiatement le dé, sans répondre à une question.</li>
+        <li>On peut jouer seul ou jusqu'à 6 joueurs ; une partie en cours survit au rafraîchissement de la page.</li>
+        <li>Les recharges remplacent les 6 catégories par celles du thème choisi — elles se sélectionnent ci-dessus.</li>
+      </ul>
+      <button id="btn-start" class="primary" disabled>Commencer la partie</button>
+    </div>
+  </section>
+
+  <!-- ÉCRAN 2 : Jeu -->
+  <section id="game-screen" class="hidden">
+    <div id="sidebar">
+      <div class="panel">
+        <h2 id="turn-title">Au tour de…</h2>
+        <div id="wedges-display"></div>
+        <button id="btn-roll" class="primary">🎲 Lancer le dé</button>
+        <div id="dice-result"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Joueurs</h2>
+        <div id="players-summary"></div>
+      </div>
+    </div>
+
+    <div id="board-wrap">
+      <svg id="board" viewBox="0 0 700 700"></svg>
+    </div>
+
+    <div id="right-col">
+      <div class="panel" id="stats-panel">
+        <h2>Statistiques</h2>
+        <div id="stats-display"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÉCRAN 3 : Victoire -->
+  <section id="win-screen" class="hidden">
+    <div class="panel">
+      <h1 id="winner-name">🏆</h1>
+      <p id="winner-sub"></p>
+      <div id="win-stats" class="win-stats"></div>
+      <button id="btn-restart" class="primary">Rejouer</button>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>Trivial Quest adapté à l'âge — des questions pour chaque joueur, du tout-petit au grand.</p>
+  <p class="small credits"><span class="sig-line">──</span> <a href="https://edukisto.win/" target="_blank" rel="noopener" title="edukisto — relier & orienter" style="color:#38bdf8;text-decoration:none"><svg width="14" height="14" viewBox="0 0 64 64" style="vertical-align:-2px"><path d="M32 3l5.2 18.2 10.8-5.2-5.2 10.8L61 32l-18.2 5.2 5.2 10.8-10.8-5.2L32 61l-5.2-18.2-10.8 5.2 5.2-10.8L3 32l18.2-5.2-5.2-10.8 10.8 5.2z" fill="currentColor"/></svg> edukisto</a> <span class="sig-line">──</span></p>
+  <p class="small">Trivial Quest · © <span id="year"></span> David Demoulin</p>
+</footer>
+
+<!-- Splash de bonne réponse -->
+<div id="correct-splash" aria-hidden="true"><span>✅ Bravo !</span></div>
+
+<!-- Bandeau question : slide depuis le bas (question + réponses + timer) -->
+<div id="question-banner" aria-hidden="true" role="group" aria-label="Question en cours">
+  <div class="banner-head">
+    <span id="banner-cat"></span>
+    <div id="question-timerwrap" class="hidden">
+      <div id="question-timerbar"></div>
+      <span id="question-timertext"></span>
+    </div>
+  </div>
+  <p id="question-text" aria-live="polite"></p>
+  <div id="answers"></div>
+  <p id="answer-feedback" aria-live="polite"></p>
+</div>
+
+<script src="board.js"></script>
+<script src="config.js"></script>
+<script src="data/age-4-5.js"></script>
+<script src="data/age-6-8.js"></script>
+<script src="data/age-9-11.js"></script>
+<script src="data/age-12-15.js"></script>
+<script src="data/age-16-30.js"></script>
+<script src="data/age-31-plus.js"></script>
+<script src="data/theme-disney.js"></script>
+<script src="data/theme-musique.js"></script>
+<script src="data/theme-starwars.js"></script>
+<script src="data/theme-dragonball.js"></script>
+<script src="data/theme-series.js"></script>
+<script src="data/theme-musique70-90.js"></script>
+<script src="data/theme-musique2000.js"></script>
+<script src="data/theme-cinema.js"></script>
+<script src="data/theme-superheroes.js"></script>
+<script src="game.js"></script>
+<script>
+  (function () {
+    fetch("version.txt", { cache: "no-store" })
+      .then(r => { if (!r.ok) throw new Error("no version"); return r.text(); })
+      .then(v => { document.getElementById("app-version").textContent = v.trim(); })
+      .catch(() => { /* version.txt inaccessible */ });
+  })();
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+<script>
+  /* Installation PWA : bouton visible dès que le navigateur le permet (Chrome/Edge/Android).
+     iOS Safari : le bouton ouvre un guide (Partager → Sur l'écran d'accueil). */
+  (function () {
+    const btn = document.getElementById("btn-install");
+    if (!btn) return;
+    let deferredPrompt = null;
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const hide = () => { btn.style.display = "none"; };
+    if (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) return hide();
+    if (navigator.standalone) return hide();
+    if (isIOS) {
+      btn.title = "Sur iPhone/iPad : bouton Partager (carré avec flèche) puis « Sur l'écran d'accueil »";
+      btn.onclick = () => alert("Installation sur iPhone/iPad :\n\n1. Appuyez sur le bouton Partager (le carré avec la flèche vers le haut, en bas de l'écran)\n2. Faites défiler et choisissez « Sur l'écran d'accueil »\n3. Confirmez avec « Ajouter »\n\nTrivial Quest sera alors disponible comme une vraie app, même hors-ligne.");
+      return;
+    }
+    btn.disabled = true;
+    window.addEventListener("beforeinstallprompt", e => {
+      e.preventDefault();
+      deferredPrompt = e;
+      btn.disabled = false;
+    });
+    btn.onclick = async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const c = await deferredPrompt.userChoice;
+      if (c && c.outcome === "accepted") hide();
+      deferredPrompt = null;
+    };
+    window.addEventListener("appinstalled", hide);
+  })();
+</script>
+<script>
+  /* Service worker : installation PWA + mise à jour automatique */
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./sw.js").then(reg => {
+      // détection de mise à jour au démarrage
+      reg.addEventListener("updatefound", () => {
+        const nw = reg.installing;
+        if (nw) nw.addEventListener("statechange", () => {
+          if (nw.state === "installed" && navigator.serviceWorker.controller) {
+            const b = document.getElementById("update-banner");
+            b.classList.remove("hidden");
+            document.getElementById("btn-update").onclick = () => location.reload();
+          }
+        });
+      });
+    });
+    // vérification explicite au démarrage
+    navigator.serviceWorker.ready.then(reg => reg.update());
+  }
+</script>
+</body>
+</html>

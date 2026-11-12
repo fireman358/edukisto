@@ -1,0 +1,53 @@
+{
+  "id": "dc-comics",
+  "nom": "DC Comics",
+  "sousTitre": "Justice et ténèbres",
+  "description": "De Gotham à Metropolis, héros et vilains se confondent. À toi de faire la lumière sur le secret.",
+  "emoji": "🦇",
+  "palette": {
+    "accent": "#58a6ff",
+    "accent2": "#ffd166",
+    "fond": "#07101d",
+    "lueur": "#58a6ff"
+  },
+  "attributs": [
+    { "id": "humain", "nom": "Humain", "type": "bool", "categorie": "Espèce", "icone": "🧑", "question": "Ton personnage est-il humain ?" },
+    { "id": "surhumain", "nom": "Surhumain", "type": "bool", "categorie": "Capacités", "icone": "💥", "question": "Ton personnage possède-t-il des capacités surhumaines ?" },
+    { "id": "justice_league", "nom": "Justice League", "type": "bool", "categorie": "Équipe", "icone": "🛡️", "question": "Ton personnage fait-il partie de la Justice League ?" },
+    { "id": "gotham", "nom": "Gotham", "type": "bool", "categorie": "Origine", "icone": "🌃", "question": "Ton personnage est-il lié à Gotham City ?" },
+    { "id": "mechant", "nom": "Vilain", "type": "bool", "categorie": "Allégeance", "icone": "😈", "question": "Ton personnage est-il un vilain ?" },
+    { "id": "alien", "nom": "Extraterrestre", "type": "bool", "categorie": "Espèce", "icone": "👽", "question": "Ton personnage est-il extraterrestre ?" },
+    { "id": "magie", "nom": "Magie", "type": "bool", "categorie": "Capacités", "icone": "✨", "question": "Ton personnage utilise-t-il de la magie ?" },
+    { "id": "tech", "nom": "Technologie", "type": "bool", "categorie": "Équipement", "icone": "🛠️", "question": "Ton personnage utilise-t-il une technologie avancée ?" },
+    { "id": "vole", "nom": "Sait voler", "type": "bool", "categorie": "Capacités", "icone": "🪽", "question": "Ton personnage sait-il voler ?" },
+    { "id": "masque", "nom": "Masque ou casque", "type": "bool", "categorie": "Apparence", "icone": "🎭", "question": "Ton personnage porte-t-il un masque ou un casque ?" },
+    { "id": "equipe_batman", "nom": "Famille Batman", "type": "bool", "categorie": "Équipe", "icone": "🦇", "question": "Ton personnage fait-il partie de la Bat-Famille ?" },
+    { "id": "rapide", "nom": "Super vitesse", "type": "bool", "categorie": "Capacités", "icone": "💨", "question": "Ton personnage possède-t-il une super vitesse ?" }
+  ],
+  "personnages": [
+    { "id": "superman", "nom": "Superman", "emoji": "🦸", "attributs": { "humain": false, "surhumain": true, "justice_league": true, "gotham": false, "mechant": false, "alien": true, "magie": false, "tech": false, "vole": true, "masque": false, "equipe_batman": false, "rapide": true } },
+    { "id": "batman", "nom": "Batman", "emoji": "🦇", "attributs": { "humain": true, "surhumain": false, "justice_league": true, "gotham": true, "mechant": false, "alien": false, "magie": false, "tech": true, "vole": true, "masque": true, "equipe_batman": true, "rapide": false } },
+    { "id": "wonder-woman", "nom": "Wonder Woman", "emoji": "🪢", "attributs": { "humain": false, "surhumain": true, "justice_league": true, "gotham": false, "mechant": false, "alien": false, "magie": true, "tech": false, "vole": true, "masque": false, "equipe_batman": false, "rapide": true } },
+    { "id": "flash", "nom": "Flash", "emoji": "⚡", "attributs": { "humain": true, "surhumain": true, "justice_league": true, "gotham": false, "mechant": false, "alien": false, "magie": false, "tech": false, "vole": false, "masque": true, "equipe_batman": false, "rapide": true } },
+    { "id": "aquaman", "nom": "Aquaman", "emoji": "🔱", "attributs": { "humain": false, "surhumain": true, "justice_league": true, "gotham": false, "mechant": false, "alien": false, "magie": false, "tech": false, "vole": false, "masque": false, "equipe_batman": false, "rapide": false } },
+    { "id": "green-lantern", "nom": "Green Lantern", "emoji": "💚", "attributs": { "humain": true, "surhumain": true, "justice_league": true, "gotham": false, "mechant": false, "alien": false, "magie": false, "tech": true, "vole": true, "masque": true, "equipe_batman": false, "rapide": false } },
+    { "id": "cyborg", "nom": "Cyborg", "emoji": "🤖", "attributs": { "humain": true, "surhumain": true, "justice_league": true, "gotham": false, "mechant": false, "alien": false, "magie": false, "tech": true, "vole": false, "masque": false, "equipe_batman": false, "rapide": false } },
+    { "id": "martian-manhunter", "nom": "Martian Manhunter", "emoji": "👽", "attributs": { "humain": false, "surhumain": true, "justice_league": true, "gotham": false, "mechant": false, "alien": true, "magie": false, "tech": false, "vole": true, "masque": false, "equipe_batman": false, "rapide": false } },
+    { "id": "supergirl", "nom": "Supergirl", "emoji": "🦸‍♀️", "attributs": { "humain": false, "surhumain": true, "justice_league": true, "gotham": false, "mechant": false, "alien": true, "magie": false, "tech": false, "vole": true, "masque": false, "equipe_batman": false, "rapide": true } },
+    { "id": "nightwing", "nom": "Nightwing", "emoji": "🐦", "attributs": { "humain": true, "surhumain": false, "justice_league": false, "gotham": true, "mechant": false, "alien": false, "magie": false, "tech": true, "vole": true, "masque": true, "equipe_batman": true, "rapide": false } },
+    { "id": "batgirl", "nom": "Batgirl", "emoji": "🦇", "attributs": { "humain": true, "surhumain": false, "justice_league": false, "gotham": true, "mechant": false, "alien": false, "magie": false, "tech": true, "vole": true, "masque": true, "equipe_batman": true, "rapide": false } },
+    { "id": "robin", "nom": "Robin", "emoji": "🪶", "attributs": { "humain": true, "surhumain": false, "justice_league": false, "gotham": true, "mechant": false, "alien": false, "magie": false, "tech": true, "vole": true, "masque": true, "equipe_batman": true, "rapide": false } },
+    { "id": "harley-quinn", "nom": "Harley Quinn", "emoji": "🎪", "attributs": { "humain": true, "surhumain": false, "justice_league": false, "gotham": true, "mechant": false, "alien": false, "magie": false, "tech": false, "vole": false, "masque": false, "equipe_batman": false, "rapide": false } },
+    { "id": "joker", "nom": "Le Joker", "emoji": "🃏", "attributs": { "humain": true, "surhumain": false, "justice_league": false, "gotham": true, "mechant": true, "alien": false, "magie": false, "tech": true, "vole": false, "masque": true, "equipe_batman": false, "rapide": false } },
+    { "id": "catwoman", "nom": "Catwoman", "emoji": "🐈", "attributs": { "humain": true, "surhumain": false, "justice_league": false, "gotham": true, "mechant": false, "alien": false, "magie": false, "tech": true, "vole": true, "masque": true, "equipe_batman": false, "rapide": false } },
+    { "id": "poison-ivy", "nom": "Poison Ivy", "emoji": "🌿", "attributs": { "humain": true, "surhumain": true, "justice_league": false, "gotham": true, "mechant": false, "alien": false, "magie": true, "tech": false, "vole": false, "masque": false, "equipe_batman": false, "rapide": false } },
+    { "id": "lex-luthor", "nom": "Lex Luthor", "emoji": "🧠", "attributs": { "humain": true, "surhumain": false, "justice_league": false, "gotham": false, "mechant": true, "alien": false, "magie": false, "tech": true, "vole": false, "masque": false, "equipe_batman": false, "rapide": false } },
+    { "id": "darkseid", "nom": "Darkseid", "emoji": "🪨", "attributs": { "humain": false, "surhumain": true, "justice_league": false, "gotham": false, "mechant": true, "alien": true, "magie": false, "tech": true, "vole": false, "masque": false, "equipe_batman": false, "rapide": false } },
+    { "id": "brainiac", "nom": "Brainiac", "emoji": "🛸", "attributs": { "humain": false, "surhumain": true, "justice_league": false, "gotham": false, "mechant": true, "alien": true, "magie": false, "tech": true, "vole": true, "masque": false, "equipe_batman": false, "rapide": false } },
+    { "id": "deathstroke", "nom": "Deathstroke", "emoji": "🗡️", "attributs": { "humain": true, "surhumain": true, "justice_league": false, "gotham": false, "mechant": true, "alien": false, "magie": false, "tech": true, "vole": false, "masque": true, "equipe_batman": false, "rapide": false } },
+    { "id": "green-arrow", "nom": "Green Arrow", "emoji": "🏹", "attributs": { "humain": true, "surhumain": false, "justice_league": true, "gotham": false, "mechant": false, "alien": false, "magie": false, "tech": true, "vole": false, "masque": true, "equipe_batman": false, "rapide": false } },
+    { "id": "black-canary", "nom": "Black Canary", "emoji": "🎤", "attributs": { "humain": true, "surhumain": true, "justice_league": true, "gotham": false, "mechant": false, "alien": false, "magie": false, "tech": false, "vole": false, "masque": true, "equipe_batman": false, "rapide": false } },
+    { "id": "shazam", "nom": "Shazam", "emoji": "🦸‍♂️", "attributs": { "humain": true, "surhumain": true, "justice_league": true, "gotham": false, "mechant": false, "alien": false, "magie": true, "tech": false, "vole": true, "masque": false, "equipe_batman": false, "rapide": true } },
+    { "id": "raven", "nom": "Raven", "emoji": "🐦‍⬛", "attributs": { "humain": false, "surhumain": true, "justice_league": false, "gotham": false, "mechant": false, "alien": false, "magie": true, "tech": false, "vole": true, "masque": false, "equipe_batman": false, "rapide": false } }
+  ]
+}

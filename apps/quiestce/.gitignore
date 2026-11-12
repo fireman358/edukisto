@@ -1,0 +1,7 @@
+# Captures et profils de test locaux
+captures/
+.chrome-test/
+
+# Dépendances éventuelles pour les tests de développement
+node_modules/
+*.log

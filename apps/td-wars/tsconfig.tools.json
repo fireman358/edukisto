@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "allowImportingTsExtensions": false,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": ".tmp/build",
+    "rootDir": ".",
+    "sourceMap": false
+  },
+  "include": ["src/game", "tools"]
+}

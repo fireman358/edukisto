@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Qui suis-je ? — un jeu de déduction 2.5D à jouer seul ou à deux, sans serveur et installable comme application.">
+    <meta name="theme-color" content="#0b1118">
+    <meta name="color-scheme" content="dark">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Qui suis-je ?">
+    <title>Qui suis-je ? — Le duel des portraits</title>
+
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Le bundle est un secours pour l'ouverture directe en file://.
+         En mode servi, les fichiers JSON restent la source de vérité. -->
+    <script src="data/themes.bundle.js" defer></script>
+    <script src="js/utils.js" defer></script>
+    <script src="js/storage.js" defer></script>
+    <script src="js/themes.js" defer></script>
+    <script src="js/ai.js" defer></script>
+    <script src="js/engine.js" defer></script>
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <a class="lien-evitement" href="#contenu">Aller au contenu principal</a>
+
+    <div class="decor-fond" aria-hidden="true">
+      <div class="decor-fond__halo decor-fond__halo--un"></div>
+      <div class="decor-fond__halo decor-fond__halo--deux"></div>
+      <div class="decor-fond__grille"></div>
+      <div class="decor-fond__grain"></div>
+    </div>
+
+    <div id="app" class="app" aria-live="off">
+      <div class="chargement" id="ecran-chargement">
+        <div class="chargement__carte">
+          <span class="chargement__question">?</span>
+          <p class="surtitre">Préparation du plateau</p>
+          <h1>Qui suis-je&nbsp;?</h1>
+          <div class="chargement__barre"><span></span></div>
+          <p class="chargement__texte">Mélange des portraits…</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="calque-modale" class="calque-modale" hidden></div>
+    <div id="zone-toasts" class="zone-toasts" role="status" aria-live="polite" aria-atomic="false"></div>
+    <div id="zone-confettis" class="zone-confettis" aria-hidden="true"></div>
+
+    <noscript>
+      <div class="sans-javascript">
+        <h1>JavaScript est nécessaire</h1>
+        <p>Ce jeu fonctionne entièrement dans votre navigateur. Activez JavaScript pour afficher le plateau.</p>
+      </div>
+    </noscript>
+
+    <script src="js/pwa.js" defer></script>
+  </body>
+</html>

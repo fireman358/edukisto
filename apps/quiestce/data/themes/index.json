@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "themes": [
+    { "id": "classique", "fichier": "data/themes/classique.json", "emoji": "👥", "nom": "Tout le monde" },
+    { "id": "animaux", "fichier": "data/themes/animaux.json", "emoji": "🦁", "nom": "Animaux" },
+    { "id": "star-wars", "fichier": "data/themes/star-wars.json", "emoji": "⚔️", "nom": "Star Wars" },
+    { "id": "nourriture", "fichier": "data/themes/nourriture.json", "emoji": "🍟", "nom": "Nourriture" },
+    { "id": "harry-potter", "fichier": "data/themes/harry-potter.json", "emoji": "⚡", "nom": "Harry Potter" },
+    { "id": "marvel", "fichier": "data/themes/marvel.json", "emoji": "🕷️", "nom": "Marvel" },
+    { "id": "dc-comics", "fichier": "data/themes/dc-comics.json", "emoji": "🦇", "nom": "DC Comics" },
+    { "id": "seigneur-des-anneaux", "fichier": "data/themes/seigneur-des-anneaux.json", "emoji": "💍", "nom": "Le Seigneur des Anneaux" }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "td-wars",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "build:file": "node tools/build-file.mjs",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "balance": "tsc -p tsconfig.tools.json && node tools/run-balance.cjs",
+    "test": "tsc -p tsconfig.tools.json && node --test tools/tests"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "vite": "^5.4.0"
+  }
+}

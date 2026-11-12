@@ -1,0 +1,76 @@
+{
+  "id": "animaux",
+  "nom": "Animaux",
+  "sousTitre": "Le grand règne",
+  "description": "Plumes, écailles et fourrure : repère la bête cachée dans ce règne animal haut en couleurs.",
+  "emoji": "🦁",
+  "palette": {
+    "accent": "#f7b955",
+    "accent2": "#54d6a1",
+    "fond": "#0a1915",
+    "lueur": "#f7b955"
+  },
+  "attributs": [
+    {
+      "id": "classe",
+      "nom": "Classe",
+      "type": "enum",
+      "categorie": "Zoologie",
+      "icone": "🐾",
+      "options": [
+        { "id": "mammifere", "nom": "Mammifère", "question": "Ton personnage est-il un mammifère ?" },
+        { "id": "oiseau", "nom": "Oiseau", "question": "Ton personnage est-il un oiseau ?" },
+        { "id": "reptile", "nom": "Reptile", "question": "Ton personnage est-il un reptile ?" },
+        { "id": "poisson", "nom": "Poisson", "question": "Ton personnage est-il un poisson ?" },
+        { "id": "insecte", "nom": "Insecte", "question": "Ton personnage est-il un insecte ?" }
+      ]
+    },
+    {
+      "id": "habitat",
+      "nom": "Habitat",
+      "type": "enum",
+      "categorie": "Milieu de vie",
+      "icone": "🌍",
+      "options": [
+        { "id": "ferme", "nom": "Ferme", "question": "Ton personnage vit-il dans une ferme ?" },
+        { "id": "savane", "nom": "Savane", "question": "Ton personnage vit-il dans la savane ?" },
+        { "id": "foret", "nom": "Forêt", "question": "Ton personnage vit-il dans une forêt ?" },
+        { "id": "ocean", "nom": "Océan", "question": "Ton personnage vit-il dans l'océan ?" },
+        { "id": "jungle", "nom": "Jungle", "question": "Ton personnage vit-il dans la jungle ?" }
+      ]
+    },
+    { "id": "domestique", "nom": "Domestique", "type": "bool", "categorie": "Mode de vie", "icone": "🏠", "question": "Ton personnage est-il un animal domestique ?" },
+    { "id": "sauvage", "nom": "Sauvage", "type": "bool", "categorie": "Mode de vie", "icone": "🌲", "question": "Ton personnage est-il un animal sauvage ?" },
+    { "id": "rayures", "nom": "Rayures", "type": "bool", "categorie": "Apparence", "icone": "🦓", "question": "Ton personnage a-t-il des rayures ?" },
+    { "id": "taches", "nom": "Taches", "type": "bool", "categorie": "Apparence", "icone": "🐆", "question": "Ton personnage a-t-il des taches ?" },
+    { "id": "carnivore", "nom": "Carnivore", "type": "bool", "categorie": "Alimentation", "icone": "🍖", "question": "Ton personnage est-il carnivore ?" },
+    { "id": "sait_voler", "nom": "Sait voler", "type": "bool", "categorie": "Capacités", "icone": "🪽", "question": "Ton personnage sait-il voler ?" },
+    { "id": "sait_nager", "nom": "Sait nager", "type": "bool", "categorie": "Capacités", "icone": "🌊", "question": "Ton personnage sait-il nager ?" }
+  ],
+  "personnages": [
+    { "id": "lion", "nom": "Léon le lion", "emoji": "🦁", "attributs": { "classe": "mammifere", "habitat": "savane", "domestique": false, "sauvage": true, "rayures": false, "taches": false, "carnivore": true, "sait_voler": false, "sait_nager": false } },
+    { "id": "elephant", "nom": "Éléonore l'éléphant", "emoji": "🐘", "attributs": { "classe": "mammifere", "habitat": "savane", "domestique": false, "sauvage": true, "rayures": false, "taches": false, "carnivore": false, "sait_voler": false, "sait_nager": true } },
+    { "id": "girafe", "nom": "Gisèle la girafe", "emoji": "🦒", "attributs": { "classe": "mammifere", "habitat": "savane", "domestique": false, "sauvage": true, "rayures": false, "taches": true, "carnivore": false, "sait_voler": false, "sait_nager": false } },
+    { "id": "zebre", "nom": "Zia le zèbre", "emoji": "🦓", "attributs": { "classe": "mammifere", "habitat": "savane", "domestique": false, "sauvage": true, "rayures": true, "taches": false, "carnivore": false, "sait_voler": false, "sait_nager": false } },
+    { "id": "tigre", "nom": "Tao le tigre", "emoji": "🐯", "attributs": { "classe": "mammifere", "habitat": "jungle", "domestique": false, "sauvage": true, "rayures": true, "taches": false, "carnivore": true, "sait_voler": false, "sait_nager": true } },
+    { "id": "loup", "nom": "Lucien le loup", "emoji": "🐺", "attributs": { "classe": "mammifere", "habitat": "foret", "domestique": false, "sauvage": true, "rayures": false, "taches": false, "carnivore": true, "sait_voler": false, "sait_nager": true } },
+    { "id": "renard", "nom": "Rouky le renard", "emoji": "🦊", "attributs": { "classe": "mammifere", "habitat": "foret", "domestique": false, "sauvage": true, "rayures": false, "taches": false, "carnivore": true, "sait_voler": false, "sait_nager": false } },
+    { "id": "lapin", "nom": "Barnabé le lapin", "emoji": "🐰", "attributs": { "classe": "mammifere", "habitat": "ferme", "domestique": true, "sauvage": false, "rayures": false, "taches": false, "carnivore": false, "sait_voler": false, "sait_nager": false } },
+    { "id": "vache", "nom": "Marguerite la vache", "emoji": "🐮", "attributs": { "classe": "mammifere", "habitat": "ferme", "domestique": true, "sauvage": false, "rayures": false, "taches": true, "carnivore": false, "sait_voler": false, "sait_nager": false } },
+    { "id": "chien", "nom": "Filou le chien", "emoji": "🐶", "attributs": { "classe": "mammifere", "habitat": "ferme", "domestique": true, "sauvage": false, "rayures": false, "taches": true, "carnivore": true, "sait_voler": false, "sait_nager": true } },
+    { "id": "chauve-souris", "nom": "Nocturne la chauve-souris", "emoji": "🦇", "attributs": { "classe": "mammifere", "habitat": "foret", "domestique": false, "sauvage": true, "rayures": false, "taches": false, "carnivore": true, "sait_voler": true, "sait_nager": false } },
+    { "id": "poule", "nom": "Colette la poule", "emoji": "🐔", "attributs": { "classe": "oiseau", "habitat": "ferme", "domestique": true, "sauvage": false, "rayures": false, "taches": false, "carnivore": false, "sait_voler": false, "sait_nager": false } },
+    { "id": "aigle", "nom": "Astride l'aigle", "emoji": "🦅", "attributs": { "classe": "oiseau", "habitat": "foret", "domestique": false, "sauvage": true, "rayures": false, "taches": false, "carnivore": true, "sait_voler": true, "sait_nager": false } },
+    { "id": "hibou", "nom": "Hugo le hibou", "emoji": "🦉", "attributs": { "classe": "oiseau", "habitat": "foret", "domestique": false, "sauvage": true, "rayures": false, "taches": true, "carnivore": true, "sait_voler": true, "sait_nager": false } },
+    { "id": "perroquet", "nom": "Coco le perroquet", "emoji": "🦜", "attributs": { "classe": "oiseau", "habitat": "jungle", "domestique": false, "sauvage": true, "rayures": false, "taches": false, "carnivore": false, "sait_voler": true, "sait_nager": false } },
+    { "id": "manchot", "nom": "Pingo le manchot", "emoji": "🐧", "attributs": { "classe": "oiseau", "habitat": "ocean", "domestique": false, "sauvage": true, "rayures": false, "taches": false, "carnivore": true, "sait_voler": false, "sait_nager": true } },
+    { "id": "flamant", "nom": "Flammy le flamant", "emoji": "🦩", "attributs": { "classe": "oiseau", "habitat": "savane", "domestique": false, "sauvage": true, "rayures": false, "taches": false, "carnivore": false, "sait_voler": true, "sait_nager": true } },
+    { "id": "serpent", "nom": "Sissi le serpent", "emoji": "🐍", "attributs": { "classe": "reptile", "habitat": "foret", "domestique": false, "sauvage": true, "rayures": true, "taches": false, "carnivore": true, "sait_voler": false, "sait_nager": false } },
+    { "id": "crocodile", "nom": "Croco le crocodile", "emoji": "🐊", "attributs": { "classe": "reptile", "habitat": "jungle", "domestique": false, "sauvage": true, "rayures": false, "taches": false, "carnivore": true, "sait_voler": false, "sait_nager": true } },
+    { "id": "tortue", "nom": "Tully la tortue", "emoji": "🐢", "attributs": { "classe": "reptile", "habitat": "ocean", "domestique": true, "sauvage": false, "rayures": false, "taches": true, "carnivore": false, "sait_voler": false, "sait_nager": true } },
+    { "id": "requin", "nom": "Mako le requin", "emoji": "🦈", "attributs": { "classe": "poisson", "habitat": "ocean", "domestique": false, "sauvage": true, "rayures": false, "taches": false, "carnivore": true, "sait_voler": false, "sait_nager": true } },
+    { "id": "poisson-clown", "nom": "Clowny le poisson-clown", "emoji": "🐠", "attributs": { "classe": "poisson", "habitat": "ocean", "domestique": true, "sauvage": false, "rayures": true, "taches": false, "carnivore": false, "sait_voler": false, "sait_nager": true } },
+    { "id": "abeille", "nom": "Zaza l'abeille", "emoji": "🐝", "attributs": { "classe": "insecte", "habitat": "foret", "domestique": false, "sauvage": true, "rayures": true, "taches": false, "carnivore": false, "sait_voler": true, "sait_nager": false } },
+    { "id": "papillon", "nom": "Paulo le papillon", "emoji": "🦋", "attributs": { "classe": "insecte", "habitat": "foret", "domestique": false, "sauvage": true, "rayures": true, "taches": true, "carnivore": false, "sait_voler": true, "sait_nager": false } }
+  ]
+}

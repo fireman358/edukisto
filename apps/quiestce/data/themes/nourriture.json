@@ -1,0 +1,83 @@
+{
+  "id": "nourriture",
+  "nom": "Nourriture",
+  "sousTitre": "À table !",
+  "description": "Des frites aux fruits, en passant par la pizza : un plateau gourmand pour un duel qui met l'eau à la bouche.",
+  "emoji": "🍟",
+  "palette": {
+    "accent": "#ffcf6e",
+    "accent2": "#ff7a6b",
+    "fond": "#1d110b",
+    "lueur": "#ff9f5a"
+  },
+  "attributs": [
+    {
+      "id": "type",
+      "nom": "Famille",
+      "type": "enum",
+      "categorie": "Catégorie",
+      "icone": "🍽️",
+      "options": [
+        { "id": "fruit", "nom": "Fruit", "question": "Ton personnage est-il un fruit ?" },
+        { "id": "legume", "nom": "Légume", "question": "Ton personnage est-il un légume ?" },
+        { "id": "plat", "nom": "Plat", "question": "Ton personnage est-il un plat ou une douceur ?" }
+      ]
+    },
+    { "id": "sucre", "nom": "Sucré", "type": "bool", "categorie": "Saveurs", "icone": "🍯", "question": "Ton personnage est-il sucré ?" },
+    { "id": "sale", "nom": "Salé", "type": "bool", "categorie": "Saveurs", "icone": "🧂", "question": "Ton personnage est-il salé ?" },
+    { "id": "chaud", "nom": "Chaud", "type": "bool", "categorie": "Température", "icone": "🔥", "question": "Ton personnage se mange-t-il chaud ?" },
+    { "id": "froid", "nom": "Froid", "type": "bool", "categorie": "Température", "icone": "🧊", "question": "Ton personnage se mange-t-il froid ?" },
+    {
+      "id": "couleur",
+      "nom": "Couleur dominante",
+      "type": "enum",
+      "categorie": "Apparence",
+      "icone": "🎨",
+      "options": [
+        { "id": "rouge", "nom": "Rouge", "question": "Sa couleur dominante est-elle le rouge ?" },
+        { "id": "jaune", "nom": "Jaune", "question": "Sa couleur dominante est-elle le jaune ?" },
+        { "id": "brun", "nom": "Brun", "question": "Sa couleur dominante est-elle le brun ?" },
+        { "id": "vert", "nom": "Vert", "question": "Sa couleur dominante est-elle le vert ?" }
+      ]
+    },
+    {
+      "id": "origine",
+      "nom": "Origine",
+      "type": "enum",
+      "categorie": "Origine",
+      "icone": "🌍",
+      "options": [
+        { "id": "belgique", "nom": "Belgique", "question": "Ton personnage vient-il de Belgique ?" },
+        { "id": "france", "nom": "France", "question": "Ton personnage vient-il de France ?" },
+        { "id": "italie", "nom": "Italie", "question": "Ton personnage vient-il d'Italie ?" },
+        { "id": "monde", "nom": "Ailleurs dans le monde", "question": "Ton personnage vient-il d'ailleurs dans le monde ?" }
+      ]
+    }
+  ],
+  "personnages": [
+    { "id": "gaufre", "nom": "Gaufre de Liège", "emoji": "🧇", "attributs": { "type": "plat", "sucre": true, "sale": false, "chaud": true, "froid": false, "couleur": "jaune", "origine": "belgique" } },
+    { "id": "frites", "nom": "Frites dorées", "emoji": "🍟", "attributs": { "type": "plat", "sucre": false, "sale": true, "chaud": true, "froid": false, "couleur": "jaune", "origine": "belgique" } },
+    { "id": "moules", "nom": "Moules marinière", "emoji": "🦪", "attributs": { "type": "plat", "sucre": false, "sale": true, "chaud": true, "froid": false, "couleur": "brun", "origine": "france" } },
+    { "id": "carbonnade", "nom": "Carbonnade flamande", "emoji": "🍲", "attributs": { "type": "plat", "sucre": false, "sale": true, "chaud": true, "froid": false, "couleur": "brun", "origine": "belgique" } },
+    { "id": "cuberdon", "nom": "Cuberdon violet", "emoji": "🍬", "attributs": { "type": "plat", "sucre": true, "sale": false, "chaud": false, "froid": false, "couleur": "rouge", "origine": "belgique" } },
+    { "id": "speculoos", "nom": "Spéculoos croustillant", "emoji": "🍪", "attributs": { "type": "plat", "sucre": true, "sale": false, "chaud": false, "froid": false, "couleur": "brun", "origine": "belgique" } },
+    { "id": "pizza", "nom": "Pizza Margherita", "emoji": "🍕", "attributs": { "type": "plat", "sucre": false, "sale": true, "chaud": true, "froid": false, "couleur": "rouge", "origine": "italie" } },
+    { "id": "sushi", "nom": "Sushi au saumon", "emoji": "🍣", "attributs": { "type": "plat", "sucre": false, "sale": true, "chaud": false, "froid": true, "couleur": "brun", "origine": "monde" } },
+    { "id": "croissant", "nom": "Croissant au beurre", "emoji": "🥐", "attributs": { "type": "plat", "sucre": true, "sale": false, "chaud": true, "froid": false, "couleur": "jaune", "origine": "france" } },
+    { "id": "chocolat", "nom": "Tablette de chocolat", "emoji": "🍫", "attributs": { "type": "plat", "sucre": true, "sale": false, "chaud": false, "froid": false, "couleur": "brun", "origine": "belgique" } },
+    { "id": "pomme", "nom": "Pomme croquante", "emoji": "🍎", "attributs": { "type": "fruit", "sucre": true, "sale": false, "chaud": false, "froid": true, "couleur": "rouge", "origine": "france" } },
+    { "id": "fraise", "nom": "Fraise des bois", "emoji": "🍓", "attributs": { "type": "fruit", "sucre": true, "sale": false, "chaud": false, "froid": true, "couleur": "rouge", "origine": "monde" } },
+    { "id": "banane", "nom": "Banane voyageuse", "emoji": "🍌", "attributs": { "type": "fruit", "sucre": true, "sale": false, "chaud": false, "froid": true, "couleur": "jaune", "origine": "monde" } },
+    { "id": "citron", "nom": "Citron vif", "emoji": "🍋", "attributs": { "type": "fruit", "sucre": true, "sale": false, "chaud": false, "froid": true, "couleur": "jaune", "origine": "monde" } },
+    { "id": "orange", "nom": "Orange pressée", "emoji": "🍊", "attributs": { "type": "fruit", "sucre": true, "sale": false, "chaud": false, "froid": true, "couleur": "jaune", "origine": "monde" } },
+    { "id": "raisin", "nom": "Raisin doré", "emoji": "🍇", "attributs": { "type": "fruit", "sucre": true, "sale": false, "chaud": false, "froid": true, "couleur": "rouge", "origine": "italie" } },
+    { "id": "brocoli", "nom": "Brocoli vert", "emoji": "🥦", "attributs": { "type": "legume", "sucre": false, "sale": false, "chaud": false, "froid": true, "couleur": "vert", "origine": "italie" } },
+    { "id": "courgette", "nom": "Courgette du jardin", "emoji": "🥒", "attributs": { "type": "legume", "sucre": false, "sale": false, "chaud": false, "froid": true, "couleur": "vert", "origine": "italie" } },
+    { "id": "petits-pois", "nom": "Petits pois tendres", "emoji": "🫛", "attributs": { "type": "legume", "sucre": false, "sale": false, "chaud": false, "froid": true, "couleur": "vert", "origine": "monde" } },
+    { "id": "salade", "nom": "Salade croquante", "emoji": "🥗", "attributs": { "type": "legume", "sucre": false, "sale": true, "chaud": false, "froid": true, "couleur": "vert", "origine": "france" } },
+    { "id": "epinards", "nom": "Épinards frais", "emoji": "🥬", "attributs": { "type": "legume", "sucre": false, "sale": false, "chaud": false, "froid": true, "couleur": "vert", "origine": "france" } },
+    { "id": "haricots-verts", "nom": "Haricots verts", "emoji": "🌱", "attributs": { "type": "legume", "sucre": false, "sale": false, "chaud": false, "froid": true, "couleur": "vert", "origine": "france" } },
+    { "id": "tomate", "nom": "Tomate mûre", "emoji": "🍅", "attributs": { "type": "legume", "sucre": false, "sale": false, "chaud": false, "froid": true, "couleur": "rouge", "origine": "italie" } },
+    { "id": "champignon", "nom": "Champignon de Paris", "emoji": "🍄", "attributs": { "type": "legume", "sucre": false, "sale": false, "chaud": false, "froid": true, "couleur": "brun", "origine": "italie" } }
+  ]
+}

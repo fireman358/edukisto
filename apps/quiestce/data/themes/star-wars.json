@@ -1,0 +1,50 @@
+{
+  "id": "star-wars",
+  "nom": "Star Wars",
+  "sousTitre": "Une galaxie lointaine",
+  "description": "Jedi, Sith, droïdes et contrebandiers : la Force est avec celui qui saura démasquer l'autre.",
+  "emoji": "⚔️",
+  "palette": {
+    "accent": "#ffd166",
+    "accent2": "#67e8f9",
+    "fond": "#071120",
+    "lueur": "#67e8f9"
+  },
+  "attributs": [
+    { "id": "humain", "nom": "Humain", "type": "bool", "categorie": "Espèce", "icone": "🧑", "question": "Ton personnage est-il humain ?" },
+    { "id": "espece_non_humaine", "nom": "Espèce non humaine", "type": "bool", "categorie": "Espèce", "icone": "👽", "question": "Ton personnage appartient-il à une espèce non humaine ?" },
+    { "id": "casque", "nom": "Casque", "type": "bool", "categorie": "Équipement", "icone": "🪖", "question": "Ton personnage porte-t-il un casque ?" },
+    { "id": "droide", "nom": "Droïde", "type": "bool", "categorie": "Espèce", "icone": "🤖", "question": "Ton personnage est-il un droïde ?" },
+    { "id": "sabre_laser", "nom": "Sabre laser", "type": "bool", "categorie": "Équipement", "icone": "⚔️", "question": "Ton personnage manie-t-il un sabre laser ?" },
+    { "id": "cote_obscur", "nom": "Côté obscur", "type": "bool", "categorie": "Allégeance", "icone": "🌑", "question": "Ton personnage appartient-il au côté obscur ?" },
+    { "id": "robe", "nom": "Robe", "type": "bool", "categorie": "Apparence", "icone": "🥋", "question": "Ton personnage porte-t-il une robe ?" },
+    { "id": "pilote", "nom": "Pilote", "type": "bool", "categorie": "Capacités", "icone": "🚀", "question": "Ton personnage est-il pilote ?" },
+    { "id": "force", "nom": "Sensible à la Force", "type": "bool", "categorie": "Capacités", "icone": "✨", "question": "Ton personnage est-il sensible à la Force ?" }
+  ],
+  "personnages": [
+    { "id": "luke", "nom": "Luke Skywalker", "emoji": "🧑‍🌾", "attributs": { "humain": true, "espece_non_humaine": false, "casque": true, "droide": false, "sabre_laser": true, "cote_obscur": false, "robe": true, "pilote": true, "force": true } },
+    { "id": "leia", "nom": "Leia Organa", "emoji": "👸", "attributs": { "humain": true, "espece_non_humaine": false, "casque": false, "droide": false, "sabre_laser": false, "cote_obscur": false, "robe": true, "pilote": false, "force": true } },
+    { "id": "han", "nom": "Han Solo", "emoji": "🧑‍✈️", "attributs": { "humain": true, "espece_non_humaine": false, "casque": false, "droide": false, "sabre_laser": false, "cote_obscur": false, "robe": false, "pilote": true, "force": false } },
+    { "id": "chewbacca", "nom": "Chewbacca", "emoji": "🐻", "attributs": { "humain": false, "espece_non_humaine": true, "casque": false, "droide": false, "sabre_laser": false, "cote_obscur": false, "robe": false, "pilote": true, "force": false } },
+    { "id": "vador", "nom": "Dark Vador", "emoji": "🌑", "attributs": { "humain": true, "espece_non_humaine": false, "casque": true, "droide": false, "sabre_laser": true, "cote_obscur": true, "robe": true, "pilote": true, "force": true } },
+    { "id": "yoda", "nom": "Yoda", "emoji": "🧙", "attributs": { "humain": false, "espece_non_humaine": true, "casque": false, "droide": false, "sabre_laser": true, "cote_obscur": false, "robe": true, "pilote": false, "force": true } },
+    { "id": "r2d2", "nom": "R2-D2", "emoji": "🤖", "attributs": { "humain": false, "espece_non_humaine": true, "casque": false, "droide": true, "sabre_laser": false, "cote_obscur": false, "robe": false, "pilote": true, "force": false } },
+    { "id": "c3po", "nom": "C-3PO", "emoji": "🟡", "attributs": { "humain": false, "espece_non_humaine": true, "casque": false, "droide": true, "sabre_laser": false, "cote_obscur": false, "robe": false, "pilote": false, "force": false } },
+    { "id": "boba-fett", "nom": "Boba Fett", "emoji": "🪖", "attributs": { "humain": true, "espece_non_humaine": false, "casque": true, "droide": false, "sabre_laser": false, "cote_obscur": false, "robe": false, "pilote": true, "force": false } },
+    { "id": "palpatine", "nom": "Palpatine", "emoji": "⚡", "attributs": { "humain": true, "espece_non_humaine": false, "casque": false, "droide": false, "sabre_laser": true, "cote_obscur": true, "robe": true, "pilote": false, "force": true } },
+    { "id": "obi-wan", "nom": "Obi-Wan Kenobi", "emoji": "🧙‍♂️", "attributs": { "humain": true, "espece_non_humaine": false, "casque": false, "droide": false, "sabre_laser": true, "cote_obscur": false, "robe": true, "pilote": true, "force": true } },
+    { "id": "rey", "nom": "Rey", "emoji": "🧝‍♀️", "attributs": { "humain": true, "espece_non_humaine": false, "casque": false, "droide": false, "sabre_laser": true, "cote_obscur": false, "robe": true, "pilote": true, "force": true } },
+    { "id": "kylo-ren", "nom": "Kylo Ren", "emoji": "🖤", "attributs": { "humain": true, "espece_non_humaine": false, "casque": true, "droide": false, "sabre_laser": true, "cote_obscur": true, "robe": true, "pilote": true, "force": true } },
+    { "id": "padme", "nom": "Padmé Amidala", "emoji": "👑", "attributs": { "humain": true, "espece_non_humaine": false, "casque": false, "droide": false, "sabre_laser": false, "cote_obscur": false, "robe": true, "pilote": true, "force": false } },
+    { "id": "jabba", "nom": "Jabba le Hutt", "emoji": "🐌", "attributs": { "humain": false, "espece_non_humaine": true, "casque": false, "droide": false, "sabre_laser": false, "cote_obscur": false, "robe": false, "pilote": false, "force": false } },
+    { "id": "stormtrooper", "nom": "Stormtrooper", "emoji": "🛡️", "attributs": { "humain": true, "espece_non_humaine": false, "casque": true, "droide": false, "sabre_laser": false, "cote_obscur": false, "robe": false, "pilote": false, "force": false } },
+    { "id": "lando", "nom": "Lando Calrissian", "emoji": "🎲", "attributs": { "humain": true, "espece_non_humaine": false, "casque": false, "droide": false, "sabre_laser": false, "cote_obscur": false, "robe": false, "pilote": true, "force": false } },
+    { "id": "anakin", "nom": "Anakin Skywalker", "emoji": "🏎️", "attributs": { "humain": true, "espece_non_humaine": false, "casque": true, "droide": false, "sabre_laser": true, "cote_obscur": false, "robe": true, "pilote": true, "force": true } },
+    { "id": "mace-windu", "nom": "Mace Windu", "emoji": "🟣", "attributs": { "humain": true, "espece_non_humaine": false, "casque": false, "droide": false, "sabre_laser": true, "cote_obscur": false, "robe": true, "pilote": false, "force": true } },
+    { "id": "ahsoka", "nom": "Ahsoka Tano", "emoji": "🧡", "attributs": { "humain": false, "espece_non_humaine": true, "casque": false, "droide": false, "sabre_laser": true, "cote_obscur": false, "robe": true, "pilote": true, "force": true } },
+    { "id": "din-djarin", "nom": "Din Djarin", "emoji": "🪖", "attributs": { "humain": true, "espece_non_humaine": false, "casque": true, "droide": false, "sabre_laser": true, "cote_obscur": false, "robe": false, "pilote": true, "force": false } },
+    { "id": "grogu", "nom": "Grogu", "emoji": "👽", "attributs": { "humain": false, "espece_non_humaine": true, "casque": false, "droide": false, "sabre_laser": false, "cote_obscur": false, "robe": true, "pilote": false, "force": true } },
+    { "id": "poe", "nom": "Poe Dameron", "emoji": "🧑‍✈️", "attributs": { "humain": true, "espece_non_humaine": false, "casque": true, "droide": false, "sabre_laser": false, "cote_obscur": false, "robe": false, "pilote": true, "force": false } },
+    { "id": "finn", "nom": "Finn", "emoji": "🧑‍🦱", "attributs": { "humain": true, "espece_non_humaine": false, "casque": true, "droide": false, "sabre_laser": false, "cote_obscur": false, "robe": false, "pilote": false, "force": false } }
+  ]
+}

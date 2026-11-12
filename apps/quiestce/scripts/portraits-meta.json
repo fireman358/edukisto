@@ -1,0 +1,1738 @@
+{
+  "generateur": "AI Horde",
+  "modele": "Deliberate",
+  "client": "qui-suis-je-portraits:1.0:local-build",
+  "largeur": 512,
+  "hauteur": 640,
+  "steps": 24,
+  "portraits": [
+    {
+      "theme": "classique",
+      "id": "alice",
+      "nom": "Alice",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Alice, a 30-year-old woman with long curly red hair, pale skin, green eyes, round glasses, small pearl earrings, light freckles, warm smile, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 2144953493,
+      "fichier": "assets\\portraits\\classique\\alice.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "bastien",
+      "nom": "Bastien",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Bastien, a 35-year-old man with short blond hair, pale skin, blue eyes, full beard, serious expression, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 660587851,
+      "fichier": "assets\\portraits\\classique\\bastien.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "camille",
+      "nom": "Camille",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Camille, a 28-year-old woman with shoulder-length brown hair, olive skin, brown eyes, glasses, wide-brim hat, warm smile, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 140217828,
+      "fichier": "assets\\portraits\\classique\\camille.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "david",
+      "nom": "David",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. David, a 40-year-old Black man with short black hair, dark skin, brown eyes, full beard and moustache, serious expression, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 2089106321,
+      "fichier": "assets\\portraits\\classique\\david.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "elodie",
+      "nom": "Élodie",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Élodie, a 26-year-old woman with long wavy blonde hair, olive skin, blue eyes, light freckles, warm smile, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 850730337,
+      "fichier": "assets\\portraits\\classique\\elodie.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "farid",
+      "nom": "Farid",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Farid, a 32-year-old man with short black hair, brown skin, hazel eyes, beard and moustache, small gold earring, warm smile, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 1375824407,
+      "fichier": "assets\\portraits\\classique\\farid.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "gabriel",
+      "nom": "Gabriel",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Gabriel, a 38-year-old man with short red hair, pale skin, green eyes, glasses, flat cap, light freckles, serious expression, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 789822048,
+      "fichier": "assets\\portraits\\classique\\gabriel.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "helene",
+      "nom": "Hélène",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Hélène, a 45-year-old woman with long brown hair, pale skin, brown eyes, glasses, pearl earrings, neutral expression, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 614702341,
+      "fichier": "assets\\portraits\\classique\\helene.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "ines",
+      "nom": "Inès",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Inès, a 24-year-old woman with long black hair, brown skin, brown eyes, hoop earrings, warm smile, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 102968295,
+      "fichier": "assets\\portraits\\classique\\ines.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "julien",
+      "nom": "Julien",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Julien, a 33-year-old man with short brown hair, olive skin, green eyes, beard, straw hat, serious expression, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 156902375,
+      "fichier": "assets\\portraits\\classique\\julien.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "karim",
+      "nom": "Karim",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Karim, a 42-year-old Black man with short black hair, dark skin, brown eyes, glasses, full beard and moustache, warm smile, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 1451995898,
+      "fichier": "assets\\portraits\\classique\\karim.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "laura",
+      "nom": "Laura",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Laura, a 29-year-old woman with long red hair, olive skin, hazel eyes, hoop earrings, freckles, warm smile, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 917681515,
+      "fichier": "assets\\portraits\\classique\\laura.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "mathieu",
+      "nom": "Mathieu",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Mathieu, a 27-year-old man with long blond hair, pale skin, blue eyes, clean-shaven, warm smile, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 55203279,
+      "fichier": "assets\\portraits\\classique\\mathieu.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "nadia",
+      "nom": "Nadia",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Nadia, a 36-year-old woman with long brown hair, brown skin, hazel eyes, glasses, wide-brim hat, neutral expression, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 594949010,
+      "fichier": "assets\\portraits\\classique\\nadia.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "olivier",
+      "nom": "Olivier",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Olivier, a 50-year-old man with short black hair, brown skin, green eyes, glasses, beard, serious expression, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 1785232659,
+      "fichier": "assets\\portraits\\classique\\olivier.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "pauline",
+      "nom": "Pauline",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Pauline, a 31-year-old woman with long blonde hair, olive skin, blue eyes, hoop earrings, freckles, warm smile, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 1648657726,
+      "fichier": "assets\\portraits\\classique\\pauline.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "quentin",
+      "nom": "Quentin",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Quentin, a 34-year-old man with short red hair, pale skin, blue eyes, beard and moustache, freckles, serious expression, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 1616700057,
+      "fichier": "assets\\portraits\\classique\\quentin.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "rachid",
+      "nom": "Rachid",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Rachid, a 39-year-old man with short brown hair, brown skin, hazel eyes, beard and moustache, hat, warm smile, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 1490024901,
+      "fichier": "assets\\portraits\\classique\\rachid.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "sophie",
+      "nom": "Sophie",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Sophie, a 44-year-old woman with short blonde hair, brown skin, green eyes, glasses, hoop earrings, neutral expression, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 1293466091,
+      "fichier": "assets\\portraits\\classique\\sophie.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "tessa",
+      "nom": "Tessa",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Tessa, a 25-year-old woman with short red hair, olive skin, green eyes, hat, warm smile, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 509408790,
+      "fichier": "assets\\portraits\\classique\\tessa.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "ursule",
+      "nom": "Ursule",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Ursule, a 55-year-old Black woman with long red hair, dark skin, hazel eyes, freckles, warm smile, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 206971412,
+      "fichier": "assets\\portraits\\classique\\ursule.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "valentin",
+      "nom": "Valentin",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Valentin, a 29-year-old Black man with short blond hair, dark skin, blue eyes, glasses, freckles, neutral expression, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 1572319890,
+      "fichier": "assets\\portraits\\classique\\valentin.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "wassim",
+      "nom": "Wassim",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Wassim, a 31-year-old Black man with short black hair, dark skin, hazel eyes, beard and moustache, warm smile, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 2132651732,
+      "fichier": "assets\\portraits\\classique\\wassim.jpg"
+    },
+    {
+      "theme": "classique",
+      "id": "yasmine",
+      "nom": "Yasmine",
+      "prompt": "Photorealistic studio portrait, head and shoulders, centered, soft neutral warm-grey background, natural skin texture, everyday person, sharp focus, friendly and believable. Yasmine, a 37-year-old Black woman with long brown hair, dark skin, brown eyes, glasses, wide-brim hat, hoop earrings, neutral expression, soft neutral studio background, head and shoulders portrait. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, painting, low quality, blurry, extra people, deformed face, collage, contact sheet, celebrity",
+      "seed": 2040586655,
+      "fichier": "assets\\portraits\\classique\\yasmine.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "lion",
+      "nom": "Léon le lion",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a majestic male lion with a golden mane, intense amber eyes, detailed fur, golden savanna at dusk. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 1752625563,
+      "fichier": "assets\\portraits\\animaux\\lion.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "elephant",
+      "nom": "Éléonore l'éléphant",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. an African elephant with large ears and a long trunk, wise amber eyes, dusty savanna. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 1616598444,
+      "fichier": "assets\\portraits\\animaux\\elephant.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "girafe",
+      "nom": "Gisèle la girafe",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a tall giraffe with long neck, ossicones, patterned coat, warm savanna light. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 2117789125,
+      "fichier": "assets\\portraits\\animaux\\girafe.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "zebre",
+      "nom": "Zia le zèbre",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a zebra with crisp black and white stripes, alert eyes, sunlit savanna. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 1429297198,
+      "fichier": "assets\\portraits\\animaux\\zebre.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "tigre",
+      "nom": "Tao le tigre",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a Bengal tiger with orange fur and dark stripes, intense amber eyes, green jungle. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 564415023,
+      "fichier": "assets\\portraits\\animaux\\tigre.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "loup",
+      "nom": "Lucien le loup",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a grey wolf with thick fur, piercing pale eyes, misty forest. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 1913912589,
+      "fichier": "assets\\portraits\\animaux\\loup.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "renard",
+      "nom": "Rouky le renard",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a red fox with bright orange fur and sharp ears, autumn forest. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 316633913,
+      "fichier": "assets\\portraits\\animaux\\renard.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "lapin",
+      "nom": "Barnabé le lapin",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a white rabbit with long ears and soft fur, meadow. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 1818166500,
+      "fichier": "assets\\portraits\\animaux\\lapin.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "vache",
+      "nom": "Marguerite la vache",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a dairy cow with black and white patches, gentle eyes, green pasture. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 307112297,
+      "fichier": "assets\\portraits\\animaux\\vache.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "chien",
+      "nom": "Filou le chien",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a friendly brown dog with floppy ears and soulful eyes, meadow. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 1969905210,
+      "fichier": "assets\\portraits\\animaux\\chien.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "chauve-souris",
+      "nom": "Nocturne la chauve-souris",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a fruit bat with large leathery wings, big ears and amber eyes, twilight cave. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 901496172,
+      "fichier": "assets\\portraits\\animaux\\chauve-souris.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "poule",
+      "nom": "Colette la poule",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a rustic brown hen with red comb and bright feathers, farmyard. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 1952246660,
+      "fichier": "assets\\portraits\\animaux\\poule.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "aigle",
+      "nom": "Astride l'aigle",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a golden eagle with sharp beak, fierce amber eyes and powerful wings, mountain sky. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 1835056611,
+      "fichier": "assets\\portraits\\animaux\\aigle.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "hibou",
+      "nom": "Hugo le hibou",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a great horned owl with amber eyes, patterned feathers, moonlit forest. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 175415710,
+      "fichier": "assets\\portraits\\animaux\\hibou.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "perroquet",
+      "nom": "Coco le perroquet",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a colorful scarlet macaw with bright red blue and yellow feathers, tropical jungle. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 934335309,
+      "fichier": "assets\\portraits\\animaux\\perroquet.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "manchot",
+      "nom": "Pingo le manchot",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. an emperor penguin with black and white plumage and orange beak, icy Antarctic. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 2079377117,
+      "fichier": "assets\\portraits\\animaux\\manchot.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "flamant",
+      "nom": "Flammy le flamant",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a pink flamingo with long curved neck, elegant feathers, shallow lagoon. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 464181732,
+      "fichier": "assets\\portraits\\animaux\\flamant.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "serpent",
+      "nom": "Sissi le serpent",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a green tree python with intricate scales and golden eyes, rainforest branch. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 1416537537,
+      "fichier": "assets\\portraits\\animaux\\serpent.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "crocodile",
+      "nom": "Croco le crocodile",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a crocodile with rough green scales, powerful jaw and golden eyes, riverbank. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 141903632,
+      "fichier": "assets\\portraits\\animaux\\crocodile.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "tortue",
+      "nom": "Tully la tortue",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a sea turtle with patterned shell, gentle eyes, coral reef. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 942510340,
+      "fichier": "assets\\portraits\\animaux\\tortue.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "requin",
+      "nom": "Mako le requin",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a great white shark with grey skin, sharp teeth, deep blue ocean. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 622741454,
+      "fichier": "assets\\portraits\\animaux\\requin.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "poisson-clown",
+      "nom": "Clowny le poisson-clown",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a clownfish with bright orange and white stripes, coral reef. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 829676343,
+      "fichier": "assets\\portraits\\animaux\\poisson-clown.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "abeille",
+      "nom": "Zaza l'abeille",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a honeybee with yellow and black stripes, translucent wings, detailed macro portrait, flowers. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 954474234,
+      "fichier": "assets\\portraits\\animaux\\abeille.jpg"
+    },
+    {
+      "theme": "animaux",
+      "id": "papillon",
+      "nom": "Paulo le papillon",
+      "prompt": "Photorealistic wildlife portrait, head and shoulders, centered, sharp focus, natural habitat background, detailed fur feathers or scales, professional wildlife photography. a monarch butterfly with orange and black patterned wings, detailed macro portrait, meadow. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, cartoon, illustration, painting, low quality, blurry, extra animals, collage, contact sheet",
+      "seed": 150619398,
+      "fichier": "assets\\portraits\\animaux\\papillon.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "luke",
+      "nom": "Luke Skywalker",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Luke Skywalker, young blond Jedi knight in a beige desert tunic, glowing blue lightsaber, Tatooine twin suns and starry sky. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 407966776,
+      "fichier": "assets\\portraits\\star-wars\\luke.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "leia",
+      "nom": "Leia Organa",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Princess Leia Organa, brown hair in braided side buns, flowing white gown, silver belt, starfield. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1227843504,
+      "fichier": "assets\\portraits\\star-wars\\leia.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "han",
+      "nom": "Han Solo",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Han Solo, rugged brown-haired scoundrel, white shirt, black vest, blaster pistol, starfield. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1232592353,
+      "fichier": "assets\\portraits\\star-wars\\han.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "chewbacca",
+      "nom": "Chewbacca",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Chewbacca, tall furry brown Wookiee with a leather bandolier, dark starfield. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1205171303,
+      "fichier": "assets\\portraits\\star-wars\\chewbacca.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "vador",
+      "nom": "Dark Vador",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Darth Vader, black helmet and respirator, red lenses, black armored suit, red lightsaber, dark starfield. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 926577406,
+      "fichier": "assets\\portraits\\star-wars\\vador.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "yoda",
+      "nom": "Yoda",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Yoda, small green alien Jedi Master with large ears, beige robe, green lightsaber, misty swamp planet. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 232727521,
+      "fichier": "assets\\portraits\\star-wars\\yoda.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "r2d2",
+      "nom": "R2-D2",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. R2-D2 astromech droid, white and blue metallic dome, starfighter cockpit, starfield. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 546860571,
+      "fichier": "assets\\portraits\\star-wars\\r2d2.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "c3po",
+      "nom": "C-3PO",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. C-3PO, golden humanoid protocol droid, amber eyes, worried expression, starfield. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 783919982,
+      "fichier": "assets\\portraits\\star-wars\\c3po.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "boba-fett",
+      "nom": "Boba Fett",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Boba Fett, green and brown Mandalorian armor and helmet, blaster rifle, Tatooine desert. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 2047718926,
+      "fichier": "assets\\portraits\\star-wars\\boba-fett.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "palpatine",
+      "nom": "Palpatine",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Emperor Palpatine, pale wrinkled face, dark hooded robe, red Force lightning, dark throne room. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 266952456,
+      "fichier": "assets\\portraits\\star-wars\\palpatine.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "obi-wan",
+      "nom": "Obi-Wan Kenobi",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Obi-Wan Kenobi, auburn hair and beard, beige Jedi robes, blue lightsaber, desert planet. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1186736480,
+      "fichier": "assets\\portraits\\star-wars\\obi-wan.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "rey",
+      "nom": "Rey",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Rey, young brunette with three hair buns, beige wrapped outfit, blue lightsaber, desert planet. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 2074988134,
+      "fichier": "assets\\portraits\\star-wars\\rey.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "kylo-ren",
+      "nom": "Kylo Ren",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Kylo Ren, black helmet with silver cracks, black robe, red crossguard lightsaber, dark. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 17245025,
+      "fichier": "assets\\portraits\\star-wars\\kylo-ren.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "padme",
+      "nom": "Padmé Amidala",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Padmé Amidala, elegant brown hair, ornate headpiece, white and red royal gown, starfield. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1627410251,
+      "fichier": "assets\\portraits\\star-wars\\padme.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "jabba",
+      "nom": "Jabba le Hutt",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Jabba the Hutt, large slug-like alien, brown skin, big eyes, dark palace. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1036524802,
+      "fichier": "assets\\portraits\\star-wars\\jabba.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "stormtrooper",
+      "nom": "Stormtrooper",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Stormtrooper in white armor and white helmet, blaster, star destroyer. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 65908956,
+      "fichier": "assets\\portraits\\star-wars\\stormtrooper.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "lando",
+      "nom": "Lando Calrissian",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Lando Calrissian, dark-skinned, black hair, mustache, blue and gold outfit, Cloud City. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1037699701,
+      "fichier": "assets\\portraits\\star-wars\\lando.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "anakin",
+      "nom": "Anakin Skywalker",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Anakin Skywalker, sandy brown hair, dark Jedi robes, blue lightsaber, scar, starfield. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 609657721,
+      "fichier": "assets\\portraits\\star-wars\\anakin.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "mace-windu",
+      "nom": "Mace Windu",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Mace Windu, bald dark-skinned Jedi Master, purple lightsaber, dark robes. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 462083351,
+      "fichier": "assets\\portraits\\star-wars\\mace-windu.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "ahsoka",
+      "nom": "Ahsoka Tano",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Ahsoka Tano, orange Togruta with white and blue head tails, dual lightsabers, starfield. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 32951934,
+      "fichier": "assets\\portraits\\star-wars\\ahsoka.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "din-djarin",
+      "nom": "Din Djarin",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Din Djarin, chrome Mandalorian helmet, brown armor, cape, blaster. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 800545773,
+      "fichier": "assets\\portraits\\star-wars\\din-djarin.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "grogu",
+      "nom": "Grogu",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Grogu, small green alien child with large ears, beige robe, starfield. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 534754536,
+      "fichier": "assets\\portraits\\star-wars\\grogu.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "poe",
+      "nom": "Poe Dameron",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Poe Dameron, dark-haired pilot in orange flight suit, helmet, starfighter. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1915029407,
+      "fichier": "assets\\portraits\\star-wars\\poe.jpg"
+    },
+    {
+      "theme": "star-wars",
+      "id": "finn",
+      "nom": "Finn",
+      "prompt": "Semi-realistic cinematic sci-fi portrait, head and shoulders, centered, dramatic rim lighting, dark starfield background, richly detailed costume, sharp focus. Finn, dark-skinned former stormtrooper, brown jacket, blaster, starfield. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, illustration, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 376821929,
+      "fichier": "assets\\portraits\\star-wars\\finn.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "gaufre",
+      "nom": "Gaufre de Liège",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. a golden Belgian waffle with crisp grid pattern, powdered sugar and strawberries, rustic plate. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 1184675738,
+      "fichier": "assets\\portraits\\nourriture\\gaufre.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "frites",
+      "nom": "Frites dorées",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. golden Belgian fries in a paper cone with salt and mayonnaise, rustic table. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 1663408216,
+      "fichier": "assets\\portraits\\nourriture\\frites.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "moules",
+      "nom": "Moules marinière",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. a bowl of steamed mussels in white wine with parsley, rustic table. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 1993265284,
+      "fichier": "assets\\portraits\\nourriture\\moules.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "carbonnade",
+      "nom": "Carbonnade flamande",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. Belgian beef carbonnade stew with dark beer sauce, carrots and herbs, rustic bowl. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 794596211,
+      "fichier": "assets\\portraits\\nourriture\\carbonnade.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "cuberdon",
+      "nom": "Cuberdon violet",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. purple cuberdon candies with a conical shape and sugar shine, Belgian sweets. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 722915287,
+      "fichier": "assets\\portraits\\nourriture\\cuberdon.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "speculoos",
+      "nom": "Spéculoos croustillant",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. caramel-brown Belgian speculoos biscuits with stamped patterns, rustic table. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 517360221,
+      "fichier": "assets\\portraits\\nourriture\\speculoos.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "pizza",
+      "nom": "Pizza Margherita",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. a Margherita pizza with melted mozzarella, basil and tomato, rustic wooden table. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 998991162,
+      "fichier": "assets\\portraits\\nourriture\\pizza.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "sushi",
+      "nom": "Sushi au saumon",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. fresh salmon sushi and maki on a dark slate, wasabi and chopsticks. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 2099872454,
+      "fichier": "assets\\portraits\\nourriture\\sushi.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "croissant",
+      "nom": "Croissant au beurre",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. a golden flaky butter croissant, crumbs and warm light, rustic table. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 323020300,
+      "fichier": "assets\\portraits\\nourriture\\croissant.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "chocolat",
+      "nom": "Tablette de chocolat",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. a tablet of Belgian dark chocolate with rich squares, cocoa beans, elegant still life. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 1112310503,
+      "fichier": "assets\\portraits\\nourriture\\chocolat.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "pomme",
+      "nom": "Pomme croquante",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. a crisp red apple with a green leaf and water droplets, dark rustic table. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 1376666022,
+      "fichier": "assets\\portraits\\nourriture\\pomme.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "fraise",
+      "nom": "Fraise des bois",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. fresh strawberries with green leaves and water droplets, dark rustic table. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 866828729,
+      "fichier": "assets\\portraits\\nourriture\\fraise.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "banane",
+      "nom": "Banane voyageuse",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. a ripe yellow banana bunch, tropical light, dark table. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 968346734,
+      "fichier": "assets\\portraits\\nourriture\\banane.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "citron",
+      "nom": "Citron vif",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. fresh lemons with green leaf and bright zest, dark rustic table. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 600486466,
+      "fichier": "assets\\portraits\\nourriture\\citron.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "orange",
+      "nom": "Orange pressée",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. fresh oranges with green leaves and cut segments, warm light. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 1356432168,
+      "fichier": "assets\\portraits\\nourriture\\orange.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "raisin",
+      "nom": "Raisin doré",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. a bunch of dark purple grapes with water droplets, vine leaves, rustic table. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 155642313,
+      "fichier": "assets\\portraits\\nourriture\\raisin.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "brocoli",
+      "nom": "Brocoli vert",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. fresh green broccoli florets with water droplets, dark rustic table. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 1286360766,
+      "fichier": "assets\\portraits\\nourriture\\brocoli.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "courgette",
+      "nom": "Courgette du jardin",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. fresh green zucchini with slices and delicate flowers, rustic kitchen. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 452622563,
+      "fichier": "assets\\portraits\\nourriture\\courgette.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "petits-pois",
+      "nom": "Petits pois tendres",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. fresh green peas in an open pod, garden setting, detailed still life. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 941504648,
+      "fichier": "assets\\portraits\\nourriture\\petits-pois.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "salade",
+      "nom": "Salade croquante",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. a fresh green salad with tomatoes and vinaigrette in a rustic bowl. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 658428309,
+      "fichier": "assets\\portraits\\nourriture\\salade.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "epinards",
+      "nom": "Épinards frais",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. fresh spinach leaves with water droplets, dark rustic table. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 2009783906,
+      "fichier": "assets\\portraits\\nourriture\\epinards.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "haricots-verts",
+      "nom": "Haricots verts",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. a bundle of fresh green beans, bright and crisp, rustic table. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 325706760,
+      "fichier": "assets\\portraits\\nourriture\\haricots-verts.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "tomate",
+      "nom": "Tomate mûre",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. ripe red tomatoes on the vine with green stems and water droplets. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 629605872,
+      "fichier": "assets\\portraits\\nourriture\\tomate.jpg"
+    },
+    {
+      "theme": "nourriture",
+      "id": "champignon",
+      "nom": "Champignon de Paris",
+      "prompt": "Professional food photography, centered vertical composition, rustic table, warm dramatic light, shallow depth of field, highly detailed, appetizing. fresh brown cremini mushrooms with detailed gills, dark rustic table. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, people, hands, cutlery, cartoon, illustration, low quality, blurry, collage, contact sheet",
+      "seed": 1782272371,
+      "fichier": "assets\\portraits\\nourriture\\champignon.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "harry",
+      "nom": "Harry Potter",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Harry Potter, young wizard with messy black hair, round glasses, lightning scar, Gryffindor scarf, wand, candlelit Hogwarts. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1638271066,
+      "fichier": "assets\\portraits\\harry-potter\\harry.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "hermione",
+      "nom": "Hermione Granger",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Hermione Granger, young witch with bushy brown hair, Gryffindor scarf, holding a wand, candlelit Hogwarts. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1317678449,
+      "fichier": "assets\\portraits\\harry-potter\\hermione.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "ron",
+      "nom": "Ron Weasley",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Ron Weasley, young wizard with red hair, Gryffindor sweater, wand, Hogwarts. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 426982509,
+      "fichier": "assets\\portraits\\harry-potter\\ron.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "drago",
+      "nom": "Drago Malefoy",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Draco Malfoy, pale blond young wizard, Slytherin robes, wand, Hogwarts. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 988436395,
+      "fichier": "assets\\portraits\\harry-potter\\drago.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "dumbledore",
+      "nom": "Albus Dumbledore",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Albus Dumbledore, elderly wizard with long white hair and beard, round glasses, purple robes, wand, Hogwarts. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 554306599,
+      "fichier": "assets\\portraits\\harry-potter\\dumbledore.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "voldemort",
+      "nom": "Lord Voldemort",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Lord Voldemort, pale noseless snake-like face, red eyes, black hooded robe, wand, dark. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 10044656,
+      "fichier": "assets\\portraits\\harry-potter\\voldemort.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "rogue",
+      "nom": "Severus Rogue",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Severus Snape, pale man with long black hair, black robes, wand, Hogwarts dungeons. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1431778698,
+      "fichier": "assets\\portraits\\harry-potter\\rogue.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "hagrid",
+      "nom": "Rubeus Hagrid",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Rubeus Hagrid, huge bearded half-giant with wild brown hair, thick fur coat, Hogwarts. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 383973275,
+      "fichier": "assets\\portraits\\harry-potter\\hagrid.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "sirius",
+      "nom": "Sirius Black",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Sirius Black, handsome long-haired wizard, dark robes, wand, Grimmauld Place. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 433012330,
+      "fichier": "assets\\portraits\\harry-potter\\sirius.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "lupin",
+      "nom": "Remus Lupin",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Remus Lupin, tired sandy-haired wizard with scars, brown jacket, wand, Hogwarts. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 548796042,
+      "fichier": "assets\\portraits\\harry-potter\\lupin.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "bellatrix",
+      "nom": "Bellatrix Lestrange",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Bellatrix Lestrange, wild dark curly hair, black corset and robe, wand, dark. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 461735034,
+      "fichier": "assets\\portraits\\harry-potter\\bellatrix.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "luna",
+      "nom": "Luna Lovegood",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Luna Lovegood, blonde witch with dreamy expression, radish earrings, Ravenclaw blue, wand. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 900781559,
+      "fichier": "assets\\portraits\\harry-potter\\luna.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "neville",
+      "nom": "Neville Londubat",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Neville Longbottom, young wizard with a round face, Gryffindor sweater, wand, Hogwarts. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1486943294,
+      "fichier": "assets\\portraits\\harry-potter\\neville.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "ginny",
+      "nom": "Ginny Weasley",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Ginny Weasley, young witch with long red hair, Gryffindor robes, wand, Hogwarts. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1855972732,
+      "fichier": "assets\\portraits\\harry-potter\\ginny.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "mcgonagall",
+      "nom": "Minerva McGonagall",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Minerva McGonagall, strict elderly witch with dark hair in a bun, green robes, pointed hat, wand, Hogwarts. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1559773885,
+      "fichier": "assets\\portraits\\harry-potter\\mcgonagall.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "dobby",
+      "nom": "Dobby",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Dobby, small pale house-elf with large bat ears and tennis-ball green eyes, ragged pillowcase. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 217481151,
+      "fichier": "assets\\portraits\\harry-potter\\dobby.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "cedric",
+      "nom": "Cedric Diggory",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Cedric Diggory, handsome young wizard with brown hair, Hufflepuff yellow and black, wand, Hogwarts. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1373619138,
+      "fichier": "assets\\portraits\\harry-potter\\cedric.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "fleur",
+      "nom": "Fleur Delacour",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Fleur Delacour, beautiful young witch with silver-blonde hair, blue Beauxbatons robes, wand. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1533375672,
+      "fichier": "assets\\portraits\\harry-potter\\fleur.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "krum",
+      "nom": "Viktor Krum",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Viktor Krum, dark-haired young wizard, red Durmstrang uniform, wand. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 775408097,
+      "fichier": "assets\\portraits\\harry-potter\\krum.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "tonks",
+      "nom": "Nymphadora Tonks",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Nymphadora Tonks, young witch with short pink hair, dark auror coat, wand. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 868483320,
+      "fichier": "assets\\portraits\\harry-potter\\tonks.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "moody",
+      "nom": "Alastor Maugrey",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Alastor Moody, grizzled auror with a magical eye patch, scarred face, brown coat, wand. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1167328601,
+      "fichier": "assets\\portraits\\harry-potter\\moody.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "ombrage",
+      "nom": "Dolores Ombrage",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Dolores Umbridge, stout middle-aged witch in a pink cardigan, toad-like smile, wand, pink office. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 529438120,
+      "fichier": "assets\\portraits\\harry-potter\\ombrage.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "lucius",
+      "nom": "Lucius Malefoy",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Lucius Malfoy, pale aristocratic wizard with long platinum hair, black robes, cane wand. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 87001962,
+      "fichier": "assets\\portraits\\harry-potter\\lucius.jpg"
+    },
+    {
+      "theme": "harry-potter",
+      "id": "hedwig",
+      "nom": "Hedwige",
+      "prompt": "Semi-realistic cinematic fantasy portrait, head and shoulders, centered, warm candlelight, Hogwarts stone and candle bokeh background, richly detailed clothing, sharp focus. Hedwig, a beautiful snowy owl with white feathers and amber eyes, Hogwarts letter. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 330950135,
+      "fichier": "assets\\portraits\\harry-potter\\hedwig.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "spider-man",
+      "nom": "Spider-Man",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Spider-Man, red and blue webbed suit, large white eye lenses, web shooters, New York city. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1284383551,
+      "fichier": "assets\\portraits\\marvel\\spider-man.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "iron-man",
+      "nom": "Iron Man",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Iron Man, red and gold high-tech armor, glowing blue eyes, repulsor, city. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1537892904,
+      "fichier": "assets\\portraits\\marvel\\iron-man.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "captain-america",
+      "nom": "Captain America",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Captain America, blue tactical suit with white star, red gloves, round shield, city. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1668723995,
+      "fichier": "assets\\portraits\\marvel\\captain-america.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "thor",
+      "nom": "Thor",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Thor, long blond hair and beard, red cape, silver armor, Mjolnir hammer, lightning sky. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1113633990,
+      "fichier": "assets\\portraits\\marvel\\thor.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "hulk",
+      "nom": "Hulk",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Hulk, giant green muscular man, dark hair, torn purple pants, angry expression. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 494090207,
+      "fichier": "assets\\portraits\\marvel\\hulk.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "black-widow",
+      "nom": "Black Widow",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Black Widow, red-haired female spy in black tactical suit, batons, city. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 724362826,
+      "fichier": "assets\\portraits\\marvel\\black-widow.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "hawkeye",
+      "nom": "Hawkeye",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Hawkeye, brown-haired archer in purple and black suit, compound bow, city. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 244766608,
+      "fichier": "assets\\portraits\\marvel\\hawkeye.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "doctor-strange",
+      "nom": "Doctor Strange",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Doctor Strange, dark hair with grey temples, goatee, blue robes, red cloak, magical portal. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1795120857,
+      "fichier": "assets\\portraits\\marvel\\doctor-strange.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "black-panther",
+      "nom": "Black Panther",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Black Panther, black vibranium suit and cat mask, silver claws, Wakanda. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1497936481,
+      "fichier": "assets\\portraits\\marvel\\black-panther.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "scarlet-witch",
+      "nom": "Scarlet Witch",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Scarlet Witch, red-haired woman with a red crown, red and black outfit, scarlet magic. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1388995182,
+      "fichier": "assets\\portraits\\marvel\\scarlet-witch.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "vision",
+      "nom": "Vision",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Vision, red android with green face, yellow Mind Stone, cape, glowing eyes. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1833845354,
+      "fichier": "assets\\portraits\\marvel\\vision.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "loki",
+      "nom": "Loki",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Loki, black hair, golden horned helmet, green and gold Asgardian armor, dagger. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1303103662,
+      "fichier": "assets\\portraits\\marvel\\loki.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "thanos",
+      "nom": "Thanos",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Thanos, purple giant with gold and blue armor, Infinity Gauntlet, cosmic background. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 2080980948,
+      "fichier": "assets\\portraits\\marvel\\thanos.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "wolverine",
+      "nom": "Wolverine",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Wolverine, short dark-haired mutant with sideburns, yellow and blue suit, metal claws. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1329619085,
+      "fichier": "assets\\portraits\\marvel\\wolverine.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "professor-x",
+      "nom": "Professor X",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Professor X, bald man in a suit, serious expression, wheelchair, X-Men mansion. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1805528429,
+      "fichier": "assets\\portraits\\marvel\\professor-x.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "magneto",
+      "nom": "Magneto",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Magneto, older man with silver hair, red and purple helmet, metal-controlling hands. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 567690859,
+      "fichier": "assets\\portraits\\marvel\\magneto.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "deadpool",
+      "nom": "Deadpool",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Deadpool, red and black full mask, twin swords, confident smirk, city. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 803774951,
+      "fichier": "assets\\portraits\\marvel\\deadpool.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "captain-marvel",
+      "nom": "Captain Marvel",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Captain Marvel, blonde female hero in red blue and gold suit, glowing fists, cosmic. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1687182816,
+      "fichier": "assets\\portraits\\marvel\\captain-marvel.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "star-lord",
+      "nom": "Star-Lord",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Star-Lord, brown hair, red leather jacket, helmet, blaster, spaceship. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1204743256,
+      "fichier": "assets\\portraits\\marvel\\star-lord.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "gamora",
+      "nom": "Gamora",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Gamora, green-skinned alien warrior with black hair, black outfit, sword. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 849434732,
+      "fichier": "assets\\portraits\\marvel\\gamora.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "rocket",
+      "nom": "Rocket",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Rocket, anthropomorphic raccoon in a brown space suit, large blaster, space. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 71297496,
+      "fichier": "assets\\portraits\\marvel\\rocket.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "groot",
+      "nom": "Groot",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Groot, tall tree-like alien with bark skin and glowing eyes, branches, forest. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1236834299,
+      "fichier": "assets\\portraits\\marvel\\groot.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "ant-man",
+      "nom": "Ant-Man",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Ant-Man, red and silver helmeted suit, shrinking technology, city. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1471456743,
+      "fichier": "assets\\portraits\\marvel\\ant-man.jpg"
+    },
+    {
+      "theme": "marvel",
+      "id": "wasp",
+      "nom": "Wasp",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, dramatic comic-book movie lighting, high-tech or cosmic background, detailed costume, sharp focus. Wasp, yellow and blue high-tech suit, helmet, wings, city. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1645716811,
+      "fichier": "assets\\portraits\\marvel\\wasp.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "superman",
+      "nom": "Superman",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Superman, black hair, blue suit with red cape and S symbol, Metropolis. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 723388059,
+      "fichier": "assets\\portraits\\dc-comics\\superman.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "batman",
+      "nom": "Batman",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Batman, black cowl with pointed ears, dark armor, cape, Gotham skyline. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1168288559,
+      "fichier": "assets\\portraits\\dc-comics\\batman.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "wonder-woman",
+      "nom": "Wonder Woman",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Wonder Woman, long dark hair, golden tiara, red and blue armor, lasso, Amazon. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 492213607,
+      "fichier": "assets\\portraits\\dc-comics\\wonder-woman.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "flash",
+      "nom": "Flash",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Flash, red cowl and suit with yellow lightning, speedster, city. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 951278277,
+      "fichier": "assets\\portraits\\dc-comics\\flash.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "aquaman",
+      "nom": "Aquaman",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Aquaman, long blond hair and beard, orange and green armor, trident, ocean. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1806777414,
+      "fichier": "assets\\portraits\\dc-comics\\aquaman.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "green-lantern",
+      "nom": "Green Lantern",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Green Lantern, green and black suit, glowing green ring, domino mask, space. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 152239422,
+      "fichier": "assets\\portraits\\dc-comics\\green-lantern.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "cyborg",
+      "nom": "Cyborg",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Cyborg, half-human half-machine, silver cybernetic body, red eye, city. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1930776733,
+      "fichier": "assets\\portraits\\dc-comics\\cyborg.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "martian-manhunter",
+      "nom": "Martian Manhunter",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Martian Manhunter, bald green alien, blue cape, red eyes, Mars. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 604447704,
+      "fichier": "assets\\portraits\\dc-comics\\martian-manhunter.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "supergirl",
+      "nom": "Supergirl",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Supergirl, blonde blue-eyed Kryptonian, blue and red suit, red cape, city. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 222614472,
+      "fichier": "assets\\portraits\\dc-comics\\supergirl.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "nightwing",
+      "nom": "Nightwing",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Nightwing, black-haired acrobat, black and blue suit, domino mask, Gotham. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1284925516,
+      "fichier": "assets\\portraits\\dc-comics\\nightwing.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "batgirl",
+      "nom": "Batgirl",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Batgirl, red-haired woman, purple and black suit, bat cowl, Gotham. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1897735160,
+      "fichier": "assets\\portraits\\dc-comics\\batgirl.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "robin",
+      "nom": "Robin",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Robin, young dark-haired hero, red green and yellow suit, domino mask. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 186156634,
+      "fichier": "assets\\portraits\\dc-comics\\robin.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "harley-quinn",
+      "nom": "Harley Quinn",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Harley Quinn, blonde pigtails with red and blue tips, red and blue jacket, mallet. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 446879190,
+      "fichier": "assets\\portraits\\dc-comics\\harley-quinn.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "joker",
+      "nom": "Le Joker",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Joker, pale skin, green hair, wide red smile, purple suit, Gotham. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 2003233677,
+      "fichier": "assets\\portraits\\dc-comics\\joker.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "catwoman",
+      "nom": "Catwoman",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Catwoman, black cat cowl and suit, whip, Gotham rooftop. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1430175732,
+      "fichier": "assets\\portraits\\dc-comics\\catwoman.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "poison-ivy",
+      "nom": "Poison Ivy",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Poison Ivy, red-haired woman with green skin, green plant outfit, vines. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 953282988,
+      "fichier": "assets\\portraits\\dc-comics\\poison-ivy.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "lex-luthor",
+      "nom": "Lex Luthor",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Lex Luthor, bald businessman in a dark suit, green and purple tie, Metropolis. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 292490687,
+      "fichier": "assets\\portraits\\dc-comics\\lex-luthor.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "darkseid",
+      "nom": "Darkseid",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Darkseid, giant grey stone-skinned alien, glowing red eyes, dark armor, Apokolips. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 2058634567,
+      "fichier": "assets\\portraits\\dc-comics\\darkseid.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "brainiac",
+      "nom": "Brainiac",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Brainiac, green alien with metal implants, cold expression, sci-fi ship. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1477953304,
+      "fichier": "assets\\portraits\\dc-comics\\brainiac.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "deathstroke",
+      "nom": "Deathstroke",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Deathstroke, mercenary with black and orange half mask, armor, sword. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 963079424,
+      "fichier": "assets\\portraits\\dc-comics\\deathstroke.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "green-arrow",
+      "nom": "Green Arrow",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Green Arrow, goatee, green hood and suit, bow, Star City. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1788975157,
+      "fichier": "assets\\portraits\\dc-comics\\green-arrow.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "black-canary",
+      "nom": "Black Canary",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Black Canary, blonde woman, black suit, domino mask, sonic scream. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 619062146,
+      "fichier": "assets\\portraits\\dc-comics\\black-canary.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "shazam",
+      "nom": "Shazam",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Shazam, young hero in red and gold armor, white cape, lightning bolt. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1368938574,
+      "fichier": "assets\\portraits\\dc-comics\\shazam.jpg"
+    },
+    {
+      "theme": "dc-comics",
+      "id": "raven",
+      "nom": "Raven",
+      "prompt": "Semi-realistic cinematic superhero portrait, head and shoulders, centered, moody graphic-novel lighting, dark city or cosmic background, detailed costume, sharp focus. Raven, pale goth woman, purple hooded cloak, dark magic, gem. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 309901516,
+      "fichier": "assets\\portraits\\dc-comics\\raven.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "frodon",
+      "nom": "Frodon Sacquet",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Frodo Baggins, young hobbit with curly brown hair, earthy cloak, Elven brooch, the One Ring. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 815770666,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\frodon.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "sam",
+      "nom": "Sam Gamegie",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Samwise Gamgee, hobbit with curly hair, rustic clothes, backpack, the Shire. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1632895756,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\sam.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "merry",
+      "nom": "Merry Brandebouc",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Meriadoc Brandybuck, young hobbit, curly hair, cloak and sword. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 449995792,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\merry.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "pippin",
+      "nom": "Pippin Touque",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Peregrin Took, young hobbit, curly hair, cloak, mischievous smile. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1192090844,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\pippin.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "gandalf",
+      "nom": "Gandalf",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Gandalf the Grey, elderly wizard with long grey hair and beard, pointed wizard hat, grey robes, staff. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 206728656,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\gandalf.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "aragorn",
+      "nom": "Aragorn",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Aragorn, rugged long-haired ranger, beard, green cloak, sword, Middle-earth. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1596100542,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\aragorn.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "legolas",
+      "nom": "Legolas",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Legolas, elven archer with long blond hair and pointed ears, green and brown outfit, bow. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1447866504,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\legolas.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "gimli",
+      "nom": "Gimli",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Gimli, dwarf warrior with long red beard, horned helmet, armor and axe. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 645344728,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\gimli.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "boromir",
+      "nom": "Boromir",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Boromir, human warrior with long hair, red and brown tunic, horn of Gondor and shield. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 417855133,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\boromir.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "galadriel",
+      "nom": "Galadriel",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Galadriel, elven queen with long golden hair, white robes, golden circlet, ring of light. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1779763192,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\galadriel.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "elrond",
+      "nom": "Elrond",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Elrond, elven lord with dark hair, silver circlet, burgundy robes, Rivendell. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 949066837,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\elrond.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "arwen",
+      "nom": "Arwen",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Arwen, beautiful elven woman with dark hair, blue and white gown, Evenstar necklace. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1341964381,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\arwen.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "saroumane",
+      "nom": "Saroumane",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Saruman the White, elderly wizard with long white hair and beard, black robes, staff, Orthanc. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1373121347,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\saroumane.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "sauron",
+      "nom": "Sauron",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Sauron, dark armored figure with a black spiked helmet, fiery eye, the One Ring. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 499103890,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\sauron.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "gollum",
+      "nom": "Gollum",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Gollum, thin pale creature with large eyes and little hair, ragged loincloth, the One Ring. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1938297541,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\gollum.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "bilbo",
+      "nom": "Bilbo Sacquet",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Bilbo Baggins, older hobbit with curly grey hair, vest, pipe, Bag End. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1979542290,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\bilbo.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "thorin",
+      "nom": "Thorin Écu-de-Chêne",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Thorin Oakenshield, dwarf king with long dark hair and beard, blue cloak, crown and sword. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1200704212,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\thorin.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "tauriel",
+      "nom": "Tauriel",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Tauriel, elven warrior with long red hair and pointed ears, green outfit, bow. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1605924398,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\tauriel.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "eowyn",
+      "nom": "Éowyn",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Éowyn, noble shieldmaiden with long blond hair, green and brown armor, sword. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 525743422,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\eowyn.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "eomer",
+      "nom": "Éomer",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Éomer, blond horseman of Rohan, green armor, spear and horse. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 200571409,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\eomer.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "faramir",
+      "nom": "Faramir",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Faramir, dark-haired ranger of Gondor, green and brown outfit, bow. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1737523889,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\faramir.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "denethor",
+      "nom": "Denethor",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Denethor, old steward of Gondor with grey hair and beard, dark robes, troubled expression. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1395031101,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\denethor.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "grima",
+      "nom": "Grima Langue-de-Serpent",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Gríma Wormtongue, pale thin man with long dark hair, black robes, sinister expression. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 564785688,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\grima.jpg"
+    },
+    {
+      "theme": "seigneur-des-anneaux",
+      "id": "tom-bombadil",
+      "nom": "Tom Bombadil",
+      "prompt": "Semi-realistic epic fantasy portrait, head and shoulders, centered, painterly cinematic lighting, Middle-earth landscape background, detailed costume, sharp focus. Tom Bombadil, mysterious old man with brown beard, blue jacket, yellow hat, forest. No text, no watermark, no logo, no frame.",
+      "negative_prompt": "text, watermark, logo, frame, cartoon, anime, low quality, blurry, extra people, deformed face, collage, contact sheet",
+      "seed": 1441614197,
+      "fichier": "assets\\portraits\\seigneur-des-anneaux\\tom-bombadil.jpg"
+    }
+  ]
+}

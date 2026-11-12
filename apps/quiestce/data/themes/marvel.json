@@ -1,0 +1,53 @@
+{
+  "id": "marvel",
+  "nom": "Marvel",
+  "sousTitre": "Héros et vilains",
+  "description": "Avengers, Gardiens et mutants : un plateau sous tension pour démasquer le héros caché.",
+  "emoji": "🕷️",
+  "palette": {
+    "accent": "#ff5c5c",
+    "accent2": "#ffd166",
+    "fond": "#16080b",
+    "lueur": "#ff5c5c"
+  },
+  "attributs": [
+    { "id": "humain", "nom": "Humain", "type": "bool", "categorie": "Espèce", "icone": "🧑", "question": "Ton personnage est-il humain ?" },
+    { "id": "surhumain", "nom": "Surhumain", "type": "bool", "categorie": "Capacités", "icone": "💥", "question": "Ton personnage possède-t-il des capacités surhumaines ?" },
+    { "id": "avengers", "nom": "Avengers", "type": "bool", "categorie": "Équipe", "icone": "🅰️", "question": "Ton personnage fait-il partie des Avengers ?" },
+    { "id": "gardiens", "nom": "Gardiens de la Galaxie", "type": "bool", "categorie": "Équipe", "icone": "🚀", "question": "Ton personnage fait-il partie des Gardiens de la Galaxie ?" },
+    { "id": "xmen", "nom": "X-Men", "type": "bool", "categorie": "Équipe", "icone": "❌", "question": "Ton personnage fait-il partie des X-Men ?" },
+    { "id": "mechant", "nom": "Vilain", "type": "bool", "categorie": "Allégeance", "icone": "😈", "question": "Ton personnage est-il un vilain ?" },
+    { "id": "cosmique", "nom": "Cosmique", "type": "bool", "categorie": "Origine", "icone": "🌌", "question": "Ton personnage vient-il de l'espace ou du cosmos ?" },
+    { "id": "tech", "nom": "Technologie", "type": "bool", "categorie": "Équipement", "icone": "🛠️", "question": "Ton personnage utilise-t-il une technologie avancée ?" },
+    { "id": "vole", "nom": "Sait voler", "type": "bool", "categorie": "Capacités", "icone": "🪽", "question": "Ton personnage sait-il voler ?" },
+    { "id": "masque", "nom": "Masque ou casque", "type": "bool", "categorie": "Apparence", "icone": "🎭", "question": "Ton personnage porte-t-il un masque ou un casque ?" },
+    { "id": "mutant", "nom": "Mutant", "type": "bool", "categorie": "Espèce", "icone": "🧬", "question": "Ton personnage est-il un mutant ?" },
+    { "id": "arme_blanche", "nom": "Arme blanche", "type": "bool", "categorie": "Équipement", "icone": "🗡️", "question": "Ton personnage combat-il avec une arme blanche ?" }
+  ],
+  "personnages": [
+    { "id": "spider-man", "nom": "Spider-Man", "emoji": "🕷️", "attributs": { "humain": true, "surhumain": true, "avengers": true, "gardiens": false, "xmen": false, "mechant": false, "cosmique": false, "tech": true, "vole": true, "masque": true, "mutant": false, "arme_blanche": false } },
+    { "id": "iron-man", "nom": "Iron Man", "emoji": "🦾", "attributs": { "humain": true, "surhumain": false, "avengers": true, "gardiens": false, "xmen": false, "mechant": false, "cosmique": false, "tech": true, "vole": true, "masque": true, "mutant": false, "arme_blanche": false } },
+    { "id": "captain-america", "nom": "Captain America", "emoji": "🛡️", "attributs": { "humain": true, "surhumain": true, "avengers": true, "gardiens": false, "xmen": false, "mechant": false, "cosmique": false, "tech": false, "vole": false, "masque": true, "mutant": false, "arme_blanche": false } },
+    { "id": "thor", "nom": "Thor", "emoji": "⚡", "attributs": { "humain": false, "surhumain": true, "avengers": true, "gardiens": false, "xmen": false, "mechant": false, "cosmique": true, "tech": false, "vole": true, "masque": false, "mutant": false, "arme_blanche": false } },
+    { "id": "hulk", "nom": "Hulk", "emoji": "💚", "attributs": { "humain": true, "surhumain": true, "avengers": true, "gardiens": false, "xmen": false, "mechant": false, "cosmique": false, "tech": false, "vole": false, "masque": false, "mutant": false, "arme_blanche": false } },
+    { "id": "black-widow", "nom": "Black Widow", "emoji": "🕸️", "attributs": { "humain": true, "surhumain": false, "avengers": true, "gardiens": false, "xmen": false, "mechant": false, "cosmique": false, "tech": true, "vole": false, "masque": false, "mutant": false, "arme_blanche": false } },
+    { "id": "hawkeye", "nom": "Hawkeye", "emoji": "🏹", "attributs": { "humain": true, "surhumain": false, "avengers": true, "gardiens": false, "xmen": false, "mechant": false, "cosmique": false, "tech": true, "vole": false, "masque": false, "mutant": false, "arme_blanche": false } },
+    { "id": "doctor-strange", "nom": "Doctor Strange", "emoji": "🌀", "attributs": { "humain": true, "surhumain": true, "avengers": false, "gardiens": false, "xmen": false, "mechant": false, "cosmique": false, "tech": false, "vole": true, "masque": false, "mutant": false, "arme_blanche": false } },
+    { "id": "black-panther", "nom": "Black Panther", "emoji": "🐆", "attributs": { "humain": true, "surhumain": true, "avengers": true, "gardiens": false, "xmen": false, "mechant": false, "cosmique": false, "tech": true, "vole": false, "masque": true, "mutant": false, "arme_blanche": false } },
+    { "id": "scarlet-witch", "nom": "Scarlet Witch", "emoji": "🔮", "attributs": { "humain": true, "surhumain": true, "avengers": true, "gardiens": false, "xmen": false, "mechant": false, "cosmique": false, "tech": false, "vole": true, "masque": false, "mutant": true, "arme_blanche": false } },
+    { "id": "vision", "nom": "Vision", "emoji": "👁️", "attributs": { "humain": false, "surhumain": true, "avengers": true, "gardiens": false, "xmen": false, "mechant": false, "cosmique": true, "tech": true, "vole": true, "masque": false, "mutant": false, "arme_blanche": false } },
+    { "id": "loki", "nom": "Loki", "emoji": "🐍", "attributs": { "humain": false, "surhumain": true, "avengers": false, "gardiens": false, "xmen": false, "mechant": true, "cosmique": true, "tech": false, "vole": true, "masque": true, "mutant": false, "arme_blanche": true } },
+    { "id": "thanos", "nom": "Thanos", "emoji": "🟣", "attributs": { "humain": false, "surhumain": true, "avengers": false, "gardiens": false, "xmen": false, "mechant": true, "cosmique": true, "tech": true, "vole": false, "masque": false, "mutant": false, "arme_blanche": false } },
+    { "id": "wolverine", "nom": "Wolverine", "emoji": "🐺", "attributs": { "humain": true, "surhumain": true, "avengers": false, "gardiens": false, "xmen": true, "mechant": false, "cosmique": false, "tech": false, "vole": false, "masque": true, "mutant": true, "arme_blanche": true } },
+    { "id": "professor-x", "nom": "Professor X", "emoji": "🧠", "attributs": { "humain": true, "surhumain": true, "avengers": false, "gardiens": false, "xmen": true, "mechant": false, "cosmique": false, "tech": true, "vole": false, "masque": false, "mutant": true, "arme_blanche": false } },
+    { "id": "magneto", "nom": "Magneto", "emoji": "🧲", "attributs": { "humain": true, "surhumain": true, "avengers": false, "gardiens": false, "xmen": false, "mechant": true, "cosmique": false, "tech": true, "vole": true, "masque": true, "mutant": true, "arme_blanche": false } },
+    { "id": "deadpool", "nom": "Deadpool", "emoji": "🗡️", "attributs": { "humain": true, "surhumain": true, "avengers": false, "gardiens": false, "xmen": true, "mechant": false, "cosmique": false, "tech": true, "vole": false, "masque": true, "mutant": true, "arme_blanche": true } },
+    { "id": "captain-marvel", "nom": "Captain Marvel", "emoji": "⭐", "attributs": { "humain": false, "surhumain": true, "avengers": true, "gardiens": false, "xmen": false, "mechant": false, "cosmique": true, "tech": false, "vole": true, "masque": false, "mutant": false, "arme_blanche": false } },
+    { "id": "star-lord", "nom": "Star-Lord", "emoji": "🎧", "attributs": { "humain": true, "surhumain": false, "avengers": false, "gardiens": true, "xmen": false, "mechant": false, "cosmique": true, "tech": true, "vole": true, "masque": true, "mutant": false, "arme_blanche": false } },
+    { "id": "gamora", "nom": "Gamora", "emoji": "⚔️", "attributs": { "humain": false, "surhumain": true, "avengers": false, "gardiens": true, "xmen": false, "mechant": false, "cosmique": true, "tech": true, "vole": false, "masque": false, "mutant": false, "arme_blanche": true } },
+    { "id": "rocket", "nom": "Rocket", "emoji": "🦝", "attributs": { "humain": false, "surhumain": false, "avengers": false, "gardiens": true, "xmen": false, "mechant": false, "cosmique": true, "tech": true, "vole": false, "masque": false, "mutant": false, "arme_blanche": false } },
+    { "id": "groot", "nom": "Groot", "emoji": "🌳", "attributs": { "humain": false, "surhumain": true, "avengers": false, "gardiens": true, "xmen": false, "mechant": false, "cosmique": true, "tech": false, "vole": false, "masque": false, "mutant": false, "arme_blanche": false } },
+    { "id": "ant-man", "nom": "Ant-Man", "emoji": "🐜", "attributs": { "humain": true, "surhumain": true, "avengers": true, "gardiens": false, "xmen": false, "mechant": false, "cosmique": false, "tech": true, "vole": false, "masque": true, "mutant": false, "arme_blanche": false } },
+    { "id": "wasp", "nom": "Wasp", "emoji": "🐝", "attributs": { "humain": true, "surhumain": false, "avengers": true, "gardiens": false, "xmen": false, "mechant": false, "cosmique": false, "tech": true, "vole": true, "masque": true, "mutant": false, "arme_blanche": false } }
+  ]
+}

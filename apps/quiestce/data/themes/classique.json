@@ -1,0 +1,600 @@
+{
+  "id": "classique",
+  "nom": "Tout le monde",
+  "sousTitre": "Des visages, des indices",
+  "description": "Vingt-quatre visages ordinaires, des cheveux roux aux regards noirs : le vrai plaisir du Qui suis-je ? à l'ancienne.",
+  "emoji": "👥",
+  "palette": {
+    "accent": "#f2c14e",
+    "accent2": "#6ec6b4",
+    "fond": "#0d171b",
+    "lueur": "#f2c14e"
+  },
+  "attributs": [
+    {
+      "id": "femme",
+      "nom": "Femme",
+      "type": "bool",
+      "categorie": "Identité",
+      "icone": "👩",
+      "question": "Ton personnage est-il une femme ?"
+    },
+    {
+      "id": "cheveux",
+      "nom": "Cheveux",
+      "type": "enum",
+      "categorie": "Cheveux",
+      "icone": "💇",
+      "options": [
+        {
+          "id": "roux",
+          "nom": "Roux",
+          "question": "Ton personnage a-t-il les cheveux roux ?"
+        },
+        {
+          "id": "blonds",
+          "nom": "Blonds",
+          "question": "Ton personnage a-t-il les cheveux blonds ?"
+        },
+        {
+          "id": "bruns",
+          "nom": "Bruns",
+          "question": "Ton personnage a-t-il les cheveux bruns ?"
+        },
+        {
+          "id": "noirs",
+          "nom": "Noirs",
+          "question": "Ton personnage a-t-il les cheveux noirs ?"
+        }
+      ]
+    },
+    {
+      "id": "peau",
+      "nom": "Peau",
+      "type": "enum",
+      "categorie": "Teint",
+      "icone": "✋",
+      "options": [
+        {
+          "id": "claire",
+          "nom": "Claire",
+          "question": "Ton personnage a-t-il la peau claire ?"
+        },
+        {
+          "id": "mate",
+          "nom": "Mate",
+          "question": "Ton personnage a-t-il la peau mate ?"
+        },
+        {
+          "id": "brune",
+          "nom": "Brune",
+          "question": "Ton personnage a-t-il la peau brune ?"
+        },
+        {
+          "id": "noire",
+          "nom": "Noire",
+          "question": "Ton personnage a-t-il la peau noire ?"
+        }
+      ]
+    },
+    {
+      "id": "yeux",
+      "nom": "Yeux",
+      "type": "enum",
+      "categorie": "Regard",
+      "icone": "👀",
+      "options": [
+        {
+          "id": "bleus",
+          "nom": "Bleus",
+          "question": "Ton personnage a-t-il les yeux bleus ?"
+        },
+        {
+          "id": "verts",
+          "nom": "Verts",
+          "question": "Ton personnage a-t-il les yeux verts ?"
+        },
+        {
+          "id": "marron",
+          "nom": "Marron",
+          "question": "Ton personnage a-t-il les yeux marron ?"
+        },
+        {
+          "id": "noisette",
+          "nom": "Noisette",
+          "question": "Ton personnage a-t-il les yeux noisette ?"
+        }
+      ]
+    },
+    {
+      "id": "lunettes",
+      "nom": "Lunettes",
+      "type": "bool",
+      "categorie": "Accessoires",
+      "icone": "👓",
+      "question": "Ton personnage porte-t-il des lunettes ?"
+    },
+    {
+      "id": "barbe",
+      "nom": "Barbe",
+      "type": "bool",
+      "categorie": "Visage",
+      "icone": "🧔",
+      "question": "Ton personnage porte-t-il une barbe ?"
+    },
+    {
+      "id": "chapeau",
+      "nom": "Chapeau",
+      "type": "bool",
+      "categorie": "Accessoires",
+      "icone": "🎩",
+      "question": "Ton personnage porte-t-il un chapeau ?"
+    },
+    {
+      "id": "boucles_oreilles",
+      "nom": "Boucles d'oreilles",
+      "type": "bool",
+      "categorie": "Accessoires",
+      "icone": "💎",
+      "question": "Ton personnage porte-t-il des boucles d'oreilles ?"
+    },
+    {
+      "id": "taches_rousseur",
+      "nom": "Taches de rousseur",
+      "type": "bool",
+      "categorie": "Visage",
+      "icone": "🌟",
+      "question": "Ton personnage a-t-il des taches de rousseur ?"
+    },
+    {
+      "id": "cheveux_longs",
+      "nom": "Cheveux longs",
+      "type": "bool",
+      "categorie": "Cheveux",
+      "icone": "💇",
+      "question": "Ton personnage a-t-il les cheveux longs ?"
+    },
+    {
+      "id": "sourire",
+      "nom": "Sourire",
+      "type": "bool",
+      "categorie": "Expression",
+      "icone": "😊",
+      "question": "Ton personnage sourit-il ?"
+    }
+  ],
+  "personnages": [
+    {
+      "id": "alice",
+      "nom": "Alice",
+      "emoji": "👩‍🦰",
+      "attributs": {
+        "femme": true,
+        "cheveux": "roux",
+        "peau": "claire",
+        "yeux": "verts",
+        "lunettes": true,
+        "barbe": false,
+        "chapeau": false,
+        "boucles_oreilles": true,
+        "taches_rousseur": true,
+        "cheveux_longs": true,
+        "sourire": true
+      }
+    },
+    {
+      "id": "bastien",
+      "nom": "Bastien",
+      "emoji": "👨‍🦱",
+      "attributs": {
+        "femme": false,
+        "cheveux": "blonds",
+        "peau": "claire",
+        "yeux": "bleus",
+        "lunettes": false,
+        "barbe": true,
+        "chapeau": false,
+        "boucles_oreilles": false,
+        "taches_rousseur": false,
+        "cheveux_longs": false,
+        "sourire": false
+      }
+    },
+    {
+      "id": "camille",
+      "nom": "Camille",
+      "emoji": "👩‍🦱",
+      "attributs": {
+        "femme": true,
+        "cheveux": "bruns",
+        "peau": "mate",
+        "yeux": "marron",
+        "lunettes": true,
+        "barbe": false,
+        "chapeau": true,
+        "boucles_oreilles": false,
+        "taches_rousseur": false,
+        "cheveux_longs": true,
+        "sourire": true
+      }
+    },
+    {
+      "id": "david",
+      "nom": "David",
+      "emoji": "👨🏿",
+      "attributs": {
+        "femme": false,
+        "cheveux": "noirs",
+        "peau": "noire",
+        "yeux": "marron",
+        "lunettes": false,
+        "barbe": true,
+        "chapeau": false,
+        "boucles_oreilles": false,
+        "taches_rousseur": false,
+        "cheveux_longs": false,
+        "sourire": false
+      }
+    },
+    {
+      "id": "elodie",
+      "nom": "Élodie",
+      "emoji": "👩‍🦱",
+      "attributs": {
+        "femme": true,
+        "cheveux": "blonds",
+        "peau": "mate",
+        "yeux": "bleus",
+        "lunettes": false,
+        "barbe": false,
+        "chapeau": false,
+        "boucles_oreilles": false,
+        "taches_rousseur": true,
+        "cheveux_longs": true,
+        "sourire": true
+      }
+    },
+    {
+      "id": "farid",
+      "nom": "Farid",
+      "emoji": "👨🏽",
+      "attributs": {
+        "femme": false,
+        "cheveux": "noirs",
+        "peau": "brune",
+        "yeux": "noisette",
+        "lunettes": false,
+        "barbe": true,
+        "chapeau": false,
+        "boucles_oreilles": false,
+        "taches_rousseur": false,
+        "cheveux_longs": false,
+        "sourire": true
+      }
+    },
+    {
+      "id": "gabriel",
+      "nom": "Gabriel",
+      "emoji": "👨‍🦰",
+      "attributs": {
+        "femme": false,
+        "cheveux": "roux",
+        "peau": "claire",
+        "yeux": "verts",
+        "lunettes": true,
+        "barbe": true,
+        "chapeau": true,
+        "boucles_oreilles": false,
+        "taches_rousseur": true,
+        "cheveux_longs": false,
+        "sourire": false
+      }
+    },
+    {
+      "id": "helene",
+      "nom": "Hélène",
+      "emoji": "👩‍🦱",
+      "attributs": {
+        "femme": true,
+        "cheveux": "bruns",
+        "peau": "claire",
+        "yeux": "marron",
+        "lunettes": true,
+        "barbe": false,
+        "chapeau": false,
+        "boucles_oreilles": true,
+        "taches_rousseur": false,
+        "cheveux_longs": true,
+        "sourire": false
+      }
+    },
+    {
+      "id": "ines",
+      "nom": "Inès",
+      "emoji": "👩🏽",
+      "attributs": {
+        "femme": true,
+        "cheveux": "noirs",
+        "peau": "brune",
+        "yeux": "marron",
+        "lunettes": false,
+        "barbe": false,
+        "chapeau": false,
+        "boucles_oreilles": true,
+        "taches_rousseur": false,
+        "cheveux_longs": true,
+        "sourire": true
+      }
+    },
+    {
+      "id": "julien",
+      "nom": "Julien",
+      "emoji": "👨‍🦱",
+      "attributs": {
+        "femme": false,
+        "cheveux": "bruns",
+        "peau": "mate",
+        "yeux": "verts",
+        "lunettes": false,
+        "barbe": true,
+        "chapeau": true,
+        "boucles_oreilles": false,
+        "taches_rousseur": false,
+        "cheveux_longs": false,
+        "sourire": false
+      }
+    },
+    {
+      "id": "karim",
+      "nom": "Karim",
+      "emoji": "👨🏿",
+      "attributs": {
+        "femme": false,
+        "cheveux": "noirs",
+        "peau": "noire",
+        "yeux": "marron",
+        "lunettes": true,
+        "barbe": true,
+        "chapeau": false,
+        "boucles_oreilles": false,
+        "taches_rousseur": false,
+        "cheveux_longs": false,
+        "sourire": true
+      }
+    },
+    {
+      "id": "laura",
+      "nom": "Laura",
+      "emoji": "👩‍🦰",
+      "attributs": {
+        "femme": true,
+        "cheveux": "roux",
+        "peau": "mate",
+        "yeux": "noisette",
+        "lunettes": false,
+        "barbe": false,
+        "chapeau": false,
+        "boucles_oreilles": true,
+        "taches_rousseur": true,
+        "cheveux_longs": true,
+        "sourire": true
+      }
+    },
+    {
+      "id": "mathieu",
+      "nom": "Mathieu",
+      "emoji": "👨‍🦱",
+      "attributs": {
+        "femme": false,
+        "cheveux": "blonds",
+        "peau": "claire",
+        "yeux": "bleus",
+        "lunettes": false,
+        "barbe": false,
+        "chapeau": false,
+        "boucles_oreilles": false,
+        "taches_rousseur": false,
+        "cheveux_longs": true,
+        "sourire": true
+      }
+    },
+    {
+      "id": "nadia",
+      "nom": "Nadia",
+      "emoji": "👩🏽",
+      "attributs": {
+        "femme": true,
+        "cheveux": "bruns",
+        "peau": "brune",
+        "yeux": "noisette",
+        "lunettes": true,
+        "barbe": false,
+        "chapeau": true,
+        "boucles_oreilles": false,
+        "taches_rousseur": false,
+        "cheveux_longs": true,
+        "sourire": false
+      }
+    },
+    {
+      "id": "olivier",
+      "nom": "Olivier",
+      "emoji": "👨🏽",
+      "attributs": {
+        "femme": false,
+        "cheveux": "noirs",
+        "peau": "brune",
+        "yeux": "verts",
+        "lunettes": true,
+        "barbe": true,
+        "chapeau": false,
+        "boucles_oreilles": false,
+        "taches_rousseur": false,
+        "cheveux_longs": false,
+        "sourire": false
+      }
+    },
+    {
+      "id": "pauline",
+      "nom": "Pauline",
+      "emoji": "👩‍🦱",
+      "attributs": {
+        "femme": true,
+        "cheveux": "blonds",
+        "peau": "mate",
+        "yeux": "bleus",
+        "lunettes": false,
+        "barbe": false,
+        "chapeau": false,
+        "boucles_oreilles": true,
+        "taches_rousseur": true,
+        "cheveux_longs": true,
+        "sourire": true
+      }
+    },
+    {
+      "id": "quentin",
+      "nom": "Quentin",
+      "emoji": "👨‍🦰",
+      "attributs": {
+        "femme": false,
+        "cheveux": "roux",
+        "peau": "claire",
+        "yeux": "bleus",
+        "lunettes": false,
+        "barbe": true,
+        "chapeau": false,
+        "boucles_oreilles": false,
+        "taches_rousseur": true,
+        "cheveux_longs": false,
+        "sourire": false
+      }
+    },
+    {
+      "id": "rachid",
+      "nom": "Rachid",
+      "emoji": "👨🏽",
+      "attributs": {
+        "femme": false,
+        "cheveux": "bruns",
+        "peau": "brune",
+        "yeux": "noisette",
+        "lunettes": false,
+        "barbe": true,
+        "chapeau": true,
+        "boucles_oreilles": false,
+        "taches_rousseur": false,
+        "cheveux_longs": false,
+        "sourire": true
+      }
+    },
+    {
+      "id": "sophie",
+      "nom": "Sophie",
+      "emoji": "👩🏽",
+      "attributs": {
+        "femme": true,
+        "cheveux": "blonds",
+        "peau": "brune",
+        "yeux": "verts",
+        "lunettes": true,
+        "barbe": false,
+        "chapeau": false,
+        "boucles_oreilles": true,
+        "taches_rousseur": false,
+        "cheveux_longs": false,
+        "sourire": false
+      }
+    },
+    {
+      "id": "tessa",
+      "nom": "Tessa",
+      "emoji": "👩‍🦰",
+      "attributs": {
+        "femme": true,
+        "cheveux": "roux",
+        "peau": "mate",
+        "yeux": "verts",
+        "lunettes": false,
+        "barbe": false,
+        "chapeau": true,
+        "boucles_oreilles": false,
+        "taches_rousseur": false,
+        "cheveux_longs": false,
+        "sourire": true
+      }
+    },
+    {
+      "id": "ursule",
+      "nom": "Ursule",
+      "emoji": "👩🏿",
+      "attributs": {
+        "femme": true,
+        "cheveux": "roux",
+        "peau": "noire",
+        "yeux": "noisette",
+        "lunettes": false,
+        "barbe": false,
+        "chapeau": false,
+        "boucles_oreilles": false,
+        "taches_rousseur": true,
+        "cheveux_longs": true,
+        "sourire": true
+      }
+    },
+    {
+      "id": "valentin",
+      "nom": "Valentin",
+      "emoji": "👨🏿",
+      "attributs": {
+        "femme": false,
+        "cheveux": "blonds",
+        "peau": "noire",
+        "yeux": "bleus",
+        "lunettes": true,
+        "barbe": false,
+        "chapeau": false,
+        "boucles_oreilles": false,
+        "taches_rousseur": true,
+        "cheveux_longs": false,
+        "sourire": false
+      }
+    },
+    {
+      "id": "wassim",
+      "nom": "Wassim",
+      "emoji": "👨🏿",
+      "attributs": {
+        "femme": false,
+        "cheveux": "noirs",
+        "peau": "noire",
+        "yeux": "noisette",
+        "lunettes": false,
+        "barbe": true,
+        "chapeau": false,
+        "boucles_oreilles": false,
+        "taches_rousseur": false,
+        "cheveux_longs": false,
+        "sourire": true
+      }
+    },
+    {
+      "id": "yasmine",
+      "nom": "Yasmine",
+      "emoji": "👩🏿",
+      "attributs": {
+        "femme": true,
+        "cheveux": "bruns",
+        "peau": "noire",
+        "yeux": "marron",
+        "lunettes": true,
+        "barbe": false,
+        "chapeau": true,
+        "boucles_oreilles": true,
+        "taches_rousseur": false,
+        "cheveux_longs": true,
+        "sourire": false
+      }
+    }
+  ]
+}
