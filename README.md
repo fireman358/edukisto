@@ -15,11 +15,16 @@ Monorepo : site vitrine edukisto.win + applications.
 | `apps/manager-demo` | Démo manager | manager-demo |
 | `apps/saucissons` | App saucissons (Cloudflare Worker) | saucissons |
 | `apps/E.calendar.family` | Calendrier familial avec tâches et rappels | E.calendar.family |
-| `apps/laetisoftlove` | Outils manager Laeti | laetisoftlove |
 | `apps/Keskonmangelulu` | Keskonmangelulu | Keskonmangelulu |
-| `apps/Laetimum` | Laetimum | Laetimum |
 | `apps/caldemandco` | Cal demand co | caldemandco |
 | `apps/calendar-proxy` | Proxy calendrier Google | calendar-proxy |
 | `shared/` | Assets communs : logo, favicons, charte, polices | (nouveau) |
+
+## Hors monorepo
+
+Projets clients/famille, traités indépendamment avec leurs propres repos et sessions :
+
+- laetipro (Laeti) : site laetimum + appli laetisoftlove
+- EDI : site du père de David
 
 Règles de travail : voir AGENTS.md.
