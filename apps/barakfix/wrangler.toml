@@ -1,8 +1,0 @@
-name = "barakfix"
-compatibility_date = "2025-01-01"
-pages_build_output_dir = "dist"
-
-[[d1_databases]]
-binding = "DB"
-database_name = "barakfix"
-database_id = "b4d7513d-920d-4d71-803b-70a837487640"
