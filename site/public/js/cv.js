@@ -49,19 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
     )
     .join("");
 
-  document.getElementById("creativeIntro").textContent = CV.creative.intro;
-  document.getElementById("creativeList").innerHTML = CV.creative.items
-    .map(
-      (i) => `
-      <div class="soft-card">
-        <div class="soft-icon">${ICONS[i.icon]()}</div>
-        <h3>${i.title}</h3>
-        <p>${i.text}</p>
-        ${i.link ? `<a class="btn primary small full" href="${i.link}" target="_blank" rel="noopener">${i.linkLabel || "Découvrir"}</a>` : ""}
-      </div>`
-    )
-    .join("");
-
   // Section cours (seulement si présente sur la page)
   const t = CV.teaching;
   const ti = document.getElementById("teachingIntro");

@@ -273,31 +273,6 @@ const CV = {
       text: "Performance = écouter d'abord, répondre ensuite. Un ticket mal compris est un ticket refait.",
     },
   ],
-  creative: {
-    intro:
-      "L'informatique n'a pas le monopole de la création. Sous le pseudo D. RAW ARK, j'écris mes textes et dirige l'univers artistique de mes titres — la plume reste à moi. Et j'édite aussi un site passion sur le tir et la défense.",
-    items: [
-      {
-        icon: "target",
-        title: "Tir & Défense Belgique — webmaster",
-        text: "Un site d'actualité et de tests sur le tir sportif et l'équipement de défense : création, rédaction, gestion et animation au quotidien.",
-        link: "https://tir-defense-belgique.be/",
-        linkLabel: "Visiter le site",
-      },
-      {
-        icon: "book",
-        title: "De la chute au clan : itinéraire d'un survivant",
-        text: "Autobiographie de 107 pages : l'histoire d'une chute et d'une reconstruction, écrite pour témoigner.",
-      },
-      {
-        icon: "music",
-        title: "De la chute au clan — l'album (23 titres, 1h26)",
-        text: "Mon premier album : l'histoire du livre mise en musique, 23 titres dont « Mon armure », « Marbais », « Flashover », « Le clan d'Arquennes » et « Le courage d'aimer ». Paroles et direction artistique : D. Raw Ark. Disponible sur Spotify.",
-        link: "https://open.spotify.com/intl-fr/album/3RnW4B214LjbltaAB5kzhW",
-        linkLabel: "Écouter sur Spotify",
-      },
-    ],
-  },
   languages: [
     { name: "Français", level: "Langue maternelle" },
     { name: "Anglais", level: "Correct (technique : lu et compris)" },
