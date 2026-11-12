@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "balance": "tsc -p tsconfig.tools.json && node tools/run-balance.cjs",
-    "test": "tsc -p tsconfig.tools.json && node --test tools/tests"
+    "test": "tsc -p tsconfig.tools.json && node --test tools/tests/*.test.cjs"
   },
   "devDependencies": {
     "typescript": "^5.6.0",
