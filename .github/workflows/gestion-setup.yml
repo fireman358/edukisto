@@ -54,4 +54,5 @@ jobs:
             echo "AUTH_SECRET créé (32 octets aléatoires)."
           fi
       - name: Récap
-        run: echo "database_id à committer dans apps/gestion/wrangler.jsonc : ${{ steps.d1.outputs.db_id }}"
+        run: |
+          echo "database_id a committer dans apps/gestion/wrangler.jsonc = ${{ steps.d1.outputs.db_id }}"
