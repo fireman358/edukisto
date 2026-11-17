@@ -429,7 +429,7 @@ async function notesApi(request, env, method, id, body, url) {
   return json({ error: "Route inconnue" }, 404);
 }
 
-const PROFILE_KEYS = ["nom", "adresse", "tva", "tva_regime", "iban", "email", "tel", "site", "mentions"];
+const PROFILE_KEYS = ["nom", "adresse", "tva", "tva_regime", "bce", "iban", "email", "tel", "site", "mentions"];
 
 async function profileData(env) {
   const rows = await env.DB.prepare("SELECT key, value FROM settings WHERE key LIKE 'profile_%'").all();

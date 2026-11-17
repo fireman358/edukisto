@@ -534,7 +534,8 @@ async function renderProfil() {
       <h2>Mon profil — coordonnées sur les PDF devis/factures</h2>
       <div class="row"><div><label>Nom / entreprise</label><input type="text" id="p-nom" placeholder="Edukisto — David …"></div>
       <div><label>Régime TVA</label><select id="p-regime"><option value="assujetti">Assujetti à la TVA</option><option value="franchise">Non assujetti — franchise (art. 44 §2)</option></select></div></div>
-      <div><label>N° TVA (si assujetti)</label><input type="text" id="p-tva" placeholder="BE0123456789"></div>
+      <div class="row"><div><label>N° entreprise (BCE)</label><input type="text" id="p-bce" placeholder="BE 0892.739.993"></div>
+      <div><label>N° TVA (si assujetti)</label><input type="text" id="p-tva" placeholder="BE0123456789"></div></div>
       <div><label>Adresse</label><input type="text" id="p-adresse"></div>
       <div class="row"><div><label>IBAN (paiement)</label><input type="text" id="p-iban" placeholder="BE68 5390 0754 7034"></div>
       <div><label>Site</label><input type="text" id="p-site"></div></div>
@@ -547,7 +548,7 @@ async function renderProfil() {
     </div>`;
   const p = await api("profile");
   const set = (id, v) => { $("#" + id).value = v || ""; };
-  set("p-nom", p.nom); set("p-tva", p.tva); set("p-adresse", p.adresse); set("p-iban", p.iban);
+  set("p-nom", p.nom); set("p-tva", p.tva); set("p-bce", p.bce); set("p-adresse", p.adresse); set("p-iban", p.iban);
   set("p-site", p.site); set("p-email", p.email); set("p-tel", p.tel); set("p-mentions", p.mentions);
   set("p-regime", p.tva_regime || "assujetti");
   const syncRegime = () => {
@@ -561,7 +562,7 @@ async function renderProfil() {
   $("#p-save").addEventListener("click", async () => {
     try {
       await api("profile", { method: "PUT", body: JSON.stringify({
-        nom: $("#p-nom").value, tva: $("#p-tva").value, tva_regime: $("#p-regime").value, adresse: $("#p-adresse").value,
+        nom: $("#p-nom").value, tva: $("#p-tva").value, tva_regime: $("#p-regime").value, bce: $("#p-bce").value, adresse: $("#p-adresse").value,
         iban: $("#p-iban").value, site: $("#p-site").value, email: $("#p-email").value,
         tel: $("#p-tel").value, mentions: $("#p-mentions").value,
       }) });

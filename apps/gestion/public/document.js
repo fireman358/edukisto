@@ -30,7 +30,8 @@ async function boot() {
   const titre = isDevis ? "Devis" : "Facture";
   document.title = `${titre} ${doc.numero} — ${profile.nom || "Edukisto"}`;
 
-  const emetteur = [profile.nom || "Edukisto", profile.adresse, franchise ? "Non assujetti à la TVA — régime de franchise (art. 44 §2 du Code TVA)" : (profile.tva ? `TVA : ${profile.tva}` : ""), profile.iban ? `IBAN : ${profile.iban}` : "", [profile.email, profile.tel].filter(Boolean).join(" · "), profile.site].filter(Boolean).join("\n");
+  const brandName = profile.nom || "Edukisto";
+  const coords = [profile.adresse, profile.bce ? `N° entreprise : ${profile.bce}` : "", franchise ? "Non assujetti à la TVA — régime de franchise (art. 44 §2 du Code TVA)" : (profile.tva ? `TVA : ${profile.tva}` : ""), profile.iban ? `IBAN : ${profile.iban}` : "", [profile.email, profile.tel].filter(Boolean).join(" · "), profile.site].filter(Boolean).join("\n");
   const clientLines = [client.nom, client.societe, client.adresse, client.email, client.tva ? `N° TVA : ${client.tva}` : ""].filter(Boolean).join("\n");
 
   const meta = isDevis
@@ -62,8 +63,8 @@ async function boot() {
   page.innerHTML = `
     <header class="doc-header">
       <div>
-        <div class="brand"><img src="brand/edukisto-mark.svg" alt=""><div class="name">Edu<span>kisto</span></div></div>
-        <div class="emetteur">${esc(emetteur)}</div>
+        <div class="brand"><img src="brand/edukisto-mark.svg" alt=""><div class="name">${esc(brandName)}</div></div>
+        <div class="emetteur">${esc(coords)}</div>
       </div>
       <div class="doc-title">
         <h1>${titre}</h1>
@@ -89,7 +90,7 @@ async function boot() {
     ${mention_tva ? `<p class="mention-tva">${esc(mention_tva)}</p>` : ""}
     ${doc.note ? `<p class="doc-note">${esc(doc.note)}</p>` : ""}
     <footer class="doc-footer">
-      <div class="coords">${esc(emetteur)}</div>
+      <div class="coords">${esc(coords)}</div>
       ${profile.mentions ? `<div class="mentions">${esc(profile.mentions)}</div>` : ""}
     </footer>`;
 
