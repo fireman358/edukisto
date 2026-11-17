@@ -14,7 +14,7 @@
       "binding": "DB",
       "database_name": "gestion",
       // Créer la base puis coller l'id ici : npx wrangler d1 create gestion
-      "database_id": "00000000-0000-0000-0000-000000000000"
+      "database_id": "ce04e85c-2a95-42e4-a49f-37ddd0735e7f"
     }
   ]
 }
