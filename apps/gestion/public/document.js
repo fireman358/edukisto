@@ -32,7 +32,7 @@ async function boot() {
 
   const brandName = profile.nom || "Edukisto";
   const coords = [profile.adresse, profile.bce ? `N° entreprise : ${profile.bce}` : "", franchise ? "Non assujetti à la TVA — régime de franchise (art. 44 §2 du Code TVA)" : (profile.tva ? `TVA : ${profile.tva}` : ""), profile.iban ? `IBAN : ${profile.iban}` : "", [profile.email, profile.tel].filter(Boolean).join(" · "), profile.site].filter(Boolean).join("\n");
-  const clientLines = [client.nom, client.societe, client.adresse, client.email, client.tva ? `N° TVA : ${client.tva}` : ""].filter(Boolean).join("\n");
+  const clientLines = [client.societe, client.adresse, client.email, client.tva ? `N° TVA : ${client.tva}` : ""].filter(Boolean).join("\n");
 
   const meta = isDevis
     ? `Date : ${fmtDate(doc.date)}\nValable ${doc.validite_jours} jours (jusqu'au ${fmtDate(validUntil(doc.date, doc.validite_jours))})`
@@ -90,8 +90,7 @@ async function boot() {
     ${mention_tva ? `<p class="mention-tva">${esc(mention_tva)}</p>` : ""}
     ${doc.note ? `<p class="doc-note">${esc(doc.note)}</p>` : ""}
     <footer class="doc-footer">
-      <div class="coords">${esc(coords)}</div>
-      ${profile.mentions ? `<div class="mentions">${esc(profile.mentions)}</div>` : ""}
+      <div class="mentions">${esc(profile.mentions || (!isDevis ? "Paiement à 30 jours par virement sur l'IBAN repris en en-tête." : ""))}</div>
     </footer>`;
 
   $("#btn-print").addEventListener("click", () => window.print());
