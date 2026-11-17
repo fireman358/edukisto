@@ -25,7 +25,7 @@ async function jwtSign(payload, secret) {
   const data = `${b64url(header)}.${b64url({ ...payload, iat: Math.floor(Date.now() / 1000) })}`;
   const key = await crypto.subtle.importKey("raw", enc.encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
   const sig = await crypto.subtle.sign("HMAC", key, enc.encode(data));
-  return `${data}.${b64url(sig)}`;
+  return `${data}.${b64url(String.fromCharCode(...new Uint8Array(sig)))}`;
 }
 
 async function jwtVerify(token, secret) {
