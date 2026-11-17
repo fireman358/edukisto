@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS devis (
   client_id TEXT NOT NULL REFERENCES clients(id),
   numero TEXT NOT NULL UNIQUE,
   date TEXT NOT NULL,
-  validite_jours INTEGER NOT NULL DEFAULT 30,
+  validite_jours INTEGER NOT NULL DEFAULT 15,
   statut TEXT NOT NULL DEFAULT 'brouillon' CHECK (statut IN ('brouillon', 'envoye', 'accepte', 'refuse', 'expire')),
   lignes TEXT NOT NULL DEFAULT '[]',
   taux_tva REAL NOT NULL DEFAULT 21,

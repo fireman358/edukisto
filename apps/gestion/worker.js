@@ -306,7 +306,7 @@ async function devisApi(request, env, method, id, body) {
     const numero = s(b.numero) || (await nextNumero(env, "devis", "D"));
     const newId = uuid();
     const date = s(b.date) || today();
-    const validite = Math.max(1, Math.min(365, Math.trunc(num(b.validite_jours, 30))));
+    const validite = Math.max(1, Math.min(365, Math.trunc(num(b.validite_jours, 15))));
     const statut = ["brouillon", "envoye", "accepte", "refuse", "expire"].includes(b.statut) ? b.statut : "brouillon";
     await env.DB.prepare(
       `INSERT INTO devis (id, client_id, numero, date, validite_jours, statut, lignes, taux_tva, total_ht, total_ttc, created_at)
@@ -327,7 +327,7 @@ async function devisApi(request, env, method, id, body) {
     const { totalHt, totalTtc } = computeTotals(lignes, taux);
     const statut = ["brouillon", "envoye", "accepte", "refuse", "expire"].includes(b.statut) ? b.statut : existing.statut;
     const date = s(b.date) || existing.date;
-    const validite = b.validite_jours !== undefined ? Math.max(1, Math.min(365, Math.trunc(num(b.validite_jours, 30)))) : existing.validite_jours;
+    const validite = b.validite_jours !== undefined ? Math.max(1, Math.min(365, Math.trunc(num(b.validite_jours, 15)))) : existing.validite_jours;
     await env.DB.prepare(
       "UPDATE devis SET date = ?, validite_jours = ?, statut = ?, lignes = ?, taux_tva = ?, total_ht = ?, total_ttc = ? WHERE id = ?"
     ).bind(date, validite, statut, JSON.stringify(lignes), taux, totalHt, totalTtc, id).run();

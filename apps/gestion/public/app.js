@@ -11,8 +11,18 @@ const FACTURE_STATUTS = { a_envoyer: "À envoyer", envoyee_peppol: "Envoyée (Pe
 let clientsCache = [];
 let devisCache = [];
 let facturesCache = [];
+let profileCache = null;
 let signupMode = false;
 let currentTab = "dashboard";
+
+async function getProfile() {
+  if (!profileCache) profileCache = await api("profile").catch(() => ({}));
+  return profileCache;
+}
+const tvaSelectHtml = (id, current) => {
+  const cur = Number(current);
+  return `<select id="${id}">${[21, 6, 0].map((t) => `<option value="${t}" ${cur === t ? "selected" : ""}>${t} %${t === 0 ? " (franchise art. 44 §2)" : ""}</option>`).join("")}</select>`;
+};
 
 async function api(path, opts = {}) {
   const res = await fetch("/api/" + path, { headers: { "Content-Type": "application/json" }, ...opts });
@@ -278,14 +288,16 @@ async function renderDevis() {
   $$("[data-facturer]").forEach((b) => b.addEventListener("click", () => openFactureModal(null, b.dataset.facturer)));
 }
 
-function openDevisModal(devis) {
+async function openDevisModal(devis) {
+  const prof = await getProfile();
+  const defTva = devis ? devis.taux_tva : (prof.tva_regime === "franchise" ? 0 : 21);
   const lignes = devis ? JSON.parse(devis.lignes || "[]") : [{ description: "", qty: 1, prix_ht: 0 }];
   const modal = openModal(`
     <h2>${devis ? "Devis " + esc(devis.numero) : "Nouveau devis"}</h2>
     <div class="row"><div><label>Client *</label><select id="d-client">${clientsCache.map((c) => `<option value="${esc(c.id)}" ${devis?.client_id === c.id ? "selected" : ""}>${esc(c.nom)}${c.societe ? " — " + esc(c.societe) : ""}</option>`).join("")}</select></div>
     <div><label>Date</label><input type="date" id="d-date" value="${devis?.date || todayStr()}"></div>
-    <div><label>Validité (jours)</label><input type="number" id="d-validite" min="1" max="365" value="${devis?.validite_jours || 30}"></div>
-    <div><label>Taux TVA (%)</label><input type="number" id="d-tva" min="0" max="100" step="0.5" value="${devis?.taux_tva ?? 21}"></div></div>
+    <div><label>Validité (jours)</label><input type="number" id="d-validite" min="1" max="365" value="${devis?.validite_jours || 15}"></div>
+    <div><label>Taux TVA</label>${tvaSelectHtml("d-tva", defTva)}</div></div>
     <h3>Lignes</h3>
     <div id="d-lignes"></div>
     <button class="btn secondary small" id="d-add-ligne" type="button">+ Ajouter une ligne</button>
@@ -323,7 +335,7 @@ function openDevisModal(devis) {
     const body = {
       client_id: $("#d-client", modal).value,
       date: $("#d-date", modal).value,
-      validite_jours: Number($("#d-validite", modal).value) || 30,
+      validite_jours: Number($("#d-validite", modal).value) || 15,
       taux_tva: Number($("#d-tva", modal).value) || 21,
       lignes,
     };
@@ -362,7 +374,7 @@ async function renderFactures() {
           <button class="btn danger small" data-del-facture="${esc(f.id)}" type="button">✕</button>
         </td></tr>`).join("") || `<tr><td colspan="7" class="muted">Aucune facture.</td></tr>`}</tbody>
     </table></div>`;
-  const prof = await api("profile").catch(() => ({}));
+  const prof = await getProfile();
   const franchise = prof.tva_regime === "franchise";
   const peppolNote = franchise
     ? "Régime de franchise (art. 44 §2) : l'émission Peppol n'est pas obligatoire pour toi, mais enregistre-toi sur Peppol via Accountable pour recevoir tes factures fournisseurs. B2B comme B2C : le PDF envoyé par e-mail suffit."
@@ -385,6 +397,7 @@ async function renderFactures() {
 }
 
 async function openFactureModal(id, devisId = null) {
+  const prof = await getProfile();
   let devis = null;
   if (devisId) {
     devis = devisCache.find((d) => d.id === devisId);
@@ -401,7 +414,7 @@ async function openFactureModal(id, devisId = null) {
     <div><label>Échéance</label><input type="date" id="f-echeance" value="${f?.echeance || (() => { const d = new Date(); d.setDate(d.getDate() + 30); return d.toISOString().slice(0, 10); })()}"></div></div>
     <div class="row"><div><label id="f-ht-label">Montant HT (€) *</label><input type="number" id="f-ht" min="0" step="0.01" value="${f?.montant_ht ?? devis?.total_ht ?? 0}"><div class="muted" id="f-hint"></div>
     <label class="muted" style="display:flex;gap:6px;align-items:center;margin-top:6px"><input type="checkbox" id="f-ttc"> saisir en TTC (HT/TVA calculés)</label></div>
-    <div><label>Taux TVA (%)</label><input type="number" id="f-tva" min="0" max="100" step="0.5" value="${f?.taux_tva ?? devis?.taux_tva ?? 21}"></div>
+    <div><label>Taux TVA</label>${tvaSelectHtml("f-tva", f?.taux_tva ?? devis?.taux_tva ?? (prof.tva_regime === "franchise" ? 0 : 21))}</div>
     <div><label>Statut</label><select id="f-statut">${Object.entries(FACTURE_STATUTS).map(([k, v]) => `<option value="${k}" ${f?.statut === k ? "selected" : ""}>${v}</option>`).join("")}</select></div></div>
     <div><label>Note</label><input type="text" id="f-note" value="${esc(f?.note)}"></div>
     <div class="modal-actions">
@@ -430,7 +443,7 @@ async function openFactureModal(id, devisId = null) {
       echeance: $("#f-echeance", modal).value,
       montant_ht: ttcMode ? undefined : val,
       montant_ttc: ttcMode ? val : undefined,
-      taux_tva: Number($("#f-tva", modal).value) || 21,
+      taux_tva: Number($("#f-tva", modal).value),
       statut: $("#f-statut", modal).value,
       note: $("#f-note", modal).value,
       devis_id: devisId || null,
@@ -464,7 +477,8 @@ function recapAccountable(factureId) {
   else prompt("Copiez ce récap :", texte);
 }
 
-function openQuickCreate(kind) {
+async function openQuickCreate(kind) {
+  const prof = await getProfile();
   const isDevis = kind === "devis";
   const modal = openModal(`
     <h2>${isDevis ? "⚡ Devis rapide" : "⚡ Facture rapide"}</h2>
@@ -472,7 +486,7 @@ function openQuickCreate(kind) {
     <div><label>…ou nouveau client (B2C)</label><input type="text" id="q-newclient" placeholder="Nom du client…"></div></div>
     ${isDevis ? '<div><label>Description</label><input type="text" id="q-desc" value="Prestation"></div>' : ""}
     <div class="row"><div><label id="q-ht-label">Montant HT (€)</label><input type="number" id="q-ht" min="0" step="0.01" value="0"><div class="muted" id="q-hint"></div></div>
-    <div><label>Taux TVA</label><select id="q-tva"><option value="21">21 %</option><option value="6">6 %</option><option value="0">0 %</option></select></div></div>
+    <div><label>Taux TVA</label>${tvaSelectHtml("q-tva", prof.tva_regime === "franchise" ? 0 : 21)}</div></div>
     <label class="muted" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="q-ttc"> Saisir le montant TTC — HT et TVA calculés automatiquement</label>
     <p class="muted">Le PDF (logo + tes coordonnées) s'ouvre juste après. Facture B2B : l'envoi officiel reste Peppol via Accountable.</p>
     <div class="modal-actions">
