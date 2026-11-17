@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestion clients — Edukisto</title>
+<meta name="description" content="Espace privé de gestion clients, devis et factures (Edukisto).">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <nav class="nav">
+    <a class="brand-wrap" href="https://edukisto.win/" target="_blank" rel="noopener">
+      <img src="brand/edukisto-mark.svg" alt="Edukisto"> Gestion
+    </a>
+    <div class="nav-links">
+      <span id="nav-user" class="muted"></span>
+      <button id="btn-logout" class="link-btn hidden" type="button">Se déconnecter</button>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap">
+  <!-- Connexion -->
+  <section id="view-login" class="card login-card hidden">
+    <h2>Espace privé</h2>
+    <p class="muted" id="login-hint">Mot de passe de l'espace gestion.</p>
+    <form id="login-form">
+      <label for="login-password">Mot de passe</label>
+      <input type="password" id="login-password" autocomplete="current-password" required minlength="8">
+      <p id="login-error" class="error"></p>
+      <button class="btn" type="submit" id="login-submit">Se connecter</button>
+    </form>
+  </section>
+
+  <!-- Application -->
+  <section id="view-app" class="hidden">
+    <div class="tabs">
+      <button data-tab="dashboard" class="on" type="button">Tableau de bord</button>
+      <button data-tab="clients" type="button">Clients</button>
+      <button data-tab="devis" type="button">Devis</button>
+      <button data-tab="factures" type="button">Factures</button>
+    </div>
+
+    <div id="tab-dashboard" class="tab-panel"></div>
+    <div id="tab-clients" class="tab-panel hidden"></div>
+    <div id="tab-devis" class="tab-panel hidden"></div>
+    <div id="tab-factures" class="tab-panel hidden"></div>
+  </section>
+</main>
+
+<div id="modal-root"></div>
+<script src="app.js"></script>
+</body>
+</html>
