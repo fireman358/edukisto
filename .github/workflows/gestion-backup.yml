@@ -1,0 +1,54 @@
+name: gestion — sauvegarde D1
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gestion-backup
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/gestion
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Vérifier le secret de chiffrement
+        run: |
+          if [ -z "$BACKUP_PASSPHRASE" ]; then
+            echo "::error::Ajoute le secret BACKUP_PASSPHRASE (phrase de passe longue) dans Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+      - name: Exporter la base D1
+        run: |
+          mkdir -p backup
+          echo "BACKUP_FILE=gestion-$(date -u +%Y%m%d).sql" >> "$GITHUB_ENV"
+          npx -y wrangler@4.163.0 d1 export gestion --remote --output="backup/$BACKUP_FILE"
+      - name: Chiffrer la sauvegarde (AES-256)
+        run: |
+          gpg --symmetric --cipher-algo AES256 --batch --yes \
+            --passphrase "$BACKUP_PASSPHRASE" \
+            --output "backup/$BACKUP_FILE.gpg" \
+            "backup/$BACKUP_FILE"
+          rm -f backup/*.sql
+      - name: Publier l'artefact chiffré
+        uses: actions/upload-artifact@v4
+        with:
+          name: gestion-backup-${{ github.run_id }}
+          path: apps/gestion/backup/*.gpg
+          retention-days: 30
+          if-no-files-found: error

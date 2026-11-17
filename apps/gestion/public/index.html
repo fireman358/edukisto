@@ -4,57 +4,62 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gestion clients — Edukisto</title>
-<meta name="description" content="Espace privé de gestion clients, devis et factures (Edukisto).">
+<meta name="description" content="Espace privé de gestion clients, devis et suivi de factures (Edukisto).">
 <meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#333333">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <nav class="nav">
-    <a class="brand-wrap" href="https://edukisto.win/" target="_blank" rel="noopener">
-      <img src="brand/edukisto-mark.svg" alt="Edukisto"> Gestion
-    </a>
-    <div class="nav-links">
-      <span id="nav-user" class="muted"></span>
-      <button id="btn-logout" class="link-btn hidden" type="button">Se déconnecter</button>
-    </div>
-  </nav>
+<a class="skip-link" href="#main">Aller au contenu</a>
+
+<header class="topbar">
+  <a class="brand" href="#/dashboard" aria-label="Gestion Edukisto — tableau de bord">
+    <img src="brand/edukisto-mark.svg" alt="">
+    <span>Gestion</span>
+  </a>
+  <div class="topbar-actions">
+    <label class="test-toggle" title="Afficher les documents de test dans les listes et les statistiques">
+      <input type="checkbox" id="include-test" aria-label="Inclure les tests dans les listes et statistiques">
+      <span>Inclure les tests</span>
+    </label>
+    <button id="btn-logout" class="link-btn hidden" type="button">Se déconnecter</button>
+  </div>
 </header>
 
-<main class="wrap">
+<main id="main" class="wrap">
   <!-- Connexion -->
-  <section id="view-login" class="card login-card hidden">
-    <h2>Espace privé</h2>
+  <section id="view-login" class="login-card hidden" aria-labelledby="login-title">
+    <h1 id="login-title">Espace privé</h1>
     <p class="muted" id="login-hint">Mot de passe de l'espace gestion.</p>
-    <form id="login-form">
+    <form id="login-form" data-form="login" novalidate>
       <label for="login-password">Mot de passe</label>
-      <input type="password" id="login-password" autocomplete="current-password" required minlength="8">
-      <p id="login-error" class="error"></p>
-      <button class="btn" type="submit" id="login-submit">Se connecter</button>
+      <input type="password" id="login-password" autocomplete="current-password" required autofocus>
+      <p id="login-error" class="form-error" role="alert"></p>
+      <button class="btn primary full" type="submit" id="login-submit">Se connecter</button>
     </form>
+    <p class="muted small">Pas de récupération automatique : le mot de passe se change depuis « Mon profil » une fois connecté.</p>
   </section>
 
   <!-- Application -->
   <section id="view-app" class="hidden">
-    <div class="tabs">
-      <button data-tab="dashboard" class="on" type="button">Tableau de bord</button>
-      <button data-tab="clients" type="button">Clients</button>
-      <button data-tab="devis" type="button">Devis</button>
-      <button data-tab="factures" type="button">Factures</button>
-      <button data-tab="profil" type="button">Mon profil</button>
-    </div>
-
-    <div id="tab-dashboard" class="tab-panel"></div>
-    <div id="tab-clients" class="tab-panel hidden"></div>
-    <div id="tab-devis" class="tab-panel hidden"></div>
-    <div id="tab-factures" class="tab-panel hidden"></div>
-    <div id="tab-profil" class="tab-panel hidden"></div>
+    <nav class="tabs" role="tablist" aria-label="Sections de l'application">
+      <button role="tab" data-tab="dashboard" type="button">Tableau de bord</button>
+      <button role="tab" data-tab="clients" type="button">Clients</button>
+      <button role="tab" data-tab="devis" type="button">Devis</button>
+      <button role="tab" data-tab="factures" type="button">Factures</button>
+      <button role="tab" data-tab="prestations" type="button">Prestations</button>
+      <button role="tab" data-tab="profil" type="button">Mon profil</button>
+    </nav>
+    <div id="tab-content" class="tab-content"></div>
   </section>
 </main>
 
-<div id="modal-root"></div>
+<dialog id="dialog" class="dialog" aria-label="Boîte de dialogue"></dialog>
+<div id="toasts" class="toasts" aria-live="polite" aria-atomic="false"></div>
+
+<noscript><p class="wrap">Cette application a besoin de JavaScript.</p></noscript>
 <script src="app.js"></script>
 </body>
 </html>

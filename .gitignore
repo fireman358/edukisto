@@ -1,0 +1,16 @@
+# Dépendances et état local
+**/node_modules/
+**/.wrangler/
+.dev.vars
+.env
+.env.*
+!.env.example
+
+# Sauvegardes et exports locaux (ne jamais committer la base)
+backup-*.sql
+*.sql.gz
+*.sql.age
+
+# Système
+.DS_Store
+Thumbs.db

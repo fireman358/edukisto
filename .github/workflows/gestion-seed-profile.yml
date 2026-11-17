@@ -1,14 +1,10 @@
 name: gestion — seed profil (one-shot, idempotent)
 
-# Upsert des champs PUBLICS du profil (déjà publiés sur edukisto.win).
+# Upsert ponctuel des champs PUBLICS du profil (déjà publiés sur edukisto.win).
 # Adresse et IBAN ne sont PAS commités (non publics) : à saisir dans l'app (Mon profil).
-# Se déclenche sur push de ce fichier (et manuellement via Run workflow).
+# Manuel uniquement : ne pas réexécuter après avoir modifié le profil dans l'app.
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/gestion-seed-profile.yml"
   workflow_dispatch:
 
 permissions:
@@ -31,7 +27,7 @@ jobs:
       - name: Upsert du profil (champs publics uniquement)
         run: |
           set_profile() {
-            npx -y wrangler@^4 d1 execute gestion --remote --command "INSERT OR REPLACE INTO settings (key, value) VALUES ('$1', '$2')"
+            npx -y wrangler@4.163.0 d1 execute gestion --remote --command "INSERT OR REPLACE INTO settings (key, value) VALUES ('$1', '$2')"
           }
           set_profile profile_nom "Edukisto — David Demoulin"
           set_profile profile_bce "BE 0892.739.993"
@@ -43,4 +39,4 @@ jobs:
           echo "Profil seedé."
       - name: Vérification (lecture des clés profile_*)
         run: |
-          npx -y wrangler@^4 d1 execute gestion --remote --json --command "SELECT key, value FROM settings WHERE key LIKE 'profile_%' ORDER BY key"
+          npx -y wrangler@4.163.0 d1 execute gestion --remote --json --command "SELECT key, value FROM settings WHERE key LIKE 'profile_%' ORDER BY key"

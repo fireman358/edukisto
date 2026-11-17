@@ -5,7 +5,9 @@ on:
     branches: [main]
     paths:
       - "apps/gestion/worker.js"
+      - "apps/gestion/lib/**"
       - "apps/gestion/wrangler.jsonc"
+      - "apps/gestion/package.json"
       - "apps/gestion/d1/**"
       - "apps/gestion/public/**"
   workflow_dispatch:
@@ -31,8 +33,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Tests de la logique métier
+        run: npm test
       - name: Déployer le Worker 'gestion'
-        run: npx -y wrangler@^4 deploy
+        run: npx -y wrangler@4.163.0 deploy
       - name: Custom domain gestion.edukisto.win (best effort)
         run: |
           ZONE_ID=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
