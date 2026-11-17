@@ -1,0 +1,50 @@
+name: gestion — setup one-shot (D1 + AUTH_SECRET)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/gestion
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Créer la base D1 'gestion' si absente, récupérer son database_id
+        id: d1
+        run: |
+          API="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/d1/database"
+          AUTH="Authorization: Bearer $CLOUDFLARE_API_TOKEN"
+          DB_ID=$(curl -s -H "$AUTH" "$API?name=gestion" | jq -r '.result[]? | select(.name=="gestion") | .uuid' | head -1)
+          if [ -z "$DB_ID" ]; then
+            DB_ID=$(curl -s -X POST -H "$AUTH" -H "Content-Type: application/json" -d '{"name":"gestion"}' "$API" | jq -r '.result.uuid')
+            echo "Base D1 'gestion' créée."
+          else
+            echo "Base D1 'gestion' déjà existante."
+          fi
+          echo "database_id = $DB_ID"
+          echo "db_id=$DB_ID" >> "$GITHUB_OUTPUT"
+      - name: Renseigner le database_id dans wrangler.jsonc (runner uniquement, non commité)
+        run: sed -i "s/00000000-0000-0000-0000-000000000000/${{ steps.d1.outputs.db_id }}/" wrangler.jsonc
+      - name: Appliquer d1/schema.sql
+        run: npx -y wrangler@^4 d1 execute gestion --remote --file=d1/schema.sql
+      - name: Poser AUTH_SECRET si absent (généré aléatoirement dans le runner, jamais affiché)
+        run: |
+          if npx -y wrangler@^4 secret list 2>/dev/null | grep -q "AUTH_SECRET"; then
+            echo "AUTH_SECRET déjà présent, inchangé."
+          else
+            openssl rand -hex 32 | npx -y wrangler@^4 secret put AUTH_SECRET
+            echo "AUTH_SECRET créé (32 octets aléatoires)."
+          fi
+      - name: Récap
+        run: echo "database_id à committer dans apps/gestion/wrangler.jsonc : ${{ steps.d1.outputs.db_id }}"

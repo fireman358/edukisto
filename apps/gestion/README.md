@@ -18,9 +18,23 @@ Les factures B2B sont émises via **Accountable** (envoi **Peppol** obligatoire 
 - `d1/schema.sql` : schéma de la base D1 (SQLite)
 - `wrangler.jsonc` : config du Worker (binding D1 `DB`, assets `public/`)
 
-## Mise en ligne (Cloudflare Worker + D1)
+## Mise en ligne
 
-**Rapide** : depuis ta machine (wrangler connecté à ton compte Cloudflare), lancer :
+Deux façons : en local (script ci-dessous) ou **100 % via GitHub Actions** (recommandé si tu n'as pas de clone local).
+
+### A. Via GitHub Actions (sans clone local)
+
+1. Ajouter deux secrets dans le repo (Settings → Secrets and variables → Actions → New repository secret) — **ne jamais les coller ailleurs** :
+   - `CLOUDFLARE_API_TOKEN` : token API Cloudflare avec Account « Workers Scripts: Edit » + « D1: Edit », et Zone `edukisto.win` « Zone: Read » (+ « Workers Routes: Edit » pour la custom domain automatique)
+   - `CLOUDFLARE_ACCOUNT_ID` : visible dans le dashboard Cloudflare (page d'accueil du compte, colonne de droite)
+2. Onglet **Actions** → lancer une fois le workflow **« gestion — setup one-shot »** : il crée la base D1 `gestion`, applique `d1/schema.sql` et pose `AUTH_SECRET` (généré aléatoirement dans le runner, jamais affiché). Le `database_id` apparaît dans les logs du run.
+3. Renseigner ce `database_id` dans `apps/gestion/wrangler.jsonc` et push sur `main`.
+4. Le workflow **« gestion — deploy »** se déclenche alors automatiquement à chaque push sur `main` qui touche `apps/gestion/` (`worker.js`, `public/`, `wrangler.jsonc`, `d1/`) : `wrangler deploy` + tentative d'attache de la custom domain `gestion.edukisto.win` (sinon l'ajouter dans le dashboard : Workers & Pages > gestion > Settings > Domains & Routes).
+5. Premier accès : `https://gestion.edukisto.win/` → la première connexion crée le mot de passe (8 caractères min).
+
+### B. En local (wrangler)
+
+Depuis ta machine (wrangler connecté à ton compte Cloudflare), lancer :
 
 ```bash
 bash apps/gestion/scripts/deploy.sh
