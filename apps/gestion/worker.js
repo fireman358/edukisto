@@ -1000,8 +1000,9 @@ async function statsApi(env, url) {
     .map((devis) => ({ ...devis, expire: devis.jours_restants < 0 }));
 
   const seuil = Number(profile.seuil_franchise || 25000);
+  // Seuil de franchise : chiffre d'affaires facturé de l'année (pas seulement encaissé).
   const caAnneeHt = await one(
-    `SELECT COALESCE(SUM(montant_ht), 0) AS v FROM factures WHERE statut = 'payee' AND substr(COALESCE(payee_le, date), 1, 4) = ? ${test}`,
+    `SELECT COALESCE(SUM(montant_ht), 0) AS v FROM factures WHERE substr(date, 1, 4) = ? ${test}`,
     year
   );
 

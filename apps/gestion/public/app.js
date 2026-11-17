@@ -368,7 +368,7 @@ function renderDashboard(root) {
         ${franchise.regime === "franchise" ? `<div class="card">
           <div class="card-head"><h3>Seuil de franchise</h3><span class="muted small">${franchise.pourcentage}%</span></div>
           <div class="gauge"><div class="gauge-bar"><div class="gauge-fill ${gaugeClass}" style="width:${Math.min(100, franchise.pourcentage)}%"></div></div>
-          <div class="gauge-legend"><span>${fmtEur(franchise.ca_annee_ht)} encaissés</span><span>${fmtEur(franchise.seuil)}</span></div></div>
+          <div class="gauge-legend"><span>${fmtEur(franchise.ca_annee_ht)} facturés</span><span>${fmtEur(franchise.seuil)}</span></div></div>
           <p class="muted small mt">${franchise.pourcentage >= 80 ? "Attention : tu approches du seuil. Vérifie avec ton comptable." : "Le seuil se calcule sur le chiffre d'affaires HTVA de l'année civile."}</p>
         </div>` : ""}
         <div class="card">
