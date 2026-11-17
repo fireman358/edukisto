@@ -1,11 +1,7 @@
 name: gestion — setup one-shot (D1 + AUTH_SECRET)
 
 on:
-  # push sur ce fichier = relance idempotente du setup (D1 si absente, schéma, deploy, secret si absent)
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/gestion-setup.yml"
+  # One-shot : à lancer manuellement sur une base neuve, pas à chaque modification du fichier.
   workflow_dispatch:
 
 permissions:
