@@ -6,6 +6,9 @@
   "assets": {
     "directory": "./public"
   },
+  // Route du sous-domaine, si le token Cloudflare a les droits sur la zone edukisto.win.
+  // Sinon : custom domain ajoutée dans le dashboard (Workers & Pages > gestion > Domains & Routes).
+  // "routes": [{ "pattern": "gestion.edukisto.win/*", "zone_name": "edukisto.win" }],
   "d1_databases": [
     {
       "binding": "DB",

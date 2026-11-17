@@ -20,6 +20,16 @@ Les factures B2B sont émises via **Accountable** (envoi **Peppol** obligatoire 
 
 ## Mise en ligne (Cloudflare Worker + D1)
 
+**Rapide** : depuis ta machine (wrangler connecté à ton compte Cloudflare), lancer :
+
+```bash
+bash apps/gestion/scripts/deploy.sh
+```
+
+Le script crée la base D1, renseigne le `database_id` dans `wrangler.jsonc` (à committer), initialise le schéma, génère et pose `AUTH_SECRET` (32 octets aléatoires, jamais affiché), puis déploie. Aucun secret n'est imprimé ni commité.
+
+**Manuel** (équivalent étape par étape) :
+
 1. **Créer la base D1** (gratuit) :
    ```bash
    npx wrangler d1 create gestion
@@ -31,17 +41,17 @@ Les factures B2B sont émises via **Accountable** (envoi **Peppol** obligatoire 
    npx wrangler d1 execute gestion --remote --file=d1/schema.sql
    ```
 
-3. **Secret de session** :
+3. **Secret de session** (valeur aléatoire, ne la colle nulle part) :
    ```bash
-   npx wrangler secret put AUTH_SECRET   # coller une chaîne aléatoire longue
+   openssl rand -hex 32 | npx wrangler secret put AUTH_SECRET
    ```
 
 4. **Déployer** :
    ```bash
-   npx wrangler deploy
+   cd apps/gestion && npx wrangler deploy
    ```
 
-5. **Route** : dans le dashboard Cloudflare, ajouter la custom domain `gestion.edukisto.win` sur le Worker `gestion`.
+5. **Route** : dans le dashboard Cloudflare, ajouter la custom domain `gestion.edukisto.win` sur le Worker `gestion` (Workers & Pages > gestion > Settings > Domains & Routes). Alternative : décommenter `routes` dans `wrangler.jsonc` si le token a les droits sur la zone `edukisto.win`, puis redeployer.
 
 6. **Premier accès** : ouvrir `https://gestion.edukisto.win/`, la première connexion crée le mot de passe (8 caractères min).
 
