@@ -1,3 +1,8 @@
+/* Redirection de secours si la page a été servie en HTTP (cache edge, etc.). */
+if (location.protocol === "http:" && !["localhost", "127.0.0.1", "[::1]"].includes(location.hostname)) {
+  location.replace(`https://${location.host}${location.pathname}${location.search}${location.hash}`);
+}
+
 /* SPA Gestion Edukisto — sans dépendance.
    Toutes les données sont injectées via des templates échappés. */
 

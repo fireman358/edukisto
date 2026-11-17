@@ -1,3 +1,8 @@
+/* Redirection de secours si la page a été servie en HTTP (cache edge, etc.). */
+if (location.protocol === "http:" && !["localhost", "127.0.0.1", "[::1]"].includes(location.hostname)) {
+  location.replace(`https://${location.host}${location.pathname}${location.search}${location.hash}`);
+}
+
 const $ = (selector, root = document) => root.querySelector(selector);
 const esc = (value) =>
   String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
