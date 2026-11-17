@@ -1,6 +1,10 @@
 name: gestion — setup one-shot (D1 + AUTH_SECRET)
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/gestion-setup.yml"
   workflow_dispatch:
 
 permissions:
