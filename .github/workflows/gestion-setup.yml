@@ -38,6 +38,8 @@ jobs:
         run: sed -i "s/00000000-0000-0000-0000-000000000000/${{ steps.d1.outputs.db_id }}/" wrangler.jsonc
       - name: Appliquer d1/schema.sql
         run: npx -y wrangler@^4 d1 execute gestion --remote --file=d1/schema.sql
+      - name: Premier déploiement (crée le Worker, nécessaire avant secret put)
+        run: npx -y wrangler@^4 deploy
       - name: Poser AUTH_SECRET si absent (généré aléatoirement dans le runner, jamais affiché)
         run: |
           if npx -y wrangler@^4 secret list 2>/dev/null | grep -q "AUTH_SECRET"; then
