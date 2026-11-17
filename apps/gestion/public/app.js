@@ -344,7 +344,7 @@ async function renderFactures() {
   if (!clientsCache.length) clientsCache = await api("clients");
   el.innerHTML = `
     <div class="toolbar">
-      <span class="muted">${facturesCache.length} factures — émises via Accountable (Peppol) pour le B2B</span>
+      <span class="muted">${facturesCache.length} factures — suivi d'envoi et de paiement</span>
       <div><a class="btn secondary small" href="/api/export?type=factures" download>Export CSV</a>
       <button class="btn secondary small" id="btn-quick-facture" type="button">⚡ Rapide</button>
       <button class="btn small" id="btn-new-facture" type="button">+ Nouvelle facture</button></div>
@@ -361,10 +361,13 @@ async function renderFactures() {
           <button class="btn secondary small" data-recap="${esc(f.id)}" type="button">Récap Accountable</button>
           <button class="btn danger small" data-del-facture="${esc(f.id)}" type="button">✕</button>
         </td></tr>`).join("") || `<tr><td colspan="7" class="muted">Aucune facture.</td></tr>`}</tbody>
-    </table></div>
-    <div class="card"><p class="muted">En B2B belge, la facture doit être envoyée en Peppol BIS 3.0 via un access point certifié :
-    crée-la dans <a href="https://app.accountable.eu/" target="_blank" rel="noopener">Accountable</a> (bouton « Récap Accountable » pour copier les données),
-    puis marque-la « Envoyée (Peppol) » ici. En B2C, un e-mail suffit.</p></div>`;
+    </table></div>`;
+  const prof = await api("profile").catch(() => ({}));
+  const franchise = prof.tva_regime === "franchise";
+  const peppolNote = franchise
+    ? "Régime de franchise (art. 44 §2) : l'émission Peppol n'est pas obligatoire pour toi, mais enregistre-toi sur Peppol via Accountable pour recevoir tes factures fournisseurs. B2B comme B2C : le PDF envoyé par e-mail suffit."
+    : `En B2B belge (assujetti), la facture doit être envoyée en Peppol BIS 3.0 via un access point certifié : crée-la dans <a href="https://app.accountable.eu/" target="_blank" rel="noopener">Accountable</a> (bouton « Récap Accountable » pour copier les données), puis marque-la « Envoyée (Peppol) » ici. En B2C, un e-mail suffit.`;
+  el.innerHTML += `<div class="card"><p class="muted">${peppolNote}</p></div>`;
   $("#btn-new-facture").addEventListener("click", () => openFactureModal(null));
   $("#btn-quick-facture").addEventListener("click", () => openQuickCreate("facture"));
   $$("[data-pdf-facture]").forEach((b) => b.addEventListener("click", () => window.open("document.html?type=facture&id=" + b.dataset.pdfFacture, "_blank")));
@@ -396,7 +399,8 @@ async function openFactureModal(id, devisId = null) {
     <div><label>N° (vide = auto)</label><input type="text" id="f-numero" value="${esc(f?.numero)}" placeholder="F-2026-001"></div></div>
     <div class="row"><div><label>Date</label><input type="date" id="f-date" value="${f?.date || todayStr()}"></div>
     <div><label>Échéance</label><input type="date" id="f-echeance" value="${f?.echeance || (() => { const d = new Date(); d.setDate(d.getDate() + 30); return d.toISOString().slice(0, 10); })()}"></div></div>
-    <div class="row"><div><label>Montant HT (€) *</label><input type="number" id="f-ht" min="0" step="0.01" value="${f?.montant_ht ?? devis?.total_ht ?? 0}"></div>
+    <div class="row"><div><label id="f-ht-label">Montant HT (€) *</label><input type="number" id="f-ht" min="0" step="0.01" value="${f?.montant_ht ?? devis?.total_ht ?? 0}"><div class="muted" id="f-hint"></div>
+    <label class="muted" style="display:flex;gap:6px;align-items:center;margin-top:6px"><input type="checkbox" id="f-ttc"> saisir en TTC (HT/TVA calculés)</label></div>
     <div><label>Taux TVA (%)</label><input type="number" id="f-tva" min="0" max="100" step="0.5" value="${f?.taux_tva ?? devis?.taux_tva ?? 21}"></div>
     <div><label>Statut</label><select id="f-statut">${Object.entries(FACTURE_STATUTS).map(([k, v]) => `<option value="${k}" ${f?.statut === k ? "selected" : ""}>${v}</option>`).join("")}</select></div></div>
     <div><label>Note</label><input type="text" id="f-note" value="${esc(f?.note)}"></div>
@@ -404,14 +408,28 @@ async function openFactureModal(id, devisId = null) {
       <button class="btn secondary" id="f-cancel" type="button">Annuler</button>
       <button class="btn" id="f-save" type="button">Enregistrer</button>
     </div>`);
+  const syncF = () => {
+    const ttcMode = $("#f-ttc", modal).checked;
+    const taux = Number($("#f-tva", modal).value) || 0;
+    const val = Number($("#f-ht", modal).value) || 0;
+    $("#f-ht-label", modal).textContent = ttcMode ? "Montant TTC (€) *" : "Montant HT (€) *";
+    $("#f-hint", modal).textContent = ttcMode && val > 0
+      ? "→ HT " + fmtEur(Math.round((val / (1 + taux / 100)) * 100) / 100) + " · TVA " + fmtEur(val - Math.round((val / (1 + taux / 100)) * 100) / 100)
+      : "";
+  };
+  ["f-ttc", "f-tva", "f-ht"].forEach((id) => $("#" + id, modal).addEventListener("input", syncF));
+  syncF();
   $("#f-cancel", modal).addEventListener("click", closeModal);
   $("#f-save", modal).addEventListener("click", async () => {
+    const ttcMode = $("#f-ttc", modal).checked;
+    const val = Number($("#f-ht", modal).value) || 0;
     const body = {
       client_id: $("#f-client", modal).value,
       numero: $("#f-numero", modal).value,
       date: $("#f-date", modal).value,
       echeance: $("#f-echeance", modal).value,
-      montant_ht: Number($("#f-ht", modal).value) || 0,
+      montant_ht: ttcMode ? undefined : val,
+      montant_ttc: ttcMode ? val : undefined,
       taux_tva: Number($("#f-tva", modal).value) || 21,
       statut: $("#f-statut", modal).value,
       note: $("#f-note", modal).value,
@@ -453,13 +471,25 @@ function openQuickCreate(kind) {
     <div class="row"><div><label>Client existant</label><select id="q-client">${clientsCache.map((c) => `<option value="${esc(c.id)}">${esc(c.nom)}${c.societe ? " — " + esc(c.societe) : ""}</option>`).join("")}</select></div>
     <div><label>…ou nouveau client (B2C)</label><input type="text" id="q-newclient" placeholder="Nom du client…"></div></div>
     ${isDevis ? '<div><label>Description</label><input type="text" id="q-desc" value="Prestation"></div>' : ""}
-    <div class="row"><div><label>Montant HT (€)</label><input type="number" id="q-ht" min="0" step="0.01" value="0"></div>
+    <div class="row"><div><label id="q-ht-label">Montant HT (€)</label><input type="number" id="q-ht" min="0" step="0.01" value="0"><div class="muted" id="q-hint"></div></div>
     <div><label>Taux TVA</label><select id="q-tva"><option value="21">21 %</option><option value="6">6 %</option><option value="0">0 %</option></select></div></div>
+    <label class="muted" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="q-ttc"> Saisir le montant TTC — HT et TVA calculés automatiquement</label>
     <p class="muted">Le PDF (logo + tes coordonnées) s'ouvre juste après. Facture B2B : l'envoi officiel reste Peppol via Accountable.</p>
     <div class="modal-actions">
       <button class="btn secondary" id="q-cancel" type="button">Annuler</button>
       <button class="btn" id="q-save" type="button">Créer + ouvrir le PDF</button>
     </div>`);
+  const syncQ = () => {
+    const ttcMode = $("#q-ttc", modal).checked;
+    const taux = Number($("#q-tva", modal).value);
+    const val = Number($("#q-ht", modal).value) || 0;
+    $("#q-ht-label", modal).textContent = ttcMode ? "Montant TTC (€)" : "Montant HT (€)";
+    $("#q-hint", modal).textContent = ttcMode && val > 0
+      ? "→ HT " + fmtEur(Math.round((val / (1 + taux / 100)) * 100) / 100) + " · TVA " + fmtEur(val - Math.round((val / (1 + taux / 100)) * 100) / 100)
+      : "";
+  };
+  ["q-ttc", "q-tva", "q-ht"].forEach((id) => $("#" + id, modal).addEventListener("input", syncQ));
+  syncQ();
   $("#q-cancel", modal).addEventListener("click", closeModal);
   $("#q-save", modal).addEventListener("click", async () => {
     try {
@@ -472,15 +502,22 @@ function openQuickCreate(kind) {
       }
       if (!clientId) { alert("Choisis ou crée un client."); return; }
       const taux = Number($("#q-tva", modal).value);
-      const ht = Number($("#q-ht", modal).value) || 0;
-      if (ht <= 0) { alert("Montant HT obligatoire."); return; }
+      const val = Number($("#q-ht", modal).value) || 0;
+      const ttcMode = $("#q-ttc", modal).checked;
+      if (val <= 0) { alert("Montant obligatoire."); return; }
+      const desc = ($("#q-desc", modal)?.value || "").trim() || "Prestation";
       if (isDevis) {
-        const r = await api("devis", { method: "POST", body: JSON.stringify({ client_id: clientId, lignes: [{ description: ($("#q-desc", modal).value || "").trim() || "Prestation", qty: 1, prix_ht: ht }], taux_tva: taux }) });
+        const payload = { client_id: clientId, taux_tva: taux };
+        if (ttcMode) { payload.montant_ttc = val; payload.description = desc; }
+        else payload.lignes = [{ description: desc, qty: 1, prix_ht: val }];
+        const r = await api("devis", { method: "POST", body: JSON.stringify(payload) });
         closeModal();
         renderDevis();
         window.open("document.html?type=devis&id=" + r.id, "_blank");
       } else {
-        const r = await api("factures", { method: "POST", body: JSON.stringify({ client_id: clientId, montant_ht: ht, taux_tva: taux }) });
+        const payload = { client_id: clientId, taux_tva: taux };
+        if (ttcMode) payload.montant_ttc = val; else payload.montant_ht = val;
+        const r = await api("factures", { method: "POST", body: JSON.stringify(payload) });
         closeModal();
         renderFactures();
         $("#tab-dashboard").dataset.loaded = "";
@@ -496,14 +533,15 @@ async function renderProfil() {
     <div class="card">
       <h2>Mon profil — coordonnées sur les PDF devis/factures</h2>
       <div class="row"><div><label>Nom / entreprise</label><input type="text" id="p-nom" placeholder="Edukisto — David …"></div>
-      <div><label>N° TVA</label><input type="text" id="p-tva" placeholder="BE0123456789"></div></div>
+      <div><label>Régime TVA</label><select id="p-regime"><option value="assujetti">Assujetti à la TVA</option><option value="franchise">Non assujetti — franchise (art. 44 §2)</option></select></div></div>
+      <div><label>N° TVA (si assujetti)</label><input type="text" id="p-tva" placeholder="BE0123456789"></div>
       <div><label>Adresse</label><input type="text" id="p-adresse"></div>
       <div class="row"><div><label>IBAN (paiement)</label><input type="text" id="p-iban" placeholder="BE68 5390 0754 7034"></div>
       <div><label>Site</label><input type="text" id="p-site"></div></div>
       <div class="row"><div><label>E-mail</label><input type="email" id="p-email"></div>
       <div><label>Téléphone</label><input type="tel" id="p-tel"></div></div>
       <div><label>Mentions en pied de page</label><textarea id="p-mentions" placeholder="Paiement à 30 jours sur IBAN…"></textarea></div>
-      <p class="muted">Charte fixe : logo Edukisto + bleu #38bdf8 sur fond blanc (impression A4). Les factures B2B partent de toute façon via Peppol (Accountable) ; le PDF sert aux clients B2C et en copie.</p>
+      <p class="muted">Charte fixe : logo Edukisto + bleu #38bdf8 sur fond blanc (impression A4). En franchise (art. 44 §2), la mention « Dispensé du paiement de la TVA — art. 44 §2 du Code TVA » est ajoutée automatiquement sur chaque facture et la TVA est forcée à 0 %. En assujetti B2B, l'envoi officiel reste Peppol via Accountable.</p>
       <p id="p-msg" class="error"></p>
       <button class="btn" id="p-save" type="button">Enregistrer</button>
     </div>`;
@@ -511,10 +549,19 @@ async function renderProfil() {
   const set = (id, v) => { $("#" + id).value = v || ""; };
   set("p-nom", p.nom); set("p-tva", p.tva); set("p-adresse", p.adresse); set("p-iban", p.iban);
   set("p-site", p.site); set("p-email", p.email); set("p-tel", p.tel); set("p-mentions", p.mentions);
+  set("p-regime", p.tva_regime || "assujetti");
+  const syncRegime = () => {
+    const fr = $("#p-regime").value === "franchise";
+    const tvaEl = $("#p-tva");
+    tvaEl.disabled = fr;
+    tvaEl.placeholder = fr ? "Non assujetti — art. 44 §2" : "BE0123456789";
+  };
+  $("#p-regime").addEventListener("change", syncRegime);
+  syncRegime();
   $("#p-save").addEventListener("click", async () => {
     try {
       await api("profile", { method: "PUT", body: JSON.stringify({
-        nom: $("#p-nom").value, tva: $("#p-tva").value, adresse: $("#p-adresse").value,
+        nom: $("#p-nom").value, tva: $("#p-tva").value, tva_regime: $("#p-regime").value, adresse: $("#p-adresse").value,
         iban: $("#p-iban").value, site: $("#p-site").value, email: $("#p-email").value,
         tel: $("#p-tel").value, mentions: $("#p-mentions").value,
       }) });

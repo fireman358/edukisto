@@ -295,9 +295,13 @@ async function devisApi(request, env, method, id, body) {
     const b = body || {};
     const client = await env.DB.prepare("SELECT id FROM clients WHERE id = ?").bind(s(b.client_id)).first();
     if (!client) return json({ error: "Client invalide" }, 400);
-    const lignes = parseLignes(b.lignes);
+    const taux = (await tvaRegime(env)) === "franchise" ? 0 : num(b.taux_tva, 21);
+    let lignes = parseLignes(b.lignes);
+    if (b.montant_ttc != null && num(b.montant_ttc) > 0) {
+      const ht = Math.round((num(b.montant_ttc) / (1 + taux / 100)) * 100) / 100;
+      lignes = [{ description: s(b.description) || "Prestation", qty: 1, prix_ht: ht }];
+    }
     if (!lignes.length) return json({ error: "Au moins une ligne de devis requise" }, 400);
-    const taux = num(b.taux_tva, 21);
     const { totalHt, totalTtc } = computeTotals(lignes, taux);
     const numero = s(b.numero) || (await nextNumero(env, "devis", "D"));
     const newId = uuid();
@@ -314,8 +318,12 @@ async function devisApi(request, env, method, id, body) {
     const existing = await env.DB.prepare("SELECT * FROM devis WHERE id = ?").bind(id).first();
     if (!existing) return json({ error: "Devis introuvable" }, 404);
     const b = body || {};
-    const lignes = b.lignes !== undefined ? parseLignes(b.lignes) : JSON.parse(existing.lignes || "[]");
-    const taux = b.taux_tva !== undefined ? num(b.taux_tva, 21) : existing.taux_tva;
+    const taux = (await tvaRegime(env)) === "franchise" ? 0 : (b.taux_tva !== undefined ? num(b.taux_tva, 21) : existing.taux_tva);
+    let lignes = b.lignes !== undefined ? parseLignes(b.lignes) : JSON.parse(existing.lignes || "[]");
+    if (b.montant_ttc != null && num(b.montant_ttc) > 0) {
+      const ht = Math.round((num(b.montant_ttc) / (1 + taux / 100)) * 100) / 100;
+      lignes = [{ description: s(b.description) || "Prestation", qty: 1, prix_ht: ht }];
+    }
     const { totalHt, totalTtc } = computeTotals(lignes, taux);
     const statut = ["brouillon", "envoye", "accepte", "refuse", "expire"].includes(b.statut) ? b.statut : existing.statut;
     const date = s(b.date) || existing.date;
@@ -346,9 +354,12 @@ async function facturesApi(request, env, method, id, body) {
     const b = body || {};
     const client = await env.DB.prepare("SELECT id FROM clients WHERE id = ?").bind(s(b.client_id)).first();
     if (!client) return json({ error: "Client invalide" }, 400);
-    const montantHt = num(b.montant_ht, 0);
-    if (montantHt <= 0) return json({ error: "Montant HT obligatoire" }, 400);
-    const taux = num(b.taux_tva, 21);
+    const taux = (await tvaRegime(env)) === "franchise" ? 0 : num(b.taux_tva, 21);
+    let montantHt = num(b.montant_ht, 0);
+    if (b.montant_ttc != null && num(b.montant_ttc) > 0) {
+      montantHt = Math.round((num(b.montant_ttc) / (1 + taux / 100)) * 100) / 100;
+    }
+    if (montantHt <= 0) return json({ error: "Montant obligatoire (HT ou TTC)" }, 400);
     const totalTtc = Math.round(montantHt * (1 + taux / 100) * 100) / 100;
     const numero = s(b.numero) || (await nextNumero(env, "factures", "F"));
     const date = s(b.date) || today();
@@ -370,8 +381,11 @@ async function facturesApi(request, env, method, id, body) {
     const existing = await env.DB.prepare("SELECT * FROM factures WHERE id = ?").bind(id).first();
     if (!existing) return json({ error: "Facture introuvable" }, 404);
     const b = body || {};
-    const montantHt = b.montant_ht !== undefined ? num(b.montant_ht, 0) : existing.montant_ht;
-    const taux = b.taux_tva !== undefined ? num(b.taux_tva, 21) : existing.taux_tva;
+    const taux = (await tvaRegime(env)) === "franchise" ? 0 : (b.taux_tva !== undefined ? num(b.taux_tva, 21) : existing.taux_tva);
+    let montantHt = b.montant_ht !== undefined ? num(b.montant_ht, 0) : existing.montant_ht;
+    if (b.montant_ttc != null && num(b.montant_ttc) > 0) {
+      montantHt = Math.round((num(b.montant_ttc) / (1 + taux / 100)) * 100) / 100;
+    }
     const totalTtc = Math.round(montantHt * (1 + taux / 100) * 100) / 100;
     const statut = ["a_envoyer", "envoyee_peppol", "envoyee_email", "payee"].includes(b.statut) ? b.statut : existing.statut;
     const echeance = s(b.echeance) || existing.echeance;
@@ -415,14 +429,20 @@ async function notesApi(request, env, method, id, body, url) {
   return json({ error: "Route inconnue" }, 404);
 }
 
-const PROFILE_KEYS = ["nom", "adresse", "tva", "iban", "email", "tel", "site", "mentions"];
+const PROFILE_KEYS = ["nom", "adresse", "tva", "tva_regime", "iban", "email", "tel", "site", "mentions"];
 
 async function profileData(env) {
   const rows = await env.DB.prepare("SELECT key, value FROM settings WHERE key LIKE 'profile_%'").all();
   const p = {};
   for (const r of rows.results) p[r.key.slice("profile_".length)] = r.value;
   if (!p.site) p.site = "edukisto.win";
+  if (!p.tva_regime) p.tva_regime = "assujetti";
   return p;
+}
+
+async function tvaRegime(env) {
+  const p = await profileData(env);
+  return p.tva_regime === "franchise" ? "franchise" : "assujetti";
 }
 
 async function profilePut(env, body) {
@@ -447,16 +467,20 @@ async function documentApi(env, url) {
   if (!doc) return json({ error: "Document introuvable" }, 404);
   const client = await env.DB.prepare("SELECT * FROM clients WHERE id = ?").bind(doc.client_id).first();
   if (!client) return json({ error: "Client introuvable" }, 404);
+  const profile = await profileData(env);
+  const franchise = profile.tva_regime === "franchise";
   const out = {
     type,
-    profile: await profileData(env),
+    profile,
+    franchise,
+    mention_tva: franchise ? "Dispensé du paiement de la TVA — art. 44 §2 du Code TVA" : null,
     client: { nom: client.nom, societe: client.societe, email: client.email, adresse: client.adresse, tva: client.tva, type: client.type },
   };
   if (type === "devis") {
     out.doc = {
       numero: doc.numero, date: doc.date, validite_jours: doc.validite_jours, statut: doc.statut,
-      lignes: JSON.parse(doc.lignes || "[]"), taux_tva: doc.taux_tva,
-      total_ht: doc.total_ht, total_ttc: doc.total_ttc,
+      lignes: JSON.parse(doc.lignes || "[]"), taux_tva: franchise ? 0 : doc.taux_tva,
+      total_ht: doc.total_ht, total_ttc: franchise ? doc.total_ht : doc.total_ttc,
     };
   } else {
     let lignes = null;
@@ -466,7 +490,8 @@ async function documentApi(env, url) {
     }
     out.doc = {
       numero: doc.numero, date: doc.date, echeance: doc.echeance, statut: doc.statut,
-      montant_ht: doc.montant_ht, taux_tva: doc.taux_tva, total_ttc: doc.total_ttc,
+      montant_ht: doc.montant_ht, taux_tva: franchise ? 0 : doc.taux_tva,
+      total_ttc: franchise ? doc.montant_ht : doc.total_ttc,
       note: doc.note, lignes,
       en_retard: doc.statut !== "payee" && doc.echeance < today() ? 1 : 0,
     };

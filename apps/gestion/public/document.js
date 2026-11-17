@@ -25,12 +25,12 @@ async function boot() {
     page.innerHTML = `<p id="err">${esc(e.message)} — <a href="/">Retour</a></p>`;
     return;
   }
-  const { profile, client, doc } = data;
+  const { profile, client, doc, franchise, mention_tva } = data;
   const isDevis = type === "devis";
   const titre = isDevis ? "Devis" : "Facture";
   document.title = `${titre} ${doc.numero} — ${profile.nom || "Edukisto"}`;
 
-  const emetteur = [profile.nom || "Edukisto", profile.adresse, profile.tva ? `TVA : ${profile.tva}` : "", profile.iban ? `IBAN : ${profile.iban}` : "", [profile.email, profile.tel].filter(Boolean).join(" · "), profile.site].filter(Boolean).join("\n");
+  const emetteur = [profile.nom || "Edukisto", profile.adresse, franchise ? "Non assujetti à la TVA — régime de franchise (art. 44 §2 du Code TVA)" : (profile.tva ? `TVA : ${profile.tva}` : ""), profile.iban ? `IBAN : ${profile.iban}` : "", [profile.email, profile.tel].filter(Boolean).join(" · "), profile.site].filter(Boolean).join("\n");
   const clientLines = [client.nom, client.societe, client.adresse, client.email, client.tva ? `N° TVA : ${client.tva}` : ""].filter(Boolean).join("\n");
 
   const meta = isDevis
@@ -54,7 +54,9 @@ async function boot() {
   const ttc = doc.total_ttc;
 
   const b2bNote = !isDevis && client.type === "b2b"
-    ? `<div class="b2b-note">Client professionnel belge : cette facture doit être émise via <strong>Peppol</strong> (Accountable). Ce PDF est une copie lisible envoyée en parallèle.</div>`
+    ? (franchise
+      ? `<div class="b2b-note">Régime de franchise (art. 44 §2) : l'émission Peppol n'est pas obligatoire pour toi. Enregistre-toi quand même sur Peppol via Accountable pour recevoir tes factures fournisseurs. Ce PDF peut être envoyé par e-mail.</div>`
+      : `<div class="b2b-note">Client professionnel belge : cette facture doit être émise via <strong>Peppol</strong> (Accountable). Ce PDF est une copie lisible envoyée en parallèle.</div>`)
     : "";
 
   page.innerHTML = `
@@ -84,6 +86,7 @@ async function boot() {
       <div class="row"><span>TVA (${doc.taux_tva} %)</span><span class="money">${fmtEur(tva)}</span></div>
       <div class="row ttc"><span>Total TTC</span><span class="money">${fmtEur(ttc)}</span></div>
     </div>
+    ${mention_tva ? `<p class="mention-tva">${esc(mention_tva)}</p>` : ""}
     ${doc.note ? `<p class="doc-note">${esc(doc.note)}</p>` : ""}
     <footer class="doc-footer">
       <div class="coords">${esc(emetteur)}</div>

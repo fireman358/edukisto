@@ -10,6 +10,10 @@ Les factures B2B sont émises via **Accountable** (envoi **Peppol** obligatoire 
 - **Devis** : lignes (description, qté, prix HT), taux de TVA, totaux HT/TTC calculés, validité en jours, statuts (brouillon → envoyé → accepté/refusé), passage en facture en un clic.
 - **Factures** : n° auto `F-YYYY-NNN`, date, échéance (J+30 par défaut), montant HT/TVA/TTC, statuts (à envoyer, envoyée Peppol, envoyée e-mail, payée), indicateur « retard », bouton **Récap Accountable** (copie les données à coller dans Accountable pour l'envoi Peppol).
 - **Tableau de bord** : CA payé (total/mois), en attente, en retard, devis envoyés/acceptés, liste des factures à relancer, exports CSV (clients/devis/factures).
+- **Mon profil** : coordonnées émetteur (nom, adresse, n° TVA, IBAN, e-mail, tél., site, mentions) stockées en D1 et imprimées sur les documents. **Régime TVA** : « assujetti » ou « non assujetti — franchise art. 44 §2 » ; en franchise, la mention légale « Dispensé du paiement de la TVA — art. 44 §2 du Code TVA » est ajoutée automatiquement sur chaque facture et la TVA est forcée à 0 %.
+- **Saisie en TTC** : dans la création rapide et le formulaire facture, coche « saisir en TTC » → HT et TVA calculés automatiquement (en franchise, TTC = HT).
+- **Création rapide** : boutons « ⚡ Rapide » dans Devis et Factures — client existant ou nouveau (B2C) à la volée, un montant, un taux de TVA → document créé et **PDF ouvert directement**.
+- **PDF A4 imprimable** (`document.html?type=devis|facture&id=…`) : charte Edukisto (logo, bleu #38bdf8, fond blanc), coordonnées émetteur, bloc client, lignes, totaux HT/TVA/TTC, pied de page (IBAN + mentions). Bouton « Imprimer / Enregistrer en PDF ». Sur une facture B2B, une bannière rappelle que l'envoi officiel est Peppol via Accountable.
 
 ## Architecture
 
@@ -71,7 +75,7 @@ Le script crée la base D1, renseigne le `database_id` dans `wrangler.jsonc` (à
 
 ## Notes légales (Belgique, 2026)
 
-- Facturation électronique structurée (**Peppol BIS 3.0**, UBL 2.1, EN 16931) obligatoire pour tout le B2B entre assujettis TVA belges, en émission comme en réception. Un PDF par e-mail ne suffit plus en B2B.
+- Facturation électronique structurée (**Peppol BIS 3.0**, UBL 2.1, EN 16931) obligatoire pour tout le B2B entre assujettis TVA belges, en émission comme en réception. Un PDF par e-mail ne suffit plus en B2B. **Exception : régime de franchise art. 44 §2** — l'émission Peppol n'est pas obligatoire, mais l'enregistrement sur Peppol (via Accountable, gratuit) reste nécessaire pour recevoir les factures fournisseurs.
 - Accountable sert d'access point Peppol certifié : enregistrer son n° TVA sur Peppol via Accountable (gratuit), y créer/envoyer les factures.
 - En B2C (particuliers), l'envoi par e-mail reste valable.
 - Données clients = données personnelles (RGPD) : l'accès est protégé par mot de passe, l'URL n'est pas indexée, exportez la base régulièrement (`npx wrangler d1 export gestion --remote --output=backup.sql`).
