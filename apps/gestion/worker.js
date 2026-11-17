@@ -221,6 +221,9 @@ async function handleApi(request, env, url) {
   const body = ["POST", "PUT", "PATCH"].includes(method) ? await request.json().catch(() => null) : null;
   const [resource, id] = segments;
 
+  if (resource === "profile" && method === "GET") return json(await profileData(env));
+  if (resource === "profile" && method === "PUT") return profilePut(env, body);
+  if (resource === "document" && method === "GET") return documentApi(env, url);
   if (resource === "clients") return clientsApi(request, env, method, id, body);
   if (resource === "devis") return devisApi(request, env, method, id, body);
   if (resource === "factures") return facturesApi(request, env, method, id, body);
@@ -410,6 +413,65 @@ async function notesApi(request, env, method, id, body, url) {
     return json({ ok: true });
   }
   return json({ error: "Route inconnue" }, 404);
+}
+
+const PROFILE_KEYS = ["nom", "adresse", "tva", "iban", "email", "tel", "site", "mentions"];
+
+async function profileData(env) {
+  const rows = await env.DB.prepare("SELECT key, value FROM settings WHERE key LIKE 'profile_%'").all();
+  const p = {};
+  for (const r of rows.results) p[r.key.slice("profile_".length)] = r.value;
+  if (!p.site) p.site = "edukisto.win";
+  return p;
+}
+
+async function profilePut(env, body) {
+  const b = body || {};
+  for (const k of PROFILE_KEYS) {
+    if (b[k] !== undefined) {
+      await env.DB.prepare("INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)")
+        .bind("profile_" + k, s(b[k])).run();
+    }
+  }
+  return json({ ok: true });
+}
+
+async function documentApi(env, url) {
+  const type = url.searchParams.get("type");
+  const id = url.searchParams.get("id");
+  if (!id || (type !== "devis" && type !== "facture")) {
+    return json({ error: "Paramètres invalides (type=devis|facture, id=…)" }, 400);
+  }
+  const table = type === "devis" ? "devis" : "factures";
+  const doc = await env.DB.prepare(`SELECT * FROM ${table} WHERE id = ?`).bind(id).first();
+  if (!doc) return json({ error: "Document introuvable" }, 404);
+  const client = await env.DB.prepare("SELECT * FROM clients WHERE id = ?").bind(doc.client_id).first();
+  if (!client) return json({ error: "Client introuvable" }, 404);
+  const out = {
+    type,
+    profile: await profileData(env),
+    client: { nom: client.nom, societe: client.societe, email: client.email, adresse: client.adresse, tva: client.tva, type: client.type },
+  };
+  if (type === "devis") {
+    out.doc = {
+      numero: doc.numero, date: doc.date, validite_jours: doc.validite_jours, statut: doc.statut,
+      lignes: JSON.parse(doc.lignes || "[]"), taux_tva: doc.taux_tva,
+      total_ht: doc.total_ht, total_ttc: doc.total_ttc,
+    };
+  } else {
+    let lignes = null;
+    if (doc.devis_id) {
+      const d = await env.DB.prepare("SELECT lignes, taux_tva FROM devis WHERE id = ?").bind(doc.devis_id).first();
+      if (d) lignes = JSON.parse(d.lignes || "[]");
+    }
+    out.doc = {
+      numero: doc.numero, date: doc.date, echeance: doc.echeance, statut: doc.statut,
+      montant_ht: doc.montant_ht, taux_tva: doc.taux_tva, total_ttc: doc.total_ttc,
+      note: doc.note, lignes,
+      en_retard: doc.statut !== "payee" && doc.echeance < today() ? 1 : 0,
+    };
+  }
+  return json(out);
 }
 
 async function statsApi(env) {

@@ -61,7 +61,7 @@ function switchTab(tab, force = false) {
   $("#tab-" + tab).classList.remove("hidden");
   if (force || !$("#tab-" + tab).dataset.loaded) {
     $("#tab-" + tab).dataset.loaded = "1";
-    ({ dashboard: renderDashboard, clients: renderClients, devis: renderDevis, factures: renderFactures })[tab]();
+    ({ dashboard: renderDashboard, clients: renderClients, devis: renderDevis, factures: renderFactures, profil: renderProfil })[tab]();
   }
 }
 
@@ -246,6 +246,7 @@ async function renderDevis() {
     <div class="toolbar">
       <span class="muted">${devisCache.length} devis</span>
       <div><a class="btn secondary small" href="/api/export?type=devis" download>Export CSV</a>
+      <button class="btn secondary small" id="btn-quick-devis" type="button">⚡ Rapide</button>
       <button class="btn small" id="btn-new-devis" type="button">+ Nouveau devis</button></div>
     </div>
     <div class="card"><table>
@@ -256,12 +257,15 @@ async function renderDevis() {
           <td><strong>${esc(d.numero)}</strong></td><td>${fmtDate(d.date)}</td><td>${esc(d.client_nom)}${d.client_societe ? " — " + esc(d.client_societe) : ""}</td>
           <td><select class="statut-devis" data-id="${esc(d.id)}">${Object.entries(DEVIS_STATUTS).map(([k, v]) => `<option value="${k}" ${d.statut === k ? "selected" : ""}>${v}</option>`).join("")}</select></td>
           <td class="right money">${fmtEur(d.total_ht)}</td><td class="right money">${fmtEur(d.total_ttc)}</td><td>${fmtDate(validUntil)}</td>
-          <td><button class="btn secondary small" data-facturer="${esc(d.id)}" type="button">Facturer</button>
+          <td><button class="btn secondary small" data-pdf-devis="${esc(d.id)}" type="button">PDF</button>
+              <button class="btn secondary small" data-facturer="${esc(d.id)}" type="button">Facturer</button>
               <button class="btn danger small" data-del-devis="${esc(d.id)}" type="button">✕</button></td>
         </tr>`;
       }).join("") || `<tr><td colspan="8" class="muted">Aucun devis.</td></tr>`}</tbody>
     </table></div>`;
   $("#btn-new-devis").addEventListener("click", () => openDevisModal(null));
+  $("#btn-quick-devis").addEventListener("click", () => openQuickCreate("devis"));
+  $$("[data-pdf-devis]").forEach((b) => b.addEventListener("click", () => window.open("document.html?type=devis&id=" + b.dataset.pdfDevis, "_blank")));
   $$(".statut-devis").forEach((sel) => sel.addEventListener("change", async () => {
     await api("devis/" + sel.dataset.id, { method: "PUT", body: JSON.stringify({ statut: sel.value }) });
     renderDevis();
@@ -342,6 +346,7 @@ async function renderFactures() {
     <div class="toolbar">
       <span class="muted">${facturesCache.length} factures — émises via Accountable (Peppol) pour le B2B</span>
       <div><a class="btn secondary small" href="/api/export?type=factures" download>Export CSV</a>
+      <button class="btn secondary small" id="btn-quick-facture" type="button">⚡ Rapide</button>
       <button class="btn small" id="btn-new-facture" type="button">+ Nouvelle facture</button></div>
     </div>
     <div class="card"><table>
@@ -352,6 +357,7 @@ async function renderFactures() {
         <td><select class="statut-facture" data-id="${esc(f.id)}">${Object.entries(FACTURE_STATUTS).map(([k, v]) => `<option value="${k}" ${f.statut === k ? "selected" : ""}>${v}</option>`).join("")}</select></td>
         <td class="right money">${fmtEur(f.total_ttc)}</td>
         <td>
+          <button class="btn secondary small" data-pdf-facture="${esc(f.id)}" type="button">PDF</button>
           <button class="btn secondary small" data-recap="${esc(f.id)}" type="button">Récap Accountable</button>
           <button class="btn danger small" data-del-facture="${esc(f.id)}" type="button">✕</button>
         </td></tr>`).join("") || `<tr><td colspan="7" class="muted">Aucune facture.</td></tr>`}</tbody>
@@ -360,6 +366,8 @@ async function renderFactures() {
     crée-la dans <a href="https://app.accountable.eu/" target="_blank" rel="noopener">Accountable</a> (bouton « Récap Accountable » pour copier les données),
     puis marque-la « Envoyée (Peppol) » ici. En B2C, un e-mail suffit.</p></div>`;
   $("#btn-new-facture").addEventListener("click", () => openFactureModal(null));
+  $("#btn-quick-facture").addEventListener("click", () => openQuickCreate("facture"));
+  $$("[data-pdf-facture]").forEach((b) => b.addEventListener("click", () => window.open("document.html?type=facture&id=" + b.dataset.pdfFacture, "_blank")));
   $$(".statut-facture").forEach((sel) => sel.addEventListener("change", async () => {
     await api("factures/" + sel.dataset.id, { method: "PUT", body: JSON.stringify({ statut: sel.value }) });
     renderFactures();
@@ -436,6 +444,84 @@ function recapAccountable(factureId) {
   const done = () => alert("Récapitulatif copié dans le presse-papiers. Collez-le dans Accountable, envoyez via Peppol, puis marquez la facture « Envoyée (Peppol) ».");
   if (navigator.clipboard?.writeText) navigator.clipboard.writeText(texte).then(done, () => { prompt("Copiez ce récap :", texte); });
   else prompt("Copiez ce récap :", texte);
+}
+
+function openQuickCreate(kind) {
+  const isDevis = kind === "devis";
+  const modal = openModal(`
+    <h2>${isDevis ? "⚡ Devis rapide" : "⚡ Facture rapide"}</h2>
+    <div class="row"><div><label>Client existant</label><select id="q-client">${clientsCache.map((c) => `<option value="${esc(c.id)}">${esc(c.nom)}${c.societe ? " — " + esc(c.societe) : ""}</option>`).join("")}</select></div>
+    <div><label>…ou nouveau client (B2C)</label><input type="text" id="q-newclient" placeholder="Nom du client…"></div></div>
+    ${isDevis ? '<div><label>Description</label><input type="text" id="q-desc" value="Prestation"></div>' : ""}
+    <div class="row"><div><label>Montant HT (€)</label><input type="number" id="q-ht" min="0" step="0.01" value="0"></div>
+    <div><label>Taux TVA</label><select id="q-tva"><option value="21">21 %</option><option value="6">6 %</option><option value="0">0 %</option></select></div></div>
+    <p class="muted">Le PDF (logo + tes coordonnées) s'ouvre juste après. Facture B2B : l'envoi officiel reste Peppol via Accountable.</p>
+    <div class="modal-actions">
+      <button class="btn secondary" id="q-cancel" type="button">Annuler</button>
+      <button class="btn" id="q-save" type="button">Créer + ouvrir le PDF</button>
+    </div>`);
+  $("#q-cancel", modal).addEventListener("click", closeModal);
+  $("#q-save", modal).addEventListener("click", async () => {
+    try {
+      let clientId = $("#q-client", modal).value;
+      const newName = $("#q-newclient", modal).value.trim();
+      if (newName) {
+        const r = await api("clients", { method: "POST", body: JSON.stringify({ nom: newName, type: "b2c" }) });
+        clientId = r.id;
+        clientsCache = await api("clients");
+      }
+      if (!clientId) { alert("Choisis ou crée un client."); return; }
+      const taux = Number($("#q-tva", modal).value);
+      const ht = Number($("#q-ht", modal).value) || 0;
+      if (ht <= 0) { alert("Montant HT obligatoire."); return; }
+      if (isDevis) {
+        const r = await api("devis", { method: "POST", body: JSON.stringify({ client_id: clientId, lignes: [{ description: ($("#q-desc", modal).value || "").trim() || "Prestation", qty: 1, prix_ht: ht }], taux_tva: taux }) });
+        closeModal();
+        renderDevis();
+        window.open("document.html?type=devis&id=" + r.id, "_blank");
+      } else {
+        const r = await api("factures", { method: "POST", body: JSON.stringify({ client_id: clientId, montant_ht: ht, taux_tva: taux }) });
+        closeModal();
+        renderFactures();
+        $("#tab-dashboard").dataset.loaded = "";
+        window.open("document.html?type=facture&id=" + r.id, "_blank");
+      }
+    } catch (err) { alert(err.message); }
+  });
+}
+
+async function renderProfil() {
+  const el = $("#tab-profil");
+  el.innerHTML = `
+    <div class="card">
+      <h2>Mon profil — coordonnées sur les PDF devis/factures</h2>
+      <div class="row"><div><label>Nom / entreprise</label><input type="text" id="p-nom" placeholder="Edukisto — David …"></div>
+      <div><label>N° TVA</label><input type="text" id="p-tva" placeholder="BE0123456789"></div></div>
+      <div><label>Adresse</label><input type="text" id="p-adresse"></div>
+      <div class="row"><div><label>IBAN (paiement)</label><input type="text" id="p-iban" placeholder="BE68 5390 0754 7034"></div>
+      <div><label>Site</label><input type="text" id="p-site"></div></div>
+      <div class="row"><div><label>E-mail</label><input type="email" id="p-email"></div>
+      <div><label>Téléphone</label><input type="tel" id="p-tel"></div></div>
+      <div><label>Mentions en pied de page</label><textarea id="p-mentions" placeholder="Paiement à 30 jours sur IBAN…"></textarea></div>
+      <p class="muted">Charte fixe : logo Edukisto + bleu #38bdf8 sur fond blanc (impression A4). Les factures B2B partent de toute façon via Peppol (Accountable) ; le PDF sert aux clients B2C et en copie.</p>
+      <p id="p-msg" class="error"></p>
+      <button class="btn" id="p-save" type="button">Enregistrer</button>
+    </div>`;
+  const p = await api("profile");
+  const set = (id, v) => { $("#" + id).value = v || ""; };
+  set("p-nom", p.nom); set("p-tva", p.tva); set("p-adresse", p.adresse); set("p-iban", p.iban);
+  set("p-site", p.site); set("p-email", p.email); set("p-tel", p.tel); set("p-mentions", p.mentions);
+  $("#p-save").addEventListener("click", async () => {
+    try {
+      await api("profile", { method: "PUT", body: JSON.stringify({
+        nom: $("#p-nom").value, tva: $("#p-tva").value, adresse: $("#p-adresse").value,
+        iban: $("#p-iban").value, site: $("#p-site").value, email: $("#p-email").value,
+        tel: $("#p-tel").value, mentions: $("#p-mentions").value,
+      }) });
+      $("#p-msg").textContent = "";
+      alert("Profil enregistré.");
+    } catch (err) { $("#p-msg").textContent = err.message; }
+  });
 }
 
 boot();
