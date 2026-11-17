@@ -1,0 +1,46 @@
+name: gestion — seed profil (one-shot, idempotent)
+
+# Upsert des champs PUBLICS du profil (déjà publiés sur edukisto.win).
+# Adresse et IBAN ne sont PAS commités (non publics) : à saisir dans l'app (Mon profil).
+# Se déclenche sur push de ce fichier (et manuellement via Run workflow).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/gestion-seed-profile.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/gestion
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Upsert du profil (champs publics uniquement)
+        run: |
+          set_profile() {
+            npx -y wrangler@^4 d1 execute gestion --remote --command "INSERT OR REPLACE INTO settings (key, value) VALUES ('$1', '$2')"
+          }
+          set_profile profile_nom "Edukisto — David Demoulin"
+          set_profile profile_bce "BE 0892.739.993"
+          set_profile profile_tva_regime "franchise"
+          set_profile profile_tva ""
+          set_profile profile_email "info@edukisto.win"
+          set_profile profile_tel "+32 486 206 081"
+          set_profile profile_site "edukisto.win"
+          echo "Profil seedé."
+      - name: Vérification (lecture des clés profile_*)
+        run: |
+          npx -y wrangler@^4 d1 execute gestion --remote --json --command "SELECT key, value FROM settings WHERE key LIKE 'profile_%' ORDER BY key"
